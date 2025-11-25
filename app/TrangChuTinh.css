@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("/bg-daihoi.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.trangchutinh-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  text-align: center;
+}
+
+.trangchutinh-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.trangchutinh-logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.trangchutinh-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Hàng nút */
+.button-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* khoảng cách giữa 2 hàng */
+  align-items: center;
+}
+
+.button-row {
+  display: flex;
+  gap: 20px; /* khoảng cách giữa các nút trong hàng */
+  justify-content: center;
+}
+
+/* Nút chữ nhật, kích thước đồng đều */
+.button-card {
+  width: 200px;    /* rộng */
+  height: 100px;    /* cao */
+  border: 1px solid #fff;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* Responsive điện thoại */
+@media (max-width: 600px) {
+  .button-row {
+    flex-wrap: wrap;       /* tự xuống hàng nếu không đủ chỗ */
+    gap: 10px;
+  }
+
+  .button-card {
+    width: 45%;           /* 2 nút 1 hàng */
+    height: 70px;
+    font-size: 0.8rem;
+  }
+
+  .trangchutinh-title {
+    font-size: 1.3rem;
+  }
+}
