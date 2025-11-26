@@ -18,9 +18,9 @@ export default function TrangChuTinhPage() {
     <div className="trangchutinh-container">
       <header className="trangchutinh-header">
         <h2 className="trangchutinh-title">
-          ĐẠI HỘI ĐOÀN TNCS HỒ CHÍ MINH 
-          TỈNH LÂM ĐỒNG <br />
-          LẦN THỨ I, NHIỆM KỲ 2025 - 2030<br />
+          ĐẠI HỘI ĐOÀN TNCS HỒ CHÍ MINH <br />
+          TỈNH LÂM ĐỒNG LẦN THỨ I  <br />
+           NHIỆM KỲ 2025 - 2030<br />
         </h2>
       </header>
 
