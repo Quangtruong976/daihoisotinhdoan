@@ -47,10 +47,9 @@ body {
 
 .button-row {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   justify-content: center;
-  overflow-x: auto; /* scroll ngang nếu màn hình nhỏ */
-  -webkit-overflow-scrolling: touch;
+  flex-wrap: wrap; /* tự xuống hàng nếu màn hình hẹp */
 }
 
 /* Nút chữ nhật cố định */
@@ -87,13 +86,10 @@ body {
 
 
 /* Responsive */
-@media (max-width: 768px) {
-  .button-row {
-    gap: 15px;
-  }
-
+@media (max-width: 480px) {
   .button-card {
-    height: 90px;
+    flex: 1 1 40%;   /* 2 nút/ hàng khi màn hình hẹp */
+    height: 80px;
   }
 
   .trangchutinh-title {
