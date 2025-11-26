@@ -4,22 +4,23 @@ import "./TrangChuTinh.css";
 
 export default function TrangChuTinhPage() {
   const buttons = [
-    { label: "📋 Chương trình", route: "/program", color: "rgb(11, 100, 195)" },
-    { label: "📄 Văn kiện", route: "/documents", color: "rgb(158, 62, 218)" },
-    { label: "🗣️ Diễn đàn", route: "/forum", color: " #f4511e" },
+    { label: "📋 Chương trình Đại hội", route: "/program", color: "rgb(11, 100, 195)" },
+    { label: "📄 Văn kiện Đại hội", route: "/documents", color: "rgb(158, 62, 218)" },
+    { label: "🪑 Sơ đồ đại biểu", route: "/seating", color: "rgb(10, 203, 55)" },
+    { label: "🧍‍♂️ Điểm danh đại biểu", route: "/delegates", color: "rgb(240, 89, 89)" },
+    { label: "🗣️ Diễn đàn Đại hội", route: "/forum", color: " #f4511e" },
     { label: "📝 Tham luận", route: "/contributions", color: "rgb(10, 174, 92)" },
-    { label: "🧍‍♂️ Điểm danh", route: "/delegates", color: "rgb(240, 89, 89)" },
-    { label: "🪑 Sơ đồ", route: "/seating", color: "rgb(34, 228, 79)" },
-    { label: "💬 Góp ý", route: "/feedback", color: " #f57c00" },
-    { label: "📄 Tài liệu", route: "/documents2", color: "rgb(136, 184, 15)" },
+    { label: "💬 Góp ý Văn kiện", route: "/feedback", color: " #f57c00" },
+    { label: "📄 Thông tin khác", route: "/documents2", color: "rgb(136, 184, 15)" },
   ];
 
   return (
     <div className="trangchutinh-container">
       <header className="trangchutinh-header">
-      
         <h2 className="trangchutinh-title">
-          ĐẠI HỘI ĐOÀN TNCS HỒ CHÍ MINH TỈNH LÂM ĐỒNG LẦN THỨ I, NHIỆM KỲ 2025 - 2030
+          ĐẠI HỘI ĐOÀN TNCS HỒ CHÍ MINH 
+          TỈNH LÂM ĐỒNG <br />
+          LẦN THỨ I, NHIỆM KỲ 2025 - 2030<br />
         </h2>
       </header>
 
