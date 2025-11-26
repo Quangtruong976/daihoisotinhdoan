@@ -3,10 +3,9 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-image: url("/bg-daihoi.jpg");
-  background-size: contain;       /* giữ toàn bộ ảnh */
+  background-size: cover;        /* phủ toàn màn hình, tỉ lệ đúng */
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 /* Container tổng */
