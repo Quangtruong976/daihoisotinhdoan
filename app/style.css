@@ -1,0 +1,116 @@
+/* Main container chiếm toàn màn hình, sắp xếp footer đáy */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Banner ảnh */
+.banner {
+  width: 100%;
+  max-height: 310px;
+  overflow: hidden;
+  margin-bottom: 1px; /* khoảng cách giữa banner và menu */
+}
+
+.banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Thanh menu ngang */
+.top-menu {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  background-color: #0650b7; /* xanh đậm */
+  padding: 5px 0;
+}
+
+.top-menu-btn {
+  color: white;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 0.9rem;
+  padding: 4px 6px;
+  transition: color 0.2s;
+}
+
+.top-menu-btn:hover {
+  color: #ffea00;
+}
+
+.separator {
+  color: white;
+  margin: 0 4px;
+}
+
+/* Khối nút chữ nhật */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 180px); /* giảm chiều rộng nút */
+  gap: 15px;
+  padding: 40px 0;
+  justify-content: center; /* canh giữa grid */
+}
+
+.btn-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 18px 10px;
+  border-radius: 10px;
+  border: 1px solid #d5d7d7;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-decoration: none;
+  min-height: 100px;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.btn-card:hover {
+  filter: brightness(1.2);
+  transform: translateY(-3px);
+}
+
+.btn-icon {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.footer {
+  background-color: #0073b3;
+  color: white;
+  padding: 12px 0;
+  margin-top: auto; /* đẩy footer xuống đáy */
+  font-size: 0.9rem;
+  text-align: center; /* canh giữa chữ */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .button-grid {
+    grid-template-columns: repeat(2, 180px);
+    justify-content: center;
+  }
+  .top-menu-btn {
+    font-size: 0.8rem;
+    padding: 3px 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-grid {
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+  .top-menu-btn {
+    font-size: 0.75rem;
+  }
+}
