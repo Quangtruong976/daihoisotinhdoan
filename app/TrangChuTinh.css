@@ -14,9 +14,10 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding-top: 200px;    /* header + nút xuống thấp */
+  padding-top: 200px;       /* header + nút xuống thấp */
   padding-bottom: 40px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 /* Header */
@@ -24,15 +25,29 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 50px;   /* khoảng cách giữa header và nút */
+  margin-bottom: 50px;      /* khoảng cách giữa header và nút */
 }
 
+/* Tiêu đề */
 .trangchutinh-title {
   font-size: 1.6rem;
   font-weight: bold;
-  color: #f7f6fa;        /* xanh đậm */
+  color: #f7f6fa;
   line-height: 1.4;
   text-align: center;
+}
+
+/* Nếu sau này bạn thêm subtitle, giữ cấu trúc này để đồng bộ */
+.trangchutinh-subtitle {
+  font-size: 1.1rem;
+  color: #e8e8e8;
+  margin-top: 10px;
+}
+
+/* Bạn có thể thêm khu vực nút hành động ngay bên dưới nếu cần */
+.trangchutinh-actions {
+  display: flex;
+  gap: 20px;
 }
 
 /* Section nút */
