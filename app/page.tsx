@@ -8,12 +8,11 @@ export default function TrangChu() {
   const topMenu = [
     { label: "Home", route: "/" },
     { label: "Chương trình", route: "/chuongtrinh" },
-    { label: "Văn kiện", route: "/vankien" },
-    { label: "Sơ đồ", route: "/sodo" },
+    { label: "Văn kiện Đại hội", route: "/vankien" },
+    { label: "Sơ đồ đại biểu", route: "/sodo" },
     { label: "Điểm danh", route: "/diemdanh" },
-    { label: "Diễn đàn", route: "/dien" },
-    { label: "Tham luận", route: "/thamluan" },
-    { label: "Góp ý", route: "/gopy" },
+    { label: "Đăng nhập", route: "/dangnhap" },
+   
   ];
 
   // Nút khối chữ nhật dưới

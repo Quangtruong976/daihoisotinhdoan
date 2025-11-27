@@ -51,7 +51,7 @@
 /* Khối nút chữ nhật */
 .button-grid {
   display: grid;
-  grid-template-columns: repeat(4, 180px); /* giảm chiều rộng nút */
+  grid-template-columns: repeat(4, 180100px); /* giảm chiều rộng nút */
   gap: 15px;
   padding: 40px 0;
   justify-content: center; /* canh giữa grid */
@@ -116,3 +116,141 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+
+.program-frame {
+  border: 1px solid #9fafc4;
+  
+  padding: 15px 20px;               /* khoảng cách chữ sát viền */
+  max-height: 500px;
+  max-width: 700px;
+  overflow-y: auto;
+  margin: 0 auto 25px auto; /* trên 0 để sát tiêu đề, dưới 25px */
+  background-color: #ffffff;
+  border-radius: 12px;              /* bo góc */
+  margin-bottom: 25px;
+ 
+  box-shadow: 0 4px 20px rgba(0, 80, 170, 0.25); 
+  font-family: "Times New Roman", serif;
+  font-size: 17px;
+  color: #03244f; /* xanh đậm đẹp, trang trọng */
+  line-height: 1.3;                 /* chữ sát hơn */
+}
+
+.program-frame h3 {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #04156b; /* xanh đậm đẹp, trang trọng */
+}
+
+.program-frame p {
+  margin: 5px 0;
+  text-align: left;                  /* chữ đều, sát lề */
+  word-wrap: break-word;             /* xuống dòng khi dài */
+  white-space: normal;               /* tránh giãn chữ */
+}
+
+
+.main-container h1 {
+  font-family: "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.program-title {
+  font-family: "Times New Roman", serif;  /* font chữ */
+  font-size: 22px;                         /* chữ lớn hơn */
+  font-weight: bold;                        /* in đậm */
+  text-align: center;                       /* canh giữa */
+  margin: 15px 0 5px 0;
+  color: #023372; /* xanh đậm đẹp, trang trọng */
+  line-height: 1.2;                          /* khoảng cách trên/dưới */
+}
+
+.sub-time {
+  font-size: 15px;      /* nhỏ gọn hơn */
+  display: block;
+  margin-top: 4px;      /* sát dòng trên */
+  font-style: italic;   /* kiểu chữ nghiêng cho thanh lịch (tùy chọn) */
+}
+
+.program-content p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+/*-------------------------------------------------văn kiện ---------------*/
+.vankien-frame {
+  border: 1px solid #0d3c9b; /* viền xanh */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 114, 188, 0.25); /* bóng đẹp */
+  background: white;
+  margin-bottom: 25px;
+}
+
+.vankien-frame a:hover {
+  color: #063d84;
+  text-decoration: underline;
+}
+/*--------------so do ------------*/
+.sodo-frame {
+  max-width: 950px;       /* chiều ngang cố định */
+  width: 100%;
+  height: 500px;          /* chiều cao cố định của khung */
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #f5f8f9;  /* viền xanh */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* bóng nhẹ */
+  overflow: hidden;       /* ẩn phần ảnh vượt khung */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.sodo-image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;  /* ảnh tự co theo khung, giữ tỷ lệ */
+}
+/*---------- tham luan---------*/
+/* app/style.css */
+
+/* Container của bảng */
+.thamluan-container {
+  max-width: 950px;
+  margin: auto;
+  padding: 20px;
+  font-family: "Times New Roman", serif;
+  font-size: 16px;
+}
+
+/* Bảng tham luận có viền và ô */
+.thamluan-table {
+  width: 100%;
+  border-collapse: collapse; /* gom viền */
+  border: 1px solid #0650b7; /* viền bao quanh bảng */
+}
+
+/* Viền từng ô */
+.thamluan-table th,
+.thamluan-table td {
+  border: 1px solid #0650b7;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+/* Header bảng */
+.thamluan-table th {
+  font-weight: bold;
+  background-color: #b3caed; /* màu nhạt cho header */
+}
+
