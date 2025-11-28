@@ -1,3 +1,8 @@
+
+interface ProgramFramesProps {
+  phi1Content: string;
+  phi2Content: string;
+}
 export default function ProgramFrames({ phi1Content, phi2Content }: ProgramFramesProps) {
   return (
     <div className="program-container">
