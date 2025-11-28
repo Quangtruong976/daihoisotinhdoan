@@ -103,17 +103,90 @@
   justify-items: center;
 }
 
-/* Tablet — 2 cột */
+/* Tablet — 2 cột 
 @media (max-width: 768px) {
   .button-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Mobile nhỏ — 2 cột luôn */
+Mobile nhỏ — 2 cột luôn 
 @media (max-width: 480px) {
   .button-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+} */
+/*------------------- Responsive cho điện thoại & tablet -------------------*/
+
+/* Tablet – giảm font và padding */
+@media (max-width: 768px) {
+  .program-frame {
+    max-width: 90%;       /* khung nhỏ hơn */
+    padding: 12px;
+  }
+
+  .program-frame h3 {
+    font-size: 16px;
+  }
+
+  .sub-time {
+    font-size: 13px;
+  }
+
+  .program-content p {
+    font-size: 14px;
+  }
+
+  .sodo-frame {
+    max-width: 90%;
+    height: 400px;
+  }
+
+  .thamluan-container {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .thamluan-table th,
+  .thamluan-table td {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+}
+
+/* Mobile – điện thoại nhỏ hơn, co nhỏ hơn nữa */
+@media (max-width: 480px) {
+  .program-frame {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  .program-frame h3 {
+    font-size: 14px;
+  }
+
+  .sub-time {
+    font-size: 12px;
+  }
+
+  .program-content p {
+    font-size: 13px;
+  }
+
+  .sodo-frame {
+    max-width: 95%;
+    height: 300px;
+  }
+
+  .thamluan-container {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .thamluan-table th,
+  .thamluan-table td {
+    padding: 5px 6px;
+    font-size: 11px;
   }
 }
 
