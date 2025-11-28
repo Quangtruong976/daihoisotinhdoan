@@ -1,10 +1,10 @@
 
 
-interface ProgramFramesProps {
-  phi1Content: string;
-  phi2Content: string;
-}
 
+type ProgramFramesProps = {
+  phi1Content: React.ReactNode;
+  phi2Content: React.ReactNode;
+};
 export default function ProgramFrames({ phi1Content, phi2Content }: ProgramFramesProps) {
   return (
     <div className="w-full flex flex-col items-center px-2 md:px-4">
