@@ -200,7 +200,7 @@ Mobile nhỏ — 2 cột luôn
   overflow-y: auto;
   margin: 0 auto 25px auto; /* trên 0 để sát tiêu đề, dưới 25px */
   background-color: #ffffff;
-  border-radius: 12px;              /* bo góc */
+  border-radius: 8px;              /* bo góc */
   margin-bottom: 25px;
  
   box-shadow: 0 4px 20px rgba(0, 80, 170, 0.25); 
