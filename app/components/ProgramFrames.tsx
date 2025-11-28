@@ -1,10 +1,8 @@
-
-
-
 type ProgramFramesProps = {
   phi1Content: React.ReactNode;
   phi2Content: React.ReactNode;
 };
+
 export default function ProgramFrames({ phi1Content, phi2Content }: ProgramFramesProps) {
   return (
     <div className="w-full flex flex-col items-center px-2 md:px-4">
@@ -32,19 +30,3 @@ export default function ProgramFrames({ phi1Content, phi2Content }: ProgramFrame
     </div>
   );
 }
-
-/* CSS bổ sung trong globals.css hoặc tailwind layer */
-/*
-.session-title {
-}
-
-.program-detail-box {
-}
-
-@media (max-width: 480px) {
-  .program-detail-box {
-    max-width: 90%;
-    padding: 10px 14px;
-  }
-}
-*/
