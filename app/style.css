@@ -193,7 +193,7 @@ Mobile nhỏ — 2 cột luôn
 
 .program-frame {
   border: 1px solid #9fafc4;
-  
+  box-sizing: border-box;
   padding: 15px 20px;               /* khoảng cách chữ sát viền */
   max-height: 500px;
   max-width: 700px;
