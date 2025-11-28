@@ -1,40 +1,50 @@
+import React from "react";
 
 interface ProgramFramesProps {
   phi1Content: string;
   phi2Content: string;
 }
+
 export default function ProgramFrames({ phi1Content, phi2Content }: ProgramFramesProps) {
   return (
-    <div className="program-container">
-      {/* Phiên thứ nhất */}
-      <div className="program-frame">
-        <h3>
-          PHIÊN THỨ NHẤT
-          <br />
-          <span className="sub-time">(Bắt đầu lúc 15h00 – 17h30 ngày 18/12/2025)</span>
-        </h3>
+    <div className="w-full flex flex-col items-center px-2 md:px-4">
+      {/* PHIÊN 1 */}
+      <h2 className="session-title text-xl font-bold mt-6 mb-3 uppercase text-center">
+        Phiên thứ nhất
+      </h2>
 
-        <div className="program-content">
-          {phi1Content.split("\n").map((line, idx) => (
-            <p key={idx}>{line}</p>
-          ))}
+      <div className="program-detail-box max-w-[650px] w-full border border-gray-300 rounded-xl p-4 md:p-6 bg-white overflow-hidden">
+        <div className="whitespace-pre-wrap break-words text-base leading-relaxed">
+          {phi1Content}
         </div>
       </div>
 
-      {/* Phiên thứ hai */}
-      <div className="program-frame">
-        <h3>
-          PHIÊN THỨ HAI – Phiên trọng thể Đại hội
-          <br />
-          <span className="sub-time">(Bắt đầu lúc 8h00 – 11h30 ngày 19/12/2025)</span>
-        </h3>
+      {/* PHIÊN 2 */}
+      <h2 className="session-title text-xl font-bold mt-10 mb-3 uppercase text-center">
+        Phiên thứ hai
+      </h2>
 
-        <div className="program-content">
-          {phi2Content.split("\n").map((line, idx) => (
-            <p key={idx}>{line}</p>
-          ))}
+      <div className="program-detail-box max-w-[650px] w-full border border-gray-300 rounded-xl p-4 md:p-6 bg-white overflow-hidden">
+        <div className="whitespace-pre-wrap break-words text-base leading-relaxed">
+          {phi2Content}
         </div>
       </div>
     </div>
   );
 }
+
+/* CSS bổ sung trong globals.css hoặc tailwind layer */
+/*
+.session-title {
+}
+
+.program-detail-box {
+}
+
+@media (max-width: 480px) {
+  .program-detail-box {
+    max-width: 90%;
+    padding: 10px 14px;
+  }
+}
+*/
