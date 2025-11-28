@@ -10,7 +10,7 @@
   width: 100%;
   max-height: 310px;
   overflow: hidden;
-  margin-bottom: 1px; /* khoảng cách giữa banner và menu */
+  margin-bottom: 1px;
 }
 
 .banner-img {
@@ -26,7 +26,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 5px;
-  background-color: #0650b7; /* xanh đậm */
+  background-color: #0650b7;
   padding: 5px 0;
 }
 
@@ -51,12 +51,11 @@
 /* Khối nút chữ nhật */
 .button-grid {
   display: grid;
-  grid-template-columns: repeat(4, 150px); /* sửa lỗi */
+  grid-template-columns: repeat(4, 150px);
   gap: 15px;
   padding: 40px 0;
   justify-content: center;
 }
-
 
 .btn-card {
   display: flex;
@@ -89,34 +88,21 @@
   background-color: #0073b3;
   color: white;
   padding: 12px 0;
-  margin-top: auto; /* đẩy footer xuống đáy */
+  margin-top: auto;
   font-size: 0.9rem;
-  text-align: center; /* canh giữa chữ */
+  text-align: center;
 }
 
-/* Responsive */
-/* Mặc định: Desktop – 4 cột */
+/*------------------- Responsive -------------------*/
 
-
-/* Tablet — 2 cột 
+/* Tablet – 2 cột, giảm font, padding */
 @media (max-width: 768px) {
   .button-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-Mobile nhỏ — 2 cột luôn 
-@media (max-width: 480px) {
-  .button-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-} */
-/*------------------- Responsive cho điện thoại & tablet -------------------*/
-
-/* Tablet – giảm font và padding */
-@media (max-width: 768px) {
   .program-frame {
-    max-width: 90%;       /* khung nhỏ hơn */
+    max-width: 90%;
     padding: 12px;
   }
 
@@ -149,25 +135,16 @@ Mobile nhỏ — 2 cột luôn
   }
 }
 
-/* Mobile – điện thoại nhỏ hơn, co nhỏ hơn nữa */
-.program-detail-box {
-  max-width: 92%;       /* thu hẹp khung lại */
-  margin: 0 auto;       /* căn giữa */
-  padding: 12px 16px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background: #fff;
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-}
-
-/* Trên điện thoại */
+/* Mobile nhỏ – điện thoại dọc */
 @media (max-width: 480px) {
-  .program-detail-box {
-    max-width: 90%;     /* thu hẹp nữa cho gọn */
+  .button-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .program-frame {
+    max-width: 92%;
     padding: 10px 14px;
   }
-}
 
   .program-frame h3 {
     font-size: 14px;
@@ -198,24 +175,22 @@ Mobile nhỏ — 2 cột luôn
   }
 }
 
-
+/*------------------- Program Frame -------------------*/
 .program-frame {
   border: 1px solid #9fafc4;
   box-sizing: border-box;
-  padding: 15px 20px;               /* khoảng cách chữ sát viền */
+  padding: 15px 20px;
   max-height: 500px;
   max-width: 500px;
   overflow-y: auto;
-  margin: 0 auto 25px auto; /* trên 0 để sát tiêu đề, dưới 25px */
+  margin: 0 auto 25px auto;
   background-color: #ffffff;
-  border-radius: 8px;              /* bo góc */
-  margin-bottom: 25px;
- 
+  border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 80, 170, 0.25); 
   font-family: "Times New Roman", serif;
   font-size: 17px;
-  color: #03244f; /* xanh đậm đẹp, trang trọng */
-  line-height: 1.3;                 /* chữ sát hơn */
+  color: #03244f;
+  line-height: 1.3;
 }
 
 .program-frame h3 {
@@ -223,16 +198,15 @@ Mobile nhỏ — 2 cột luôn
   font-weight: bold;
   text-align: center;
   margin-bottom: 15px;
-  color: #04156b; /* xanh đậm đẹp, trang trọng */
+  color: #04156b;
 }
 
 .program-frame p {
   margin: 5px 0;
-  text-align: left;                  /* chữ đều, sát lề */
-  word-wrap: break-word;             /* xuống dòng khi dài */
-  white-space: normal;               /* tránh giãn chữ */
+  text-align: left;
+  word-wrap: break-word;
+  white-space: normal;
 }
-
 
 .main-container h1 {
   font-family: "Times New Roman", serif;
@@ -243,32 +217,33 @@ Mobile nhỏ — 2 cột luôn
 }
 
 .program-title {
-  font-family: "Times New Roman", serif;  /* font chữ */
-  font-size: 22px;                         /* chữ lớn hơn */
-  font-weight: bold;                        /* in đậm */
-  text-align: center;                       /* canh giữa */
+  font-family: "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
   margin: 15px 0 5px 0;
-  color: #023372; /* xanh đậm đẹp, trang trọng */
-  line-height: 1.2;                          /* khoảng cách trên/dưới */
+  color: #023372;
+  line-height: 1.2;
 }
 
 .sub-time {
-  font-size: 15px;      /* nhỏ gọn hơn */
+  font-size: 15px;
   display: block;
-  margin-top: 4px;      /* sát dòng trên */
-  font-style: italic;   /* kiểu chữ nghiêng cho thanh lịch (tùy chọn) */
+  margin-top: 4px;
+  font-style: italic;
 }
 
 .program-content p {
   text-align: justify;
   text-justify: inter-word;
 }
-/*-------------------------------------------------văn kiện ---------------*/
+
+/*-------------------------------------------------Văn kiện---------------*/
 .vankien-frame {
-  border: 1px solid #0d3c9b; /* viền xanh */
+  border: 1px solid #0d3c9b;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 114, 188, 0.25); /* bóng đẹp */
+  box-shadow: 0 4px 12px rgba(0, 114, 188, 0.25);
   background: white;
   margin-bottom: 25px;
 }
@@ -277,17 +252,18 @@ Mobile nhỏ — 2 cột luôn
   color: #063d84;
   text-decoration: underline;
 }
-/*--------------so do ------------*/
+
+/*------------------- Sơ đồ -------------------*/
 .sodo-frame {
-  max-width: 950px;       /* chiều ngang cố định */
+  max-width: 950px;
   width: 100%;
-  height: 500px;          /* chiều cao cố định của khung */
+  height: 500px;
   margin: 20px auto;
   text-align: center;
-  border: 2px solid #f5f8f9;  /* viền xanh */
+  border: 2px solid #f5f8f9;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* bóng nhẹ */
-  overflow: hidden;       /* ẩn phần ảnh vượt khung */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -299,12 +275,10 @@ Mobile nhỏ — 2 cột luôn
   max-height: 100%;
   width: auto;
   height: auto;
-  object-fit: contain;  /* ảnh tự co theo khung, giữ tỷ lệ */
+  object-fit: contain;
 }
-/*---------- tham luan---------*/
-/* app/style.css */
 
-/* Container của bảng */
+/*------------------- Tham luận -------------------*/
 .thamluan-container {
   max-width: 950px;
   margin: auto;
@@ -313,14 +287,12 @@ Mobile nhỏ — 2 cột luôn
   font-size: 16px;
 }
 
-/* Bảng tham luận có viền và ô */
 .thamluan-table {
   width: 100%;
-  border-collapse: collapse; /* gom viền */
-  border: 1px solid #0650b7; /* viền bao quanh bảng */
+  border-collapse: collapse;
+  border: 1px solid #0650b7;
 }
 
-/* Viền từng ô */
 .thamluan-table th,
 .thamluan-table td {
   border: 1px solid #0650b7;
@@ -329,9 +301,7 @@ Mobile nhỏ — 2 cột luôn
   vertical-align: top;
 }
 
-/* Header bảng */
 .thamluan-table th {
   font-weight: bold;
-  background-color: #b3caed; /* màu nhạt cho header */
+  background-color: #b3caed;
 }
-
