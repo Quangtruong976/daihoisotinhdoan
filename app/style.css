@@ -51,11 +51,12 @@
 /* Khối nút chữ nhật */
 .button-grid {
   display: grid;
-  grid-template-columns: repeat(4, 180100px); /* giảm chiều rộng nút */
+  grid-template-columns: repeat(4, 150px); /* sửa lỗi */
   gap: 15px;
   padding: 40px 0;
-  justify-content: center; /* canh giữa grid */
+  justify-content: center;
 }
+
 
 .btn-card {
   display: flex;
@@ -95,13 +96,7 @@
 
 /* Responsive */
 /* Mặc định: Desktop – 4 cột */
-.button-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  padding: 25px 20px;
-  justify-items: center;
-}
+
 
 /* Tablet — 2 cột 
 @media (max-width: 768px) {
