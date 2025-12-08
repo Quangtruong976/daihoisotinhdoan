@@ -16,11 +16,11 @@ export default function Header() {
         <span className="separator">I</span>
         <Link href="/vankien" className="top-menu-btn">Văn kiện Đại hội</Link>
         <span className="separator">I</span>
-        <Link href="/sodo" className="top-menu-btn">Sơ đồ đại biểu</Link>
+        <Link href="/sodo" className="top-menu-btn">Sơ đồ chổ ngồi</Link>
         <span className="separator">I</span>
         <Link href="/diemdanh" className="top-menu-btn">Điểm danh</Link>
         <span className="separator">I</span>
-        <Link href="/dangnhap" className="top-menu-btn">Đăng nhập</Link>
+        <Link href="/thongtindaibieu" className="top-menu-btn">Thông tin đại biểu</Link>
       </nav>
     </>
   );

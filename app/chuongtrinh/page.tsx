@@ -42,7 +42,7 @@ thảo luận góp ý các dự thảo Văn kiện Đại hội:
 
   return (
     <div className="main-container">
-      <Header />
+     
       <div className="program-title">
     Chương trình Đại hội đại biểu Đoàn TNCS Hồ Chí Minh tỉnh Lâm Đồng <br/> 
     lần thứ I, nhiệm kỳ 2025 – 2030  <br/>-----
@@ -50,7 +50,6 @@ thảo luận góp ý các dự thảo Văn kiện Đại hội:
       {/* Chương trình Phiên 1 & Phiên 2 */}
       <ProgramFrames phi1Content={phi1} phi2Content={phi2} />
 
-      <footer className="footer">@2025 - Tỉnh đoàn Lâm Đồng</footer>
     </div>
   );
 }

@@ -22,9 +22,9 @@ export default function PageThamLuan() {
 
   return (
     <div className="main-container">
-      <Header />
+   
       <ThamLuanTable thamluans={thamluanList} />
-      <footer className="footer">@2025 - Tỉnh đoàn Lâm Đồng</footer>
+      
     </div>
   );
 }

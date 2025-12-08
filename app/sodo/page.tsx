@@ -9,9 +9,9 @@ export default function PageSoDo() {
 
   return (
     <div className="main-container">
-      <Header />
+    
       <SoDoFrames phi1Image={phi1Image} phi2Image={phi2Image} />
-      <footer className="footer">@2025 - Tỉnh đoàn Lâm Đồng</footer>
+   
     </div>
   );
 }

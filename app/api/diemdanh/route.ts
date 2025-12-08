@@ -1,37 +1,50 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import fs from "fs/promises";
+import path from "path";
 
-// Giả lập cơ sở dữ liệu trong bộ nhớ (memory)
-// Trong thực tế, bạn dùng DB như MongoDB, Postgres,...
-let diemDanhList: {
-  hoTen: string;
-  donVi: string;
-  email: string;
-  ngay: string;
-  phien: string;
-}[] = [];
+const DATA_FILE = path.join(process.cwd(), "data", "diemdanh.json");
 
-export async function POST(req: NextRequest) {
-  const data = await req.json();
-  const { hoTen, donVi, email, ngay, phien } = data;
-
-  if (!hoTen || !donVi || !email || !ngay || !phien) {
-    return NextResponse.json({ error: "Thiếu thông tin" }, { status: 400 });
+async function readData() {
+  try {
+    const raw = await fs.readFile(DATA_FILE, "utf-8");
+    return JSON.parse(raw);
+  } catch {
+    return { diemDanhList: [] };
   }
+}
 
-  // Kiểm tra trùng: nếu đã tồn tại cùng họ tên + email + phiên
-  const duplicate = diemDanhList.find(
-    (d) => d.hoTen === hoTen && d.email === email && d.phien === phien
-  );
-
-  if (duplicate) {
-    return NextResponse.json({ error: "Đại biểu đã điểm danh" }, { status: 400 });
-  }
-
-  diemDanhList.push({ hoTen, donVi, email, ngay, phien });
-
-  return NextResponse.json({ success: true, diemDanhList });
+async function writeData(obj: any) {
+  await fs.mkdir(path.join(process.cwd(), "data"), { recursive: true });
+  await fs.writeFile(DATA_FILE, JSON.stringify(obj, null, 2), "utf-8");
 }
 
 export async function GET() {
-  return NextResponse.json({ diemDanhList });
+  const data = await readData();
+  return NextResponse.json(data);
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const { hoTen, donVi, ngay, phien } = body;
+    if (!hoTen || !donVi || !ngay || !phien) return NextResponse.json({ error: "Thiếu trường bắt buộc" }, { status: 400 });
+
+    const data = await readData();
+    const list = data.diemDanhList || [];
+
+    const key = (s: string) => s.trim().toLowerCase();
+
+    // Kiểm tra trùng
+    const dup = list.find(d => key(d.hoTen) === key(hoTen) && d.phien === phien);
+    if (dup) return NextResponse.json({ error: "Đại biểu đã điểm danh cho phiên này" }, { status: 400 });
+
+    const item = { hoTen, donVi, ngay, phien, time: new Date().toISOString() };
+    list.push(item);
+    await writeData({ diemDanhList: list });
+
+    return NextResponse.json({ success: true, diemDanhList: list });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
+  }
 }

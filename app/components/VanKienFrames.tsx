@@ -5,7 +5,7 @@ interface VanKienProps {
 
 export default function VanKienFrames({ documents }: VanKienProps) {
   return (
-    <div style={{ maxWidth: 900, margin: "auto", padding: 20 }}>
+    <div style={{ maxWidth: 900, margin: "auto", padding: 0 }}>
       <div className="program-title" style={{ fontWeight: "bold", textAlign: "center", fontSize: 20, marginBottom: 25 }}>
         Văn kiện Đại hội đại biểu Đoàn TNCS Hồ Chí Minh tỉnh Lâm Đồng <br/>
          lần thứ I, nhiệm kỳ 2025 – 2030 <br/>-----

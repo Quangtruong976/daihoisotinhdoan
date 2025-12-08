@@ -4,16 +4,16 @@ import "./style.css";
 
 export default function TrangChu() {
 
-  // Thanh ngang trên cùng: dùng dấu "I" để ngăn cách
+  /* Thanh ngang trên cùng: dùng dấu "I" để ngăn cách
   const topMenu = [
     { label: "Home", route: "/" },
     { label: "Chương trình", route: "/chuongtrinh" },
     { label: "Văn kiện Đại hội", route: "/vankien" },
-    { label: "Sơ đồ đại biểu", route: "/sodo" },
+    { label: "Sơ đồ chổ ngồi", route: "/sodo" },
     { label: "Điểm danh", route: "/diemdanh" },
-    { label: "Đăng nhập", route: "/dangnhap" },
+    { label: "Thông tin đại biểu", route: "/thongtindaibieu" },
    
-  ];
+  ];*/
 
   // Nút khối chữ nhật dưới
   const bottomButtons = [
@@ -30,20 +30,6 @@ export default function TrangChu() {
   return (
     <div className="main-container">
 
-      {/* Banner ảnh thay cho logo + tiêu đề */}
-      <div className="banner">
-        <img src="/bg.png" alt="Banner Đại hội" className="banner-img"/>
-      </div>
-
-      {/* Thanh menu ngang với dấu "I" */}
-      <nav className="top-menu">
-        {topMenu.map((btn, i) => (
-          <span key={i}>
-            <Link href={btn.route} className="top-menu-btn">{btn.label}</Link>
-            {i < topMenu.length - 1 && <span className="separator">I</span>}
-          </span>
-        ))}
-      </nav>
 
       {/* Khối nút chữ nhật dưới */}
       <div className="button-grid">
@@ -56,9 +42,7 @@ export default function TrangChu() {
       </div>
 
       {/* Footer */}
-      <footer className="footer">
-        @2025 - Tỉnh đoàn Lâm Đồng
-      </footer>
+    
 
     </div>
   );

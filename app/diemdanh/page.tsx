@@ -1,175 +1,174 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+import Link from "next/link";
 
-type DiemDanhInfo = {
-  hoTen: string;
-  donVi: string;
-  email: string;
-  ngay: string;
-  phien: string;
-};
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DIEN_BIEU_TONG = 350;
+type DiemDanhItem = { hoTen: string; donVi: string; ngay: string; phien: string };
 
-export default function DiemDanh() {
-  const [hoTen, setHoTen] = useState("");
-  const [donVi, setDonVi] = useState("");
-  const [email, setEmail] = useState("");
-  const [ngay, setNgay] = useState("");
-  const [phien, setPhien] = useState("");
-  const [listDiemDanh, setListDiemDanh] = useState<DiemDanhInfo[]>([]);
+const DATE_OPTIONS = [
+  { 
+    label: "19/12/2025", 
+    phien: "Phiên thứ 1",
+    open: new Date("2025-12-07T08:00:00"),
+    close: new Date("2025-12-19T11:00:00")
+  },
+  { 
+    label: "20/12/2025", 
+    phien: "Phiên trọng thể",
+    open: new Date("2025-12-20T06:00:00"),
+    close: new Date("2025-12-20T23:59:00")
+  },
+];
 
-  // Load danh sách từ server khi component mount
+const TOTAL_DELEGATES = 350;
+
+export default function DiemDanhStats() {
+  const [diemDanhList, setDiemDanhList] = useState<DiemDanhItem[]>([]);
+  const [currentDateOption, setCurrentDateOption] = useState(DATE_OPTIONS[0]);
+
   useEffect(() => {
-    fetch("/api/diemdanh")
-      .then((res) => res.json())
-      .then((data) => setListDiemDanh(data.diemDanhList || []));
+    const fetchData = () => {
+      fetch("/api/diemdanh")
+        .then(res => res.json())
+        .then(data => setDiemDanhList(data.diemDanhList || []))
+        .catch(err => console.error(err));
+    };
+
+    fetchData();
+    const interval = setInterval(fetchData, 5000); // cập nhật tự động
+
+    // Cập nhật phiên hiện tại theo thời gian
+    const checkCurrent = () => {
+      const now = new Date();
+      const current = DATE_OPTIONS.find(d => now >= d.open && now <= d.close);
+      if (current) setCurrentDateOption(current);
+    };
+    checkCurrent();
+    const timeInterval = setInterval(checkCurrent, 10000);
+
+    return () => { clearInterval(interval); clearInterval(timeInterval); };
   }, []);
 
-  const handleSubmit = async () => {
-    if (!hoTen || !donVi || !email || !ngay || !phien) {
-      alert("Vui lòng nhập đầy đủ thông tin.");
-      return;
-    }
+  const filteredList = diemDanhList.filter(d => d.ngay === currentDateOption.label);
+  const coMat = filteredList.length;
+  const vang = Math.max(0, TOTAL_DELEGATES - coMat);
+  const tyLe = TOTAL_DELEGATES ? ((coMat / TOTAL_DELEGATES) * 100).toFixed(1) : "0.0";
 
-    const res = await fetch("/api/diemdanh", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ hoTen, donVi, email, ngay, phien }),
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      setListDiemDanh(data.diemDanhList);
-      setHoTen("");
-      setDonVi("");
-      setEmail("");
-    } else {
-      alert(data.error);
-    }
+  const data = {
+    labels: ["Có mặt", "Vắng"],
+    datasets: [
+      {
+        data: [coMat, vang],
+        backgroundColor: ["#28a745", "#e34a4a"],
+        hoverOffset: 6
+      }
+    ]
   };
 
-  // Thống kê tổng
-  const soCoMat = listDiemDanh.length;
-  const soVang = DIEN_BIEU_TONG - soCoMat;
-  const soChuaDiemDanh = DIEN_BIEU_TONG - soCoMat;
-
-  // Thống kê theo phiên
-  const phien1List = listDiemDanh.filter((d) => d.phien === "Phiên thứ 1");
-  const phien2List = listDiemDanh.filter((d) => d.phien === "Phiên trọng thể");
-
   return (
-    <div className="diemdanh-container">
-      <h3 className="diemdanh-title">Yêu cầu điểm danh</h3>
+    <div className="main-container" style={{ padding: 12, maxWidth: 480, margin: "0 auto" }}>
+      <h2 style={{ textAlign: "center", color: " #0650b7", fontSize: 20,  fontWeight: "bold" }}> Thống kê đại biểu dự Đại hội</h2>
 
-      <div className="diemdanh-form">
-        <label>
-          Chọn ngày điểm danh:
-          <select value={ngay} onChange={(e) => setNgay(e.target.value)}>
-            <option value="">-- Chọn ngày --</option>
-            <option value="18/12/2025">18/12/2025</option>
-            <option value="19/12/2025">19/12/2025</option>
+      <div style={{
+        width: "100%",
+        background: "#fff",
+        padding: 14,
+        borderRadius: 8,
+        boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
+        marginTop: 12
+      }}>
+        {/* Chọn phiên */}
+        <div>
+        <label style={{ fontWeight: "bold", color: "rgb(9, 70, 184)" }}>Phiên hiện tại:</label>
+          <select
+            value={currentDateOption.label}
+            onChange={e => {
+              const opt = DATE_OPTIONS.find(d => d.label === e.target.value);
+              if (opt) setCurrentDateOption(opt);
+            }}
+            style={{ display: "block", marginTop: 8, width: "100%", padding: 6, borderRadius: 6 }}
+          >
+            {DATE_OPTIONS.map(o => {
+              const now = new Date();
+              const isOpen = now >= o.open && now <= o.close;
+              return (
+                <option key={o.label} value={o.label} disabled={!isOpen} style={{ color: isOpen ? "#000" : "#aaa" }}>
+                  {o.label} — {o.phien} {isOpen ? "" : "(chưa mở)"}
+                </option>
+              )
+            })}
           </select>
-        </label>
+        </div>
 
-        <label>
-          Chọn phiên:
-          <select value={phien} onChange={(e) => setPhien(e.target.value)}>
-            <option value="">-- Chọn phiên --</option>
-            <option value="Phiên thứ 1">Phiên thứ 1</option>
-            <option value="Phiên trọng thể">Phiên trọng thể</option>
-          </select>
-        </label>
+        {/* Thông tin tổng quan */}
+        <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
+          {/* Tổng đại biểu */}
+          <div style={{
+            flex: "1 1 100px",
+            borderRadius: 8,
+            padding: 12,
+            textAlign: "center",
+            backgroundColor: "#0650b7",
+            color: "#fff"
+          }}>
+            <div style={{ fontSize: 16 }}><b>{TOTAL_DELEGATES}</b></div>
+            <div style={{ fontSize: 12 }}>Tổng đại biểu</div>
+          </div>
 
-        <label>
-          Họ tên:
-          <input
-            type="text"
-            value={hoTen}
-            onChange={(e) => setHoTen(e.target.value)}
-          />
-        </label>
+          {/* Có mặt */}
+          <div style={{
+            flex: "1 1 100px",
+            borderRadius: 8,
+            padding: 12,
+            textAlign: "center",
+            backgroundColor: "#28a745",
+            color: "#fff"
+          }}>
+            <div style={{ fontSize: 16 }}><b>{coMat}</b></div>
+            <div style={{ fontSize: 12 }}>Có mặt</div>
+          </div>
 
-        <label>
-          Đơn vị:
-          <input
-            type="text"
-            value={donVi}
-            onChange={(e) => setDonVi(e.target.value)}
-          />
-        </label>
+          {/* Vắng */}
+          <div style={{
+            flex: "1 1 100px",
+            borderRadius: 8,
+            padding: 12,
+            textAlign: "center",
+            backgroundColor: "#e34a4a",
+            color: "#fff"
+          }}>
+            <div style={{ fontSize: 16 }}><b>{vang}</b></div>
+            <div style={{ fontSize: 12 }}>Vắng</div>
+          </div>
 
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
+          {/* Tỷ lệ */}
+          <div style={{
+            flex: "1 1 80px",
+            borderRadius: 8,
+            padding: 12,
+            textAlign: "center",
+            backgroundColor: "#f0c419",
+            color: "#fff"
+          }}>
+            <div style={{ fontSize: 16, fontWeight: "bold" }}>{tyLe}%</div>
+            <div style={{ fontSize: 12 }}>Tỷ lệ</div>
+          </div>
+        </div>
 
-        <button className="btn-card" onClick={handleSubmit}>
-          Điểm danh
-        </button>
-      </div>
+        {/* Doughnut */}
+        <div style={{ marginTop: 14, maxWidth: 300, marginLeft: "auto", marginRight: "auto" }}>
+          <Doughnut data={data} />
+        </div>
 
-      <div className="diemdanh-stats">
-        <h4>Thống kê tổng</h4>
-        <p>Tổng số đại biểu: {DIEN_BIEU_TONG}</p>
-        <p>Số đại biểu có mặt: {soCoMat}</p>
-        <p>Số đại biểu vắng: {soVang}</p>
-        <p>Số đại biểu chưa điểm danh: {soChuaDiemDanh}</p>
-
-        <h4 className="mt-4">Thống kê theo phiên</h4>
-        <p>Phiên thứ 1: {phien1List.length} đại biểu</p>
-        <p>Phiên trọng thể: {phien2List.length} đại biểu</p>
-
-        {/* Bảng chi tiết từng phiên */}
-        <h4 className="mt-3">Danh sách đại biểu - Phiên thứ 1</h4>
-        <table className="diemdanh-table">
-          <thead>
-            <tr>
-              <th>Họ tên</th>
-              <th>Đơn vị</th>
-              <th>Email</th>
-              <th>Ngày</th>
-            </tr>
-          </thead>
-          <tbody>
-            {phien1List.map((d, idx) => (
-              <tr key={idx}>
-                <td>{d.hoTen}</td>
-                <td>{d.donVi}</td>
-                <td>{d.email}</td>
-                <td>{d.ngay}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <h4 className="mt-3">Danh sách đại biểu - Phiên trọng thể</h4>
-        <table className="diemdanh-table">
-          <thead>
-            <tr>
-              <th>Họ tên</th>
-              <th>Đơn vị</th>
-              <th>Email</th>
-              <th>Ngày</th>
-            </tr>
-          </thead>
-          <tbody>
-            {phien2List.map((d, idx) => (
-              <tr key={idx}>
-                <td>{d.hoTen}</td>
-                <td>{d.donVi}</td>
-                <td>{d.email}</td>
-                <td>{d.ngay}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {/* Nút */}
+        <div style={{ marginTop: 14, display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <Link href="/diemdanh/nhap" className="btn" style={{ flex: 1,display: "flex", background: "rgb(33, 73, 184)", justifyContent: "center", alignItems: "center"  }}>Điểm danh</Link>
+          <Link href="/" className="btn" style={{ flex: 1,display: "flex", background: "rgb(33, 73, 184)", justifyContent: "center", alignItems: "center" }}>Trang chủ</Link>
+        </div>
       </div>
     </div>
   );

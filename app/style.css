@@ -2,7 +2,7 @@
 .main-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+ 
 }
 
 /* Banner ảnh */
@@ -273,16 +273,17 @@
 
 /*-------------------------------------------------Văn kiện---------------*/
 .vankien-frame {
-  border: 1px solid #0d3c9b;
+  border: 1px solid #062d7b;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 114, 188, 0.25);
   background: white;
   margin-bottom: 25px;
+  margin-top: 0;  
 }
 
 .vankien-frame a:hover {
-  color: #063d84;
+  color: #073673;
   text-decoration: underline;
 }
 
@@ -415,3 +416,124 @@ button:hover {
   background-color: #b3caed;
   font-weight: bold;
 }
+
+
+
+/*....... thống kê.......*/
+
+/* Trang thống kê */
+.stat-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0650b7;
+}
+
+.sub {
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.card {
+  padding: 25px;
+  border-radius: 14px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.card1 { background: #0b72d1; }
+.card2 { background: #1da45e; }
+.card3 { background: #d9534f; }
+.card4 { background: #f0ad4e; color: #222; }
+
+.num {
+  font-size: 2.3rem;
+}
+
+.label {
+  margin-top: 5px;
+  font-size: 1.2rem;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 12px 30px;
+  background: #0650b7;
+  color: white;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+/* Trang điểm danh */
+.form-container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.list-title {
+  margin-top: 25px;
+  font-size: 1.4rem;
+  color: #b70606;
+  font-weight: bold;
+}
+
+.table {
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.table th {
+  background: #0650b7;
+  color: white;
+}
+
+/*--------điểm danh-----------*/
+/* small UI helpers for diemdanh */
+.btn {
+  background: #0650b7;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover { filter: brightness(0.95); }
+
