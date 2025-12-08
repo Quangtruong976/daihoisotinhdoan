@@ -87,8 +87,8 @@ export default function DiemDanhStats() {
       className="main-container"
       style={{ padding: 12, maxWidth: 480, margin: "0 auto" }}
     >
-      <h2 style={{ textAlign: "center", color: "#0650b7", fontSize: 20 }}>
-        Thống kê Điểm danh
+      <h2 style={{ textAlign: "center",fontWeight: "bold", color: "rgb(5, 68, 156)", fontSize: "20"}}>
+        Thống kê số lượng đại biểu
       </h2>
 
       <div
@@ -103,7 +103,9 @@ export default function DiemDanhStats() {
       >
         {/* PHIÊN */}
         <div>
-          <label>Phiên hiện tại:</label>
+        <label style={{ fontWeight: "bold", color: "rgb(2, 82, 179)" }}>
+  Phiên hiện tại:
+</label>
           <select
             value={currentDateOption.label}
             onChange={(e) => {
