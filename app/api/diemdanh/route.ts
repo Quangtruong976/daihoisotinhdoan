@@ -4,7 +4,15 @@ import path from "path";
 
 const DATA_FILE = path.join(process.cwd(), "data", "diemdanh.json");
 
-async function readData() {
+type Item = {
+  hoTen: string;
+  donVi: string;
+  ngay: string;
+  phien: string;
+  time?: string;
+};
+
+async function readData(): Promise<{ diemDanhList: Item[] }> {
   try {
     const raw = await fs.readFile(DATA_FILE, "utf-8");
     return JSON.parse(raw);
@@ -27,18 +35,37 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { hoTen, donVi, ngay, phien } = body;
-    if (!hoTen || !donVi || !ngay || !phien) return NextResponse.json({ error: "Thiếu trường bắt buộc" }, { status: 400 });
+
+    if (!hoTen || !donVi || !ngay || !phien)
+      return NextResponse.json(
+        { error: "Thiếu trường bắt buộc" },
+        { status: 400 }
+      );
 
     const data = await readData();
-    const list = data.diemDanhList || [];
+    const list: Item[] = data.diemDanhList || [];
 
     const key = (s: string) => s.trim().toLowerCase();
 
     // Kiểm tra trùng
-    const dup = list.find(d => key(d.hoTen) === key(hoTen) && d.phien === phien);
-    if (dup) return NextResponse.json({ error: "Đại biểu đã điểm danh cho phiên này" }, { status: 400 });
+    const dup = list.find(
+      (d: Item) => key(d.hoTen) === key(hoTen) && d.phien === phien
+    );
 
-    const item = { hoTen, donVi, ngay, phien, time: new Date().toISOString() };
+    if (dup)
+      return NextResponse.json(
+        { error: "Đại biểu đã điểm danh cho phiên này" },
+        { status: 400 }
+      );
+
+    const item: Item = {
+      hoTen,
+      donVi,
+      ngay,
+      phien,
+      time: new Date().toISOString(),
+    };
+
     list.push(item);
     await writeData({ diemDanhList: list });
 
