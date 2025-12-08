@@ -274,13 +274,13 @@ export default function DiemDanhStats() {
             flexWrap: "wrap",
           }}
         >
-          <Link href="/diemdanh/nhap" className="btn" style={{ flex: 1 }}>
+          <Link href="/diemdanh/nhap" className="btn" style={{ flex: 1,textAlign: "center", justifyContent: "center", background: "rgb(28, 85, 159)" }}>
             Điểm danh
           </Link>
           <Link
             href="/"
             className="btn"
-            style={{ flex: 1, background: "#6c757d" }}
+            style={{ flex: 1,textAlign: "center", justifyContent: "center", background: "rgb(28, 85, 159)" }}
           >
             Trang chủ
           </Link>
