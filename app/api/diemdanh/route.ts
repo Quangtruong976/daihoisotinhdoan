@@ -1,64 +1,59 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
+import fs from "fs";
 import path from "path";
 
-const DATA_FILE = path.join(process.cwd(), "data", "diemdanh.json");
+const DIR = path.join(process.cwd(), "data");
+const DB_PATH = path.join(DIR, "diemdanh.json");
 
-type Item = {
+type DiemDanhItem = {
   hoTen: string;
   donVi: string;
   ngay: string;
-  phien: string;
-  time?: string;
+  phien: number;
+  time: string;
 };
 
-async function readData(): Promise<{ diemDanhList: Item[] }> {
+export async function POST(req: Request) {
   try {
-    const raw = await fs.readFile(DATA_FILE, "utf-8");
-    return JSON.parse(raw);
-  } catch {
-    return { diemDanhList: [] };
-  }
-}
+    const { hoTen, donVi, ngay, phien } = await req.json();
 
-async function writeData(obj: any) {
-  await fs.mkdir(path.join(process.cwd(), "data"), { recursive: true });
-  await fs.writeFile(DATA_FILE, JSON.stringify(obj, null, 2), "utf-8");
-}
+    if (!hoTen || !donVi || !ngay || !phien) {
+      return NextResponse.json({ error: "Thiếu dữ liệu" }, { status: 400 });
+    }
 
-export async function GET() {
-  const data = await readData();
-  return NextResponse.json(data);
-}
+    // Tạo thư mục nếu chưa có
+    if (!fs.existsSync(DIR)) {
+      fs.mkdirSync(DIR, { recursive: true });
+    }
 
-export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    const { hoTen, donVi, ngay, phien } = body;
+    // Tạo file nếu chưa có
+    if (!fs.existsSync(DB_PATH)) {
+      fs.writeFileSync(DB_PATH, JSON.stringify({ diemDanhList: [] }, null, 2));
+    }
 
-    if (!hoTen || !donVi || !ngay || !phien)
-      return NextResponse.json(
-        { error: "Thiếu trường bắt buộc" },
-        { status: 400 }
-      );
+    // Đọc file
+    const raw = fs.readFileSync(DB_PATH, "utf8");
+    const data = JSON.parse(raw);
 
-    const data = await readData();
-    const list: Item[] = data.diemDanhList || [];
+    const list: DiemDanhItem[] = data.diemDanhList || [];
 
+    // Hàm chuẩn hóa họ tên
     const key = (s: string) => s.trim().toLowerCase();
 
     // Kiểm tra trùng
     const dup = list.find(
-      (d: Item) => key(d.hoTen) === key(hoTen) && d.phien === phien
+      (d: DiemDanhItem) =>
+        key(d.hoTen) === key(hoTen) && d.phien === phien
     );
 
-    if (dup)
+    if (dup) {
       return NextResponse.json(
         { error: "Đại biểu đã điểm danh cho phiên này" },
         { status: 400 }
       );
+    }
 
-    const item: Item = {
+    const item: DiemDanhItem = {
       hoTen,
       donVi,
       ngay,
@@ -66,12 +61,15 @@ export async function POST(request: Request) {
       time: new Date().toISOString(),
     };
 
+    // Lưu mới
     list.push(item);
-    await writeData({ diemDanhList: list });
 
-    return NextResponse.json({ success: true, diemDanhList: list });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
+    // Ghi lại file
+    data.diemDanhList = list;
+    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), "utf8");
+
+    return NextResponse.json({ ok: true, data: item });
+  } catch (e) {
+    return NextResponse.json({ error: "Lỗi xử lý" }, { status: 500 });
   }
 }
