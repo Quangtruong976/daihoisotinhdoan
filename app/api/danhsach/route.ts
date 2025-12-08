@@ -1,45 +1,29 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
+import * as XLSX from "xlsx";
 
-const DIR = path.join(process.cwd(), "data");
-const DB_PATH = path.join(DIR, "diemdanh.json");
-
-export async function POST(req: Request) {
+export async function GET() {
   try {
-    const { phien } = await req.json();
+    const filePath = path.join(process.cwd(), "public", "data", "danhsach.xlsx");
 
-    if (!phien) {
-      return NextResponse.json({ error: "Thiếu phiên" }, { status: 400 });
-    }
+    const buffer = await fs.readFile(filePath);
 
-    // Tạo thư mục nếu chưa có
-    if (!fs.existsSync(DIR)) {
-      fs.mkdirSync(DIR, { recursive: true });
-    }
+    // Đọc file Excel trực tiếp dạng buffer
+    const workbook = XLSX.read(buffer, { type: "buffer" });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const json = XLSX.utils.sheet_to_json(sheet);
 
-    // Tạo file nếu chưa có
-    if (!fs.existsSync(DB_PATH)) {
-      fs.writeFileSync(DB_PATH, JSON.stringify({ diemDanhList: [] }, null, 2));
-    }
+    const list = json.map((r: any) => ({
+      hoTen: r.hoTen || r["Họ tên"] || r["hoten"] || "",
+      donVi: r.donVi || r["Đơn vị"] || r["donvi"] || "",
+    }));
 
-    // Đọc file
-    const raw = fs.readFileSync(DB_PATH, "utf8");
-    let data = JSON.parse(raw);
-
-    // Xoá đúng phiên
-    data.diemDanhList = data.diemDanhList.filter(
-      (item: any) => item.phien !== phien
+    return NextResponse.json({ list });
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: "Không đọc được file Excel", detail: error.message },
+      { status: 500 }
     );
-
-    // Ghi lại file
-    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), "utf8");
-
-    return NextResponse.json({
-      ok: true,
-      diemDanhList: data.diemDanhList
-    });
-  } catch (e) {
-    return NextResponse.json({ error: "Lỗi xử lý" }, { status: 500 });
   }
 }

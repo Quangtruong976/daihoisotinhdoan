@@ -17,47 +17,49 @@ export default function DiemDanhNhap() {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Các phiên điểm danh
   const DATE_OPTIONS = [
-    { 
-      label: "19/12/2025", 
-      phien: "Phiên thứ 1", 
-      open: new Date("2025-12-07T08:00:00"), 
-      close: new Date("2025-12-19T11:00:00") 
+    {
+      label: "19/12/2025",
+      phien: "Phiên thứ 1",
+      open: new Date("2025-12-07T08:00:00"),
+      close: new Date("2025-12-19T11:00:00"),
     },
-    { 
-      label: "20/12/2025", 
-      phien: "Phiên trọng thể", 
-      open: new Date("2025-12-20T06:00:00"), 
-      close: new Date("2025-12-20T23:59:00") 
+    {
+      label: "20/12/2025",
+      phien: "Phiên trọng thể",
+      open: new Date("2025-12-20T06:00:00"),
+      close: new Date("2025-12-20T23:59:00"),
     },
   ];
 
   const now = new Date();
 
   useEffect(() => {
+    // Lấy danh sách tổng
     fetch("/api/danhsach")
-      .then(r => r.json())
-      .then(d => setDs(d.list || []));
+      .then((r) => r.json())
+      .then((d) => setDs(d.list || []));
 
+    // Lấy danh sách đã điểm danh
     fetch("/api/diemdanh")
-      .then(r => r.json())
-      .then(d => setSubmittedList(d.diemDanhList || []));
+      .then((r) => r.json())
+      .then((d) => setSubmittedList(d.diemDanhList || []));
 
-    const current = DATE_OPTIONS.find(d => now >= d.open && now <= d.close);
+    const current = DATE_OPTIONS.find(
+      (d) => now >= d.open && now <= d.close
+    );
     if (current) {
       setDate(current.label);
       setPhien(current.phien);
     }
 
     const handleClickOutside = (e: any) => {
-      if (inputRef.current && !inputRef.current.contains(e.target)) {
+      if (inputRef.current && !inputRef.current.contains(e.target))
         setShowSuggest(false);
-      }
     };
-
     document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
+    return () =>
+      document.removeEventListener("click", handleClickOutside);
   }, []);
 
   const suggestions =
@@ -82,9 +84,17 @@ export default function DiemDanhNhap() {
         d.phien === phienCheck
     );
 
-  // Nút làm mới danh sách
+  // ======================================
+  // RESET LIST CÓ MẬT KHẨU 000000
+  // ======================================
   const resetList = async () => {
     if (!phien) return alert("Chưa chọn phiên.");
+
+    const pwd = prompt("Nhập mật khẩu để làm mới danh sách:");
+    if (pwd !== "000000") {
+      alert("Sai mật khẩu. Không thể làm mới danh sách.");
+      return;
+    }
 
     if (!confirm("Xóa danh sách điểm danh của phiên hiện tại?")) return;
 
@@ -104,6 +114,9 @@ export default function DiemDanhNhap() {
     }
   };
 
+  // ======================================
+  // SUBMIT – ĐÃ BỔ SUNG FETCH LẠI DANH SÁCH
+  // ======================================
   const submit = async () => {
     if (!selected) return alert("Chọn tên trong danh sách.");
     if (!date || !phien) return alert("Phiên điểm danh chưa mở.");
@@ -111,7 +124,6 @@ export default function DiemDanhNhap() {
       return alert("Đại biểu đã điểm danh cho phiên này.");
 
     setLoading(true);
-
     try {
       const res = await fetch("/api/diemdanh", {
         method: "POST",
@@ -125,13 +137,15 @@ export default function DiemDanhNhap() {
       });
 
       const data = await res.json();
-
       if (!res.ok) alert(data.error || "Lỗi");
       else {
         alert("Điểm danh thành công");
         setSelected(null);
         setQuery("");
-        setSubmittedList(data.diemDanhList || []);
+
+        // ⬇️ BỔ SUNG: LẤY LẠI DANH SÁCH ĐÃ ĐIỂM DANH
+        const updated = await fetch("/api/diemdanh").then((r) => r.json());
+        setSubmittedList(updated.diemDanhList || []);
       }
     } catch {
       alert("Lỗi mạng");
@@ -145,7 +159,14 @@ export default function DiemDanhNhap() {
       className="main-container"
       style={{ padding: 12, maxWidth: 420, margin: "0 auto" }}
     >
-      <h2 style={{ textAlign: "center", color: "#0650b7", fontSize: 20 }}>
+      <h2
+        style={{
+          textAlign: "center",
+          color: "#0650b7",
+          fontSize: 20,
+          fontWeight: "Bold",
+        }}
+      >
         Điểm danh đại biểu
       </h2>
 
@@ -157,7 +178,6 @@ export default function DiemDanhNhap() {
           boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
         }}
       >
-        {/* CHỌN PHIÊN */}
         <label style={{ display: "block", marginBottom: 6 }}>
           Chọn phiên:
           <select
@@ -165,7 +185,9 @@ export default function DiemDanhNhap() {
             onChange={(e) => {
               const v = e.target.value;
               setDate(v);
-              const found = DATE_OPTIONS.find((x) => x.label === v);
+              const found = DATE_OPTIONS.find(
+                (x) => x.label === v
+              );
               setPhien(found ? found.phien : null);
             }}
             style={{ marginLeft: 6 }}
@@ -186,7 +208,6 @@ export default function DiemDanhNhap() {
           </select>
         </label>
 
-        {/* Ô tìm kiếm */}
         <input
           ref={inputRef}
           value={query}
@@ -205,7 +226,6 @@ export default function DiemDanhNhap() {
           }}
         />
 
-        {/* Gợi ý */}
         {showSuggest && suggestions.length > 0 && !selected && (
           <ul
             style={{
@@ -254,10 +274,13 @@ export default function DiemDanhNhap() {
         </label>
 
         <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
-          <button className="btn" onClick={submit} disabled={loading || !phien}>
+          <button
+            className="btn"
+            onClick={submit}
+            disabled={loading || !phien}
+          >
             {loading ? "Đang gửi..." : "Xác nhận điểm danh"}
           </button>
-
           <Link
             href="/diemdanh"
             className="btn"
@@ -267,7 +290,6 @@ export default function DiemDanhNhap() {
           </Link>
         </div>
 
-        {/* NÚT LÀM MỚI */}
         <button
           onClick={resetList}
           style={{
@@ -282,7 +304,6 @@ export default function DiemDanhNhap() {
           Làm mới danh sách phiên hiện tại
         </button>
 
-        {/* Danh sách đã điểm danh */}
         {submittedList.filter((d) => d.phien === phien).length > 0 && (
           <div style={{ marginTop: 12 }}>
             <h4>Đã điểm danh — {phien}</h4>
@@ -298,7 +319,7 @@ export default function DiemDanhNhap() {
               {submittedList
                 .filter((d) => d.phien === phien)
                 .map((d, i) => (
-                  <li key={i} style={{ padding: 4, color: " #28a745" }}>
+                  <li key={i} style={{ padding: 4, color: " #28a745",fontSize: 13  }}>
                     {d.hoTen} — {d.donVi}
                   </li>
                 ))}

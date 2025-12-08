@@ -9,73 +9,44 @@ type DiemDanhItem = {
   hoTen: string;
   donVi: string;
   ngay: string;
-  phien: string; // để đồng nhất, lưu chuỗi
+  phien: string;
   time: string;
 };
 
+export async function GET() {
+  if (!fs.existsSync(DB_PATH)) return NextResponse.json({ diemDanhList: [] });
+
+  const raw = fs.readFileSync(DB_PATH, "utf8");
+  const data = JSON.parse(raw);
+  return NextResponse.json(data);
+}
+
 export async function POST(req: Request) {
   try {
-    let bodyText = await req.text();
-
-    // Chặn lỗi JSON không hợp lệ
-    if (!bodyText) {
-      return NextResponse.json({ error: "Body rỗng" }, { status: 400 });
-    }
-
-    let body;
-    try {
-      body = JSON.parse(bodyText);
-    } catch {
-      return NextResponse.json({ error: "JSON không hợp lệ" }, { status: 400 });
-    }
-
+    const body = await req.json();
     const { hoTen, donVi, ngay, phien } = body;
-
-    if (!hoTen || !donVi || !ngay || !phien) {
+    if (!hoTen || !donVi || !ngay || !phien)
       return NextResponse.json({ error: "Thiếu dữ liệu" }, { status: 400 });
-    }
-
-    // Chuẩn hoá phien thành chuỗi để tránh lỗi kiểu
-    const phienStr = String(phien).trim();
 
     if (!fs.existsSync(DIR)) fs.mkdirSync(DIR, { recursive: true });
     if (!fs.existsSync(DB_PATH))
       fs.writeFileSync(DB_PATH, JSON.stringify({ diemDanhList: [] }, null, 2));
 
-    const raw = fs.readFileSync(DB_PATH, "utf8");
-    const data = JSON.parse(raw);
+    const data = JSON.parse(fs.readFileSync(DB_PATH, "utf8"));
     const list: DiemDanhItem[] = data.diemDanhList || [];
 
-    const key = (s: string) => s.trim().toLowerCase();
-
-    // Kiểm tra trùng tên + phiên
     const dup = list.find(
-      (d: DiemDanhItem) =>
-        key(d.hoTen) === key(hoTen) && d.phien === phienStr
+      (d) => d.hoTen.toLowerCase() === hoTen.toLowerCase() && d.phien === phien
     );
+    if (dup) return NextResponse.json({ error: "Đại biểu đã điểm danh" }, { status: 400 });
 
-    if (dup) {
-      return NextResponse.json(
-        { error: "Đại biểu đã điểm danh phiên này" },
-        { status: 400 }
-      );
-    }
-
-    const item: DiemDanhItem = {
-      hoTen,
-      donVi,
-      ngay,
-      phien: phienStr,
-      time: new Date().toISOString()
-    };
-
+    const item: DiemDanhItem = { hoTen, donVi, ngay, phien, time: new Date().toISOString() };
     list.push(item);
     data.diemDanhList = list;
 
-    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), "utf8");
-
-    return NextResponse.json({ ok: true, data: item });
-  } catch (e) {
-    return NextResponse.json({ error: "Lỗi xử lý server" }, { status: 500 });
+    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+    return NextResponse.json({ ok: true, diemDanhList: list });
+  } catch {
+    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
   }
 }

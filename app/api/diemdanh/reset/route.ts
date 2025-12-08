@@ -2,30 +2,22 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const DB_PATH = path.join(process.cwd(), "data", "diemdanh.json");
+const DIR = path.join(process.cwd(), "data");
+const DB_PATH = path.join(DIR, "diemdanh.json");
 
 export async function POST(req: Request) {
   try {
     const { phien } = await req.json();
-    if (!phien) {
-      return NextResponse.json({ error: "Thiếu phiên" }, { status: 400 });
-    }
+    if (!phien) return NextResponse.json({ error: "Thiếu phiên" }, { status: 400 });
 
-    let data = { diemDanhList: [] as any[] };
+    if (!fs.existsSync(DB_PATH)) return NextResponse.json({ diemDanhList: [] });
 
-    if (fs.existsSync(DB_PATH)) {
-      data = JSON.parse(fs.readFileSync(DB_PATH, "utf8"));
-    }
+    const data = JSON.parse(fs.readFileSync(DB_PATH, "utf8"));
+    data.diemDanhList = data.diemDanhList.filter((d: any) => d.phien !== phien);
 
-    // Xoá đúng phiên
-    data.diemDanhList = data.diemDanhList.filter(
-      (item: any) => item.phien !== phien
-    );
-
-    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), "utf8");
-
+    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
     return NextResponse.json({ diemDanhList: data.diemDanhList });
-  } catch (e) {
-    return NextResponse.json({ error: "Lỗi xử lý" }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
   }
 }
