@@ -1,11 +1,20 @@
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
+import { Redis } from "@upstash/redis";
 
-const KEY = "diemdanh";
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
+
+const KEY = "diemdanh_list";
 
 export async function GET() {
-  const list = (await redis.get(KEY)) || [];
-  return NextResponse.json({ diemDanhList: list });
+  try {
+    const data = (await redis.get(KEY)) || [];
+    return NextResponse.json({ diemDanhList: data });
+  } catch (err) {
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
 }
 
 export async function POST(req: Request) {
@@ -14,7 +23,10 @@ export async function POST(req: Request) {
     const { hoTen, donVi, ngay, phien } = body;
 
     if (!hoTen || !donVi || !ngay || !phien)
-      return NextResponse.json({ error: "Thiếu dữ liệu" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Thiếu dữ liệu" },
+        { status: 400 }
+      );
 
     const list = ((await redis.get(KEY)) as any[]) || [];
 
@@ -23,9 +35,10 @@ export async function POST(req: Request) {
         d.hoTen.toLowerCase() === hoTen.toLowerCase() &&
         d.phien === phien
     );
+
     if (dup)
       return NextResponse.json(
-        { error: "Đại biểu đã điểm danh" },
+        { error: "Đã điểm danh" },
         { status: 400 }
       );
 
@@ -43,6 +56,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, diemDanhList: list });
   } catch (err) {
-    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
