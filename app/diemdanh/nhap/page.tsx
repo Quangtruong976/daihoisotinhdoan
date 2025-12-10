@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import { redis } from "@/lib/redis";
 
 type Row = { hoTen: string; donVi: string; ngay?: string; phien?: string };
 
@@ -41,14 +40,12 @@ export default function DiemDanhNhap() {
       .then((r) => r.json())
       .then((d) => setDs(d.list || []));
 
-    // Lấy danh sách đã điểm danh từ Redis
+    // Lấy danh sách đã điểm danh từ server
     fetch("/api/diemdanh")
       .then((r) => r.json())
       .then((d) => setSubmittedList(d.diemDanhList || []));
 
-    const current = DATE_OPTIONS.find(
-      (d) => now >= d.open && now <= d.close
-    );
+    const current = DATE_OPTIONS.find((d) => now >= d.open && now <= d.close);
     if (current) {
       setDate(current.label);
       setPhien(current.phien);
@@ -81,30 +78,71 @@ export default function DiemDanhNhap() {
   const isSubmitted = (hoTen: string, phienCheck: string) =>
     submittedList.some(
       (d) =>
-        d.hoTen.toLowerCase() === hoTen.toLowerCase() &&
-        d.phien === phienCheck
+        d.hoTen.toLowerCase() === hoTen.toLowerCase() && d.phien === phienCheck
     );
 
-  // ======================================
-  // RESET LIST CÓ MẬT KHẨU 000000
-  // ======================================
+  const submit = async () => {
+    if (!selected) return alert("Chọn tên trong danh sách.");
+    if (!date || !phien) return alert("Phiên điểm danh chưa mở.");
+
+    setLoading(true);
+    try {
+      // Kiểm tra người này có trong Excel
+      const dsExcelRes = await fetch("/api/danhsach");
+      const dsExcelData = await dsExcelRes.json();
+      const danhSach: Row[] = dsExcelData.list || [];
+
+      if (!danhSach.some(d => d.hoTen.toLowerCase() === selected.hoTen.toLowerCase())) {
+        alert("Đại biểu không có trong danh sách");
+        setLoading(false);
+        return;
+      }
+
+      // Gọi API POST điểm danh
+      const res = await fetch("/api/diemdanh", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          hoTen: selected.hoTen,
+          donVi: selected.donVi,
+          ngay: date,
+          phien,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) alert(data.error || "Lỗi");
+      else {
+        alert("Điểm danh thành công");
+        setSelected(null);
+        setQuery("");
+
+        // Cập nhật danh sách hiển thị
+        const updated = await fetch("/api/diemdanh").then((r) => r.json());
+        setSubmittedList(updated.diemDanhList || []);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Lỗi mạng hoặc JSON không hợp lệ");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const resetList = async () => {
     if (!phien) return alert("Chưa chọn phiên.");
-
     const pwd = prompt("Nhập mật khẩu để làm mới danh sách:");
-    if (pwd !== "000000") {
-      alert("Sai mật khẩu. Không thể làm mới danh sách.");
-      return;
-    }
-
-    if (!confirm("Xóa danh sách điểm danh của phiên hiện tại?")) return;
+    if (pwd !== "000000") return alert("Sai mật khẩu");
 
     try {
-      const list: Row[] = (await redis.get("diemdanh")) || [];
-      const newList = list.filter((d) => d.phien !== phien);
-      await redis.set("diemdanh", newList);
+      const res = await fetch("/api/diemdanh/reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phien, pwd }),
+      });
 
-      setSubmittedList(newList);
+      const data = await res.json();
+      setSubmittedList(data.diemDanhList || []);
       setSelected(null);
       setQuery("");
     } catch {
@@ -112,79 +150,14 @@ export default function DiemDanhNhap() {
     }
   };
 
-  // ======================================
-  // SUBMIT – SỬ DỤNG UPSTASH REDIS
-  // ======================================
-  const submit = async () => {
-    if (!selected) return alert("Chọn tên trong danh sách.");
-    if (!date || !phien) return alert("Phiên điểm danh chưa mở.");
-
-    setLoading(true);
-    try {
-      // Lấy danh sách tổng từ Excel
-      const dsExcelRes = await fetch("/api/danhsach");
-      const dsExcelData = await dsExcelRes.json();
-      const danhSach = dsExcelData.list || [];
-
-      // Kiểm tra xem người này có trong danh sách Excel
-      if (!danhSach.some(d => d.hoTen.toLowerCase() === selected.hoTen.toLowerCase())) {
-        alert("Đại biểu không có trong danh sách");
-        setLoading(false);
-        return;
-      }
-
-      // Lấy danh sách đã điểm danh từ Redis
-      const list: Row[] = (await redis.get("diemdanh")) || [];
-      if (list.some(d => d.hoTen.toLowerCase() === selected.hoTen.toLowerCase() && d.phien === phien)) {
-        alert("Đại biểu đã điểm danh cho phiên này");
-        setLoading(false);
-        return;
-      }
-
-      // Thêm mới
-      const newItem: Row = { hoTen: selected.hoTen, donVi: selected.donVi, ngay: date!, phien };
-      const newList = [...list, newItem];
-      await redis.set("diemdanh", newList);
-
-      alert("Điểm danh thành công");
-      setSelected(null);
-      setQuery("");
-
-      // Cập nhật danh sách hiển thị
-      setSubmittedList(newList);
-    } catch (err) {
-      console.error("submit lỗi:", err);
-      alert("Lỗi mạng hoặc JSON không hợp lệ");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <div
-      className="main-container"
-      style={{ padding: 12, maxWidth: 420, margin: "0 auto" }}
-    >
-      <h2
-        style={{
-          textAlign: "center",
-          color: "#0650b7",
-          fontSize: 20,
-          fontWeight: "Bold",
-        }}
-      >
+    <div style={{ padding: 12, maxWidth: 420, margin: "0 auto" }}>
+      <h2 style={{ textAlign: "center", color: "#0650b7", fontSize: 20, fontWeight: "bold" }}>
         Điểm danh đại biểu
       </h2>
 
-      <div
-        style={{
-          background: "#fff",
-          padding: 12,
-          borderRadius: 8,
-          boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
-        }}
-      >
-        <label style={{ display: "block", marginBottom: 6 }}>
+      <div style={{ background: "#fff", padding: 12, borderRadius: 8, boxShadow: "0 4px 12px rgba(0,0,0,0.06)" }}>
+        <label>
           Chọn phiên:
           <select
             value={date || ""}
@@ -194,17 +167,11 @@ export default function DiemDanhNhap() {
               const found = DATE_OPTIONS.find(x => x.label === v);
               setPhien(found ? found.phien : null);
             }}
-            style={{ marginLeft: 6 }}
           >
             {DATE_OPTIONS.map((o) => {
               const isOpen = now >= o.open && now <= o.close;
               return (
-                <option
-                  key={o.label}
-                  value={o.label}
-                  disabled={!isOpen}
-                  style={{ color: isOpen ? "#000" : "#999" }}
-                >
+                <option key={o.label} value={o.label} disabled={!isOpen}>
                   {o.label} — {o.phien} {isOpen ? "" : "(chưa mở)"}
                 </option>
               );
@@ -215,44 +182,17 @@ export default function DiemDanhNhap() {
         <input
           ref={inputRef}
           value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            setSelected(null);
-            setShowSuggest(true);
-          }}
+          onChange={(e) => { setQuery(e.target.value); setSelected(null); setShowSuggest(true); }}
           placeholder="Nhập họ tên..."
-          style={{
-            width: "100%",
-            padding: 8,
-            marginTop: 8,
-            borderRadius: 6,
-            border: "1px solid #ccc",
-          }}
         />
 
         {showSuggest && suggestions.length > 0 && !selected && (
-          <ul
-            style={{
-              listStyle: "none",
-              margin: 4,
-              padding: 4,
-              border: "1px solid #eee",
-              maxHeight: 150,
-              overflowY: "auto",
-              borderRadius: 6,
-            }}
-          >
+          <ul>
             {suggestions.map((s, i) => (
               <li
                 key={i}
-                style={{
-                  padding: 6,
-                  cursor: "pointer",
-                  backgroundColor: isSubmitted(s.hoTen, phien!)
-                    ? "#e6f7e6"
-                    : "#fff",
-                }}
                 onClick={() => choose(s)}
+                style={{ backgroundColor: isSubmitted(s.hoTen, phien!) ? "#e6f7e6" : "#fff" }}
               >
                 {s.hoTen}
               </li>
@@ -260,73 +200,31 @@ export default function DiemDanhNhap() {
           </ul>
         )}
 
-        <label style={{ display: "block", marginTop: 10 }}>
+        <label>
           Đơn vị:
-          <input
-            value={selected?.donVi || ""}
-            disabled
-            placeholder="Tự động điền khi chọn tên"
-            style={{
-              width: "100%",
-              padding: 8,
-              marginTop: 4,
-              borderRadius: 6,
-              background: "#f7f9ff",
-              border: "1px solid #ccc",
-            }}
-          />
+          <input value={selected?.donVi || ""} disabled placeholder="Tự động điền khi chọn tên" />
         </label>
 
         <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
-          <button
-            className="btn"
-            onClick={submit}
-            disabled={loading || !phien}
-          >
+          <button onClick={submit} disabled={loading || !phien}>
             {loading ? "Đang gửi..." : "Xác nhận điểm danh"}
           </button>
-          <Link
-            href="/diemdanh"
-            className="btn"
-            style={{ background: "rgb(9, 75, 169)" }}
-          >
+          <Link href="/diemdanh" style={{ background: "rgb(9,75,169)", color:"#fff", padding:"4px 8px" }}>
             Trang thống kê
           </Link>
         </div>
 
-        <button
-          onClick={resetList}
-          style={{
-            marginTop: 10,
-            width: "100%",
-            padding: 8,
-            borderRadius: 6,
-            background: "#d9534f",
-            color: "#fff",
-          }}
-        >
+        <button onClick={resetList} style={{ marginTop: 10, width: "100%", padding: 8, borderRadius: 6, background: "#d9534f", color: "#fff" }}>
           Làm mới danh sách phiên hiện tại
         </button>
 
-        {submittedList.filter((d) => d.phien === phien).length > 0 && (
+        {submittedList.filter(d => d.phien === phien).length > 0 && (
           <div style={{ marginTop: 12 }}>
             <h4>Đã điểm danh — {phien}</h4>
-            <ul
-              style={{
-                maxHeight: 200,
-                overflowY: "auto",
-                padding: 4,
-                border: "1px solid #eee",
-                borderRadius: 6,
-              }}
-            >
-              {submittedList
-                .filter((d) => d.phien === phien)
-                .map((d, i) => (
-                  <li key={i} style={{ padding: 4, color: " #28a745", fontSize: 13 }}>
-                    {d.hoTen} — {d.donVi}
-                  </li>
-                ))}
+            <ul>
+              {submittedList.filter(d => d.phien === phien).map((d, i) => (
+                <li key={i} style={{ color: "#28a745" }}>{d.hoTen} — {d.donVi}</li>
+              ))}
             </ul>
           </div>
         )}
