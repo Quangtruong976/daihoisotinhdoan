@@ -1,5 +1,5 @@
 "use client";
-
+import { redis } from "@/lib/redis"; // chỉ dùng trong API, không dùng trực tiếp trên client
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 

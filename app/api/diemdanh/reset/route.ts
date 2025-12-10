@@ -1,13 +1,20 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 
-export async function POST(req: Request) {
-  const { phien, pwd } = await req.json();
-  if (pwd !== "000000") return NextResponse.json({ error: "Sai mật khẩu" }, { status: 401 });
+export const POST = async (req: Request) => {
+  try {
+    const { phien } = await req.json();
+    if (!phien) return NextResponse.json({ error: "Thiếu phiên" }, { status: 400 });
 
-  const list: any[] = (await redis.get("diemdanh")) || [];
-  const newList = list.filter(d => d.phien !== phien);
-  await redis.set("diemdanh", newList);
+    const raw = await redis.get("diemdanh");
+    const list = raw ? JSON.parse(raw) : [];
+    const newList = list.filter((d: any) => d.phien !== phien);
 
-  return NextResponse.json({ diemDanhList: newList });
-}
+    await redis.set("diemdanh", JSON.stringify(newList));
+
+    return NextResponse.json({ diemDanhList: newList });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
+  }
+};
