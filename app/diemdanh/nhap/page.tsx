@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { redis } from "@/lib/redis";
 
 type Row = { hoTen: string; donVi: string; ngay?: string; phien?: string };
 
@@ -35,12 +36,12 @@ export default function DiemDanhNhap() {
   const now = new Date();
 
   useEffect(() => {
-    // Lấy danh sách tổng
+    // Lấy danh sách tổng từ Excel
     fetch("/api/danhsach")
       .then((r) => r.json())
       .then((d) => setDs(d.list || []));
 
-    // Lấy danh sách đã điểm danh
+    // Lấy danh sách đã điểm danh từ Redis
     fetch("/api/diemdanh")
       .then((r) => r.json())
       .then((d) => setSubmittedList(d.diemDanhList || []));
@@ -99,14 +100,11 @@ export default function DiemDanhNhap() {
     if (!confirm("Xóa danh sách điểm danh của phiên hiện tại?")) return;
 
     try {
-      const res = await fetch("/api/diemdanh/reset", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phien }),
-      });
+      const list: Row[] = (await redis.get("diemdanh")) || [];
+      const newList = list.filter((d) => d.phien !== phien);
+      await redis.set("diemdanh", newList);
 
-      const data = await res.json();
-      setSubmittedList(data.diemDanhList || []);
+      setSubmittedList(newList);
       setSelected(null);
       setQuery("");
     } catch {
@@ -115,40 +113,48 @@ export default function DiemDanhNhap() {
   };
 
   // ======================================
-  // SUBMIT – ĐÃ BỔ SUNG FETCH LẠI DANH SÁCH
+  // SUBMIT – SỬ DỤNG UPSTASH REDIS
   // ======================================
   const submit = async () => {
     if (!selected) return alert("Chọn tên trong danh sách.");
     if (!date || !phien) return alert("Phiên điểm danh chưa mở.");
-    if (isSubmitted(selected.hoTen, phien))
-      return alert("Đại biểu đã điểm danh cho phiên này.");
 
     setLoading(true);
     try {
-      const res = await fetch("/api/diemdanh", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          hoTen: selected.hoTen,
-          donVi: selected.donVi,
-          ngay: date,
-          phien,
-        }),
-      });
+      // Lấy danh sách tổng từ Excel
+      const dsExcelRes = await fetch("/api/danhsach");
+      const dsExcelData = await dsExcelRes.json();
+      const danhSach = dsExcelData.list || [];
 
-      const data = await res.json();
-      if (!res.ok) alert(data.error || "Lỗi");
-      else {
-        alert("Điểm danh thành công");
-        setSelected(null);
-        setQuery("");
-
-        // ⬇️ BỔ SUNG: LẤY LẠI DANH SÁCH ĐÃ ĐIỂM DANH
-        const updated = await fetch("/api/diemdanh").then((r) => r.json());
-        setSubmittedList(updated.diemDanhList || []);
+      // Kiểm tra xem người này có trong danh sách Excel
+      if (!danhSach.some(d => d.hoTen.toLowerCase() === selected.hoTen.toLowerCase())) {
+        alert("Đại biểu không có trong danh sách");
+        setLoading(false);
+        return;
       }
-    } catch {
-      alert("Lỗi mạng");
+
+      // Lấy danh sách đã điểm danh từ Redis
+      const list: Row[] = (await redis.get("diemdanh")) || [];
+      if (list.some(d => d.hoTen.toLowerCase() === selected.hoTen.toLowerCase() && d.phien === phien)) {
+        alert("Đại biểu đã điểm danh cho phiên này");
+        setLoading(false);
+        return;
+      }
+
+      // Thêm mới
+      const newItem: Row = { hoTen: selected.hoTen, donVi: selected.donVi, ngay: date!, phien };
+      const newList = [...list, newItem];
+      await redis.set("diemdanh", newList);
+
+      alert("Điểm danh thành công");
+      setSelected(null);
+      setQuery("");
+
+      // Cập nhật danh sách hiển thị
+      setSubmittedList(newList);
+    } catch (err) {
+      console.error("submit lỗi:", err);
+      alert("Lỗi mạng hoặc JSON không hợp lệ");
     } finally {
       setLoading(false);
     }
@@ -185,9 +191,7 @@ export default function DiemDanhNhap() {
             onChange={(e) => {
               const v = e.target.value;
               setDate(v);
-              const found = DATE_OPTIONS.find(
-                (x) => x.label === v
-              );
+              const found = DATE_OPTIONS.find(x => x.label === v);
               setPhien(found ? found.phien : null);
             }}
             style={{ marginLeft: 6 }}
@@ -319,7 +323,7 @@ export default function DiemDanhNhap() {
               {submittedList
                 .filter((d) => d.phien === phien)
                 .map((d, i) => (
-                  <li key={i} style={{ padding: 4, color: " #28a745",fontSize: 13  }}>
+                  <li key={i} style={{ padding: 4, color: " #28a745", fontSize: 13 }}>
                     {d.hoTen} — {d.donVi}
                   </li>
                 ))}
