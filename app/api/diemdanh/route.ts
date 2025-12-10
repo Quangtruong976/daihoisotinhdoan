@@ -1,34 +1,29 @@
 import { NextResponse } from "next/server";
-import { Redis } from "@upstash/redis";
+import { redis } from "@/lib/redis";
 
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-});
+type DiemDanhItem = {
+  hoTen: string;
+  donVi: string;
+  ngay: string;
+  phien: string;
+  time: string;
+};
 
-const KEY = "diemdanh_list";
-
+// GET: lấy toàn bộ
 export async function GET() {
-  try {
-    const data = (await redis.get(KEY)) || [];
-    return NextResponse.json({ diemDanhList: data });
-  } catch (err) {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
-  }
+  const list = (await redis.get("diemdanh")) as DiemDanhItem[] | null;
+  return NextResponse.json({ diemDanhList: list || [] });
 }
 
+// POST: ghi 1 dòng mới
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { hoTen, donVi, ngay, phien } = body;
+    const { hoTen, donVi, ngay, phien } = await req.json();
 
     if (!hoTen || !donVi || !ngay || !phien)
-      return NextResponse.json(
-        { error: "Thiếu dữ liệu" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Thiếu dữ liệu" }, { status: 400 });
 
-    const list = ((await redis.get(KEY)) as any[]) || [];
+    const list = ((await redis.get("diemdanh")) as DiemDanhItem[]) || [];
 
     const dup = list.find(
       (d) =>
@@ -38,11 +33,11 @@ export async function POST(req: Request) {
 
     if (dup)
       return NextResponse.json(
-        { error: "Đã điểm danh" },
+        { error: "Đại biểu đã điểm danh" },
         { status: 400 }
       );
 
-    const item = {
+    const item: DiemDanhItem = {
       hoTen,
       donVi,
       ngay,
@@ -52,10 +47,10 @@ export async function POST(req: Request) {
 
     list.push(item);
 
-    await redis.set(KEY, list);
+    await redis.set("diemdanh", list);
 
     return NextResponse.json({ ok: true, diemDanhList: list });
-  } catch (err) {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
   }
 }
