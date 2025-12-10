@@ -1,11 +1,3 @@
 {
-  "diemDanhList": [
-    {
-      "hoTen": "Nguyễn Ý Nhi",
-      "donVi": "Bí thư Đoàn Thanh niên UBND tỉnh",
-      "ngay": "19/12/2025",
-      "phien": "Phiên thứ 1",
-      "time": "2025-12-08T16:10:20.330Z"
-    }
-  ]
+  "diemDanhList": []
 }

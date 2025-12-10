@@ -5,7 +5,7 @@ import "../style.css";
 
 export default function PageSoDo() {
   const phi1Image = "/images/sodophien1.png"; // ảnh sơ đồ phiên 1
-  const phi2Image = "/images/sodo_phien2.png"; // ảnh sơ đồ phiên trọng thể
+  const phi2Image = "/images/sodophien1.png"; // ảnh sơ đồ phiên trọng thể
 
   return (
     <div className="main-container">
