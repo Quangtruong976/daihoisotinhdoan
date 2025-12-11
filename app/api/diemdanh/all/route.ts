@@ -14,7 +14,10 @@ export async function POST() {
       trangThai: "Đã điểm danh",
     }));
 
-    await fs.writeFile(DATA_FILE, JSON.stringify({ diemDanhList: updated }, null, 2));
+    await fs.writeFile(
+      DATA_FILE,
+      JSON.stringify({ diemDanhList: updated }, null, 2)
+    );
 
     return NextResponse.json({ message: "Đã điểm danh toàn bộ đại biểu.", diemDanhList: updated });
   } catch (err) {

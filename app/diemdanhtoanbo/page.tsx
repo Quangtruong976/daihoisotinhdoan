@@ -2,17 +2,17 @@
 
 export default function DiemDanhToanBo() {
   const handleDiemDanhAll = async () => {
-    const pwd = prompt("Nhập mật khẩu xác nhận điểm danh toàn bộ:");
-    if (pwd !== "000000") {
-      alert("Sai mật khẩu!");
-      return;
-    }
+    if (!confirm("Xác nhận điểm danh toàn bộ đại biểu?")) return;
 
-    const res = await fetch("/api/diemdanh/all", {
-      method: "POST",
-    });
-    const data = await res.json();
-    alert(data.message);
+    try {
+      const res = await fetch("/api/diemdanh/all", {
+        method: "POST",
+      });
+      const data = await res.json();
+      alert(data.message);
+    } catch {
+      alert("Lỗi mạng");
+    }
   };
 
   return (
