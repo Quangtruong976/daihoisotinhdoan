@@ -21,46 +21,43 @@
 
 /* Thanh menu ngang */
 .top-menu {
-  height: 20px; /* hoặc giá trị phù hợp */
+  /* BỎ height cố định */
+  height: auto;
   min-height: 35px;
-  padding: 0 0;  /* bỏ padding top/bottom để không thay đổi */
+
+  padding: 4px 6px;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap;   /* CHO XUỐNG DÒNG */
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   background-color: #0650b7;
-  padding: 0;
-  overflow-x: auto;
-  
+
+  /* BỎ đi, nếu không dòng 2 sẽ bị che */
+  /* overflow-x: auto; */
 }
 
+/* Nút menu */
 .top-menu-btn {
   color: white;
   text-decoration: none;
   font-weight: normal;
   font-size: 0.9rem;
-  padding: 4px 6px;
-  transition: color 0.2s;
- 
+  padding: 6px 10px;
+
+  /* Quan trọng: cho nút co giãn đều trên mobile */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.05);
 }
 
+/* Hover */
 .top-menu-btn:hover {
   color: #ffea00;
 }
 
-.separator {
-  color: white;
-  margin: 0 4px;
-}
-.session-title {
-  text-align: left !important;   /* ép nằm trái */
-  text-transform: none !important;
-  margin: 0 0 6px 3px;           /* sát hơn, hơi lệch trái 3px cho đẹp */
-  font-size: 17px;
-  font-weight: bold;
-  color: #022d6b;
-}
 
 /* Khối nút chữ nhật */
 .button-grid {
