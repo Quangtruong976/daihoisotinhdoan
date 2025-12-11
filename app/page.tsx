@@ -4,45 +4,6 @@ import "./style.css";
 
 export default function TrangChu() {
 
-  /* Thanh ngang trên cùng: dùng dấu "I" để ngăn cách
-  const topMenu = [
-    { label: "Home", route: "/" },
-    { label: "Chương trình", route: "/chuongtrinh" },
-    { label: "Văn kiện Đại hội", route: "/vankien" },
-    { label: "Sơ đồ chổ ngồi", route: "/sodo" },
-    { label: "Điểm danh", route: "/diemdanh" },
-     { label: "Diễn đàn thảo luận", route: "/diendanthaoluan" },
-       { label: "Góp ý Văn Kiện", route: "/gopyvankien" },
-    { label: "Thông tin đại biểu", route: "/thongtindaibieu" },
-   
-  ];*/
-
-
-/*..........*/
-{/* Thông tin Đại hội */}
-<div className="daihHoi-info">
-  <p>⏰ <strong>Thời gian:</strong> Ngày 19, 20/12/2025</p>
-  <p>📍 <strong>Địa điểm:</strong> Nhà Văn hóa Lao động tỉnh Lâm Đồng</p>
-  <p style={{ marginTop: "-5px" }}>
-    (Số 01 Trần Quốc Toản, phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng)
-  </p>
-
-  <p className="info-title">Khẩu hiệu hành động</p>
-  <p className="info-highlight">TIÊN PHONG – ĐOÀN KẾT – BẢN LĨNH – ĐỘT PHÁ – PHÁT TRIỂN</p>
-
-  <p className="info-title">Chủ đề Đại hội</p>
-  <p className="info-highlight">
-    Tự hào, vững tin theo Đảng, tuổi trẻ Lâm Đồng xây hoài bão lớn, chung sức, đồng lòng,
-    tiên phong tham gia xây dựng quê hương phát triển nhanh, bền vững trong kỷ nguyên mới
-  </p>
-</div>
-
-
-
-
-
-
-
   // Nút khối chữ nhật dưới
   const bottomButtons = [
     { label: "Chương trình Đại hội", icon: <FaFileAlt color="rgb(240, 228, 118)"/>, color: "rgb(23, 125, 249)", route: "/chuongtrinh" },
@@ -58,6 +19,26 @@ export default function TrangChu() {
   return (
     <div className="main-container">
 
+      {/* 🔵 THÔNG TIN ĐẠI HỘI */}
+      <div className="daihHoi-info">
+        <p>⏰ <strong>Thời gian:</strong> Ngày 19, 20/12/2025</p>
+        <p>📍 <strong>Địa điểm:</strong> Nhà Văn hóa Lao động tỉnh Lâm Đồng</p>
+        <p style={{ marginTop: "-5px" }}>
+          (Số 01 Trần Quốc Toản, phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng)
+        </p>
+
+        <p className="info-title">Khẩu hiệu hành động</p>
+        <p className="info-highlight">
+          TIÊN PHONG – ĐOÀN KẾT – BẢN LĨNH – ĐỘT PHÁ – PHÁT TRIỂN
+        </p>
+
+        <p className="info-title">Chủ đề Đại hội</p>
+        <p className="info-highlight">
+          Tự hào, vững tin theo Đảng, tuổi trẻ Lâm Đồng xây hoài bão lớn,
+          chung sức, đồng lòng, tiên phong tham gia xây dựng quê hương
+          phát triển nhanh, bền vững trong kỷ nguyên mới
+        </p>
+      </div>
 
       {/* Khối nút chữ nhật dưới */}
       <div className="button-grid">
@@ -68,9 +49,6 @@ export default function TrangChu() {
           </Link>
         ))}
       </div>
-
-      {/* Footer */}
-    
 
     </div>
   );
