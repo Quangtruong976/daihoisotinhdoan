@@ -1,39 +1,38 @@
+// app/api/diemdanh/route.ts
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 
-type Row = { hoTen: string; donVi: string; ngay?: string; phien?: string };
-
-export const GET = async () => {
+export async function POST(req: Request) {
   try {
-    const raw: string | null = await redis.get("diemdanh");
-    const list: Row[] = raw ? JSON.parse(raw) : [];
-    return NextResponse.json({ diemDanhList: list });
-  } catch (err) {
-    console.error("GET /diemdanh error:", err);
-    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
-  }
-};
+    const body = await req.json();
+    const { hoTen, donVi } = body;
 
-export const POST = async (req: Request) => {
+    if (!hoTen || !donVi) {
+      return NextResponse.json({ ok: false, message: "Thiếu dữ liệu" });
+    }
+
+    // KEY lưu danh sách điểm danh
+    const KEY = "diemdanh:list";
+
+    // Lưu data vào Redis (dạng List)
+    await redis.rpush(KEY, JSON.stringify({ hoTen, donVi, time: Date.now() }));
+
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error("Lỗi điểm danh:", err);
+    return NextResponse.json({ ok: false, message: "Lỗi server" });
+  }
+}
+
+export async function GET() {
   try {
-    const body: Row = await req.json();
-    const { hoTen, donVi, ngay, phien } = body;
+    const KEY = "diemdanh:list";
 
-    if (!hoTen || !donVi || !ngay || !phien)
-      return NextResponse.json({ error: "Thiếu dữ liệu" }, { status: 400 });
+    const list = await redis.lrange(KEY, 0, -1);
+    const parsed = list.map((item) => JSON.parse(item));
 
-    const raw: string | null = await redis.get("diemdanh");
-    const list: Row[] = raw ? JSON.parse(raw) : [];
-
-    if (list.some((d) => d.hoTen.toLowerCase() === hoTen.toLowerCase() && d.phien === phien))
-      return NextResponse.json({ error: "Đại biểu đã điểm danh" }, { status: 400 });
-
-    const newList = [...list, { hoTen, donVi, ngay, phien }];
-    await redis.set("diemdanh", JSON.stringify(newList));
-
-    return NextResponse.json({ ok: true, diemDanhList: newList });
-  } catch (err) {
-    console.error("POST /diemdanh error:", err);
-    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
+    return NextResponse.json({ ok: true, data: parsed });
+  } catch {
+    return NextResponse.json({ ok: false, data: [] });
   }
-};
+}

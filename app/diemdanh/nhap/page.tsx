@@ -35,17 +35,19 @@ export default function DiemDanhNhap() {
   const now = new Date();
 
   useEffect(() => {
-    // Lấy danh sách tổng từ Excel
+    // Lấy danh sách tổng
     fetch("/api/danhsach")
       .then((r) => r.json())
       .then((d) => setDs(d.list || []));
 
-    // Lấy danh sách đã điểm danh từ Redis
+    // Lấy danh sách đã điểm danh
     fetch("/api/diemdanh")
       .then((r) => r.json())
       .then((d) => setSubmittedList(d.diemDanhList || []));
 
-    const current = DATE_OPTIONS.find((d) => now >= d.open && now <= d.close);
+    const current = DATE_OPTIONS.find(
+      (d) => now >= d.open && now <= d.close
+    );
     if (current) {
       setDate(current.label);
       setPhien(current.phien);
@@ -78,7 +80,8 @@ export default function DiemDanhNhap() {
   const isSubmitted = (hoTen: string, phienCheck: string) =>
     submittedList.some(
       (d) =>
-        d.hoTen.toLowerCase() === hoTen.toLowerCase() && d.phien === phienCheck
+        d.hoTen.toLowerCase() === hoTen.toLowerCase() &&
+        d.phien === phienCheck
     );
 
   // ======================================
@@ -117,26 +120,11 @@ export default function DiemDanhNhap() {
   const submit = async () => {
     if (!selected) return alert("Chọn tên trong danh sách.");
     if (!date || !phien) return alert("Phiên điểm danh chưa mở.");
+    if (isSubmitted(selected.hoTen, phien))
+      return alert("Đại biểu đã điểm danh cho phiên này.");
 
     setLoading(true);
     try {
-      // Lấy danh sách tổng từ Excel
-      const dsExcelRes = await fetch("/api/danhsach");
-      const dsExcelData = await dsExcelRes.json();
-      const danhSach: Row[] = dsExcelData.list || [];
-
-      // Kiểm tra xem người này có trong danh sách Excel
-      if (
-        !danhSach.some(
-          (d: Row) => d.hoTen.toLowerCase() === selected.hoTen.toLowerCase()
-        )
-      ) {
-        alert("Đại biểu không có trong danh sách");
-        setLoading(false);
-        return;
-      }
-
-      // Gửi điểm danh lên API
       const res = await fetch("/api/diemdanh", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -149,14 +137,13 @@ export default function DiemDanhNhap() {
       });
 
       const data = await res.json();
-      if (!res.ok) {
-        alert(data.error || "Lỗi");
-      } else {
+      if (!res.ok) alert(data.error || "Lỗi");
+      else {
         alert("Điểm danh thành công");
         setSelected(null);
         setQuery("");
 
-        // ⬇️ Lấy lại danh sách điểm danh
+        // ⬇️ BỔ SUNG: LẤY LẠI DANH SÁCH ĐÃ ĐIỂM DANH
         const updated = await fetch("/api/diemdanh").then((r) => r.json());
         setSubmittedList(updated.diemDanhList || []);
       }
@@ -198,7 +185,9 @@ export default function DiemDanhNhap() {
             onChange={(e) => {
               const v = e.target.value;
               setDate(v);
-              const found = DATE_OPTIONS.find((x) => x.label === v);
+              const found = DATE_OPTIONS.find(
+                (x) => x.label === v
+              );
               setPhien(found ? found.phien : null);
             }}
             style={{ marginLeft: 6 }}
@@ -330,10 +319,7 @@ export default function DiemDanhNhap() {
               {submittedList
                 .filter((d) => d.phien === phien)
                 .map((d, i) => (
-                  <li
-                    key={i}
-                    style={{ padding: 4, color: " #28a745", fontSize: 13 }}
-                  >
+                  <li key={i} style={{ padding: 4, color: " #28a745",fontSize: 13  }}>
                     {d.hoTen} — {d.donVi}
                   </li>
                 ))}
