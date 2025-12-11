@@ -543,3 +543,35 @@ input, select {
 }
 .btn:hover { filter: brightness(0.95); }
 
+/*..................................*/
+.daihHoi-info {
+  text-align: center;
+  background: #f4f7ff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-left: 4px solid #0650b7;
+  border-right: 4px solid #0650b7;
+}
+
+.daihHoi-info p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #022d6b;
+  line-height: 1.3;
+}
+
+.info-title {
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #003f8a;
+}
+
+.info-highlight {
+  font-weight: bold;
+  color: #ba0000;
+  text-transform: uppercase;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
