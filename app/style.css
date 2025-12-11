@@ -28,7 +28,7 @@
   justify-content: center;
   flex-wrap: wrap;   /* xuống dòng */
   align-items: center;
-  gap: 6px;
+  gap: 2px;
   background-color: #0650b7;
 
   /* bỏ cuộn ngang để không che nút */
