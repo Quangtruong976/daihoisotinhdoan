@@ -25,26 +25,25 @@ const DATE_OPTIONS = [
 ];
 
 const TOTAL_DELEGATES = 350;
+// Ngưỡng quorum (%) — thay đổi nếu cần (ví dụ 50 là quá bán)
 const QUORUM_PERCENT = 50;
 
 export default function DiemDanhStats() {
   const [diemDanhList, setDiemDanhList] = useState<DiemDanhItem[]>([]);
   const [currentDateOption, setCurrentDateOption] = useState(DATE_OPTIONS[0]);
 
-  const fetchData = async () => {
-    try {
-      const res = await fetch("/api/diemdanh");
-      const data = await res.json();
-      setDiemDanhList(data.diemDanhList || []);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = () => {
+      fetch("/api/diemdanh")
+        .then((res) => res.json())
+        .then((data) => setDiemDanhList(data.diemDanhList || []))
+        .catch((err) => console.error(err));
+    };
+
     fetchData();
     const interval = setInterval(fetchData, 5000); // polling
 
+    // cập nhật phiên hiện tại theo thời gian
     const checkCurrent = () => {
       const now = new Date();
       const current = DATE_OPTIONS.find((d) => now >= d.open && now <= d.close);
@@ -64,7 +63,8 @@ export default function DiemDanhStats() {
   );
   const coMat = filteredList.length;
   const vang = Math.max(0, TOTAL_DELEGATES - coMat);
-  const tyNumber = TOTAL_DELEGATES > 0 ? (coMat / TOTAL_DELEGATES) * 100 : 0;
+  const tyNumber =
+    TOTAL_DELEGATES > 0 ? (coMat / TOTAL_DELEGATES) * 100 : 0;
   const tyLe = tyNumber.toFixed(1);
   const phienName = currentDateOption.phien || "";
 
@@ -82,28 +82,12 @@ export default function DiemDanhStats() {
   const hasQuorum = tyNumber >= QUORUM_PERCENT;
   const requiredCount = Math.ceil((QUORUM_PERCENT / 100) * TOTAL_DELEGATES);
 
-  // =========================
-  // Điểm danh toàn bộ ẩn
-  // =========================
-  const handleDiemDanhToanBo = async () => {
-    if (!confirm("Xác nhận điểm danh toàn bộ đại biểu?")) return;
-
-    try {
-      const res = await fetch("/api/diemdanh/all", { method: "POST" });
-      const data = await res.json();
-      alert(data.message || "Đã điểm danh toàn bộ!");
-      fetchData(); // Cập nhật ngay thống kê
-    } catch {
-      alert("Lỗi mạng");
-    }
-  };
-
   return (
     <div
       className="main-container"
       style={{ padding: 12, maxWidth: 480, margin: "0 auto" }}
     >
-      <h2 style={{ textAlign: "center", fontWeight: "bold", color: "rgb(5, 68, 156)", fontSize: "20" }}>
+      <h2 style={{ textAlign: "center",fontWeight: "bold", color: "rgb(5, 68, 156)", fontSize: "20"}}>
         Thống kê số lượng đại biểu
       </h2>
 
@@ -119,7 +103,9 @@ export default function DiemDanhStats() {
       >
         {/* PHIÊN */}
         <div>
-          <label style={{ fontWeight: "bold", color: "rgb(2, 82, 179)" }}>Phiên hiện tại:</label>
+        <label style={{ fontWeight: "bold", color: "rgb(2, 82, 179)" }}>
+  Phiên hiện tại:
+</label>
           <select
             value={currentDateOption.label}
             onChange={(e) => {
@@ -138,7 +124,12 @@ export default function DiemDanhStats() {
               const now = new Date();
               const isOpen = now >= o.open && now <= o.close;
               return (
-                <option key={o.label} value={o.label} disabled={!isOpen} style={{ color: isOpen ? "#000" : "#aaa" }}>
+                <option
+                  key={o.label}
+                  value={o.label}
+                  disabled={!isOpen}
+                  style={{ color: isOpen ? "#000" : "#aaa" }}
+                >
                   {o.label} — {o.phien} {isOpen ? "" : "(chưa mở)"}
                 </option>
               );
@@ -147,28 +138,84 @@ export default function DiemDanhStats() {
         </div>
 
         {/* SỐ LIỆU */}
-        <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
+        <div
+          style={{
+            marginTop: 12,
+            display: "flex",
+            gap: 8,
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
           {/* Tổng đại biểu */}
-          <div style={{ flex: "1 1 100px", borderRadius: 8, padding: 12, textAlign: "center", backgroundColor: "#0650b7", color: "#fff", minWidth: 90 }}>
-            <div style={{ fontSize: 16 }}><b>{TOTAL_DELEGATES}</b></div>
+          <div
+            style={{
+              flex: "1 1 100px",
+              borderRadius: 8,
+              padding: 12,
+              textAlign: "center",
+              backgroundColor: "#0650b7",
+              color: "#fff",
+              minWidth: 90,
+            }}
+          >
+            <div style={{ fontSize: 16 }}>
+              <b>{TOTAL_DELEGATES}</b>
+            </div>
             <div style={{ fontSize: 12 }}>Tổng đại biểu</div>
           </div>
 
           {/* Có mặt */}
-          <div style={{ flex: "1 1 100px", borderRadius: 8, padding: 12, textAlign: "center", backgroundColor: "#28a745", color: "#fff", minWidth: 90 }}>
-            <div style={{ fontSize: 16 }}><b>{coMat}</b></div>
+          <div
+            style={{
+              flex: "1 1 100px",
+              borderRadius: 8,
+              padding: 12,
+              textAlign: "center",
+              backgroundColor: "#28a745",
+              color: "#fff",
+              minWidth: 90,
+            }}
+          >
+            <div style={{ fontSize: 16 }}>
+              <b>{coMat}</b>
+            </div>
             <div style={{ fontSize: 12 }}>Có mặt</div>
           </div>
 
           {/* Vắng */}
-          <div style={{ flex: "1 1 100px", borderRadius: 8, padding: 12, textAlign: "center", backgroundColor: "#e34a4a", color: "#fff", minWidth: 90 }}>
-            <div style={{ fontSize: 16 }}><b>{vang}</b></div>
+          <div
+            style={{
+              flex: "1 1 100px",
+              borderRadius: 8,
+              padding: 12,
+              textAlign: "center",
+              backgroundColor: "#e34a4a",
+              color: "#fff",
+              minWidth: 90,
+            }}
+          >
+            <div style={{ fontSize: 16 }}>
+              <b>{vang}</b>
+            </div>
             <div style={{ fontSize: 12 }}>Vắng</div>
           </div>
 
           {/* Tỷ lệ */}
-          <div style={{ flex: "1 1 80px", borderRadius: 8, padding: 12, textAlign: "center", backgroundColor: "#f0c419", color: "#fff", minWidth: 80 }}>
-            <div style={{ fontSize: 16, fontWeight: "bold" }}>{tyLe}%</div>
+          <div
+            style={{
+              flex: "1 1 80px",
+              borderRadius: 8,
+              padding: 12,
+              textAlign: "center",
+              backgroundColor: "#f0c419",
+              color: "#fff",
+              minWidth: 80,
+            }}
+          >
+            <div style={{ fontSize: 16, fontWeight: "bold" }}>
+              {tyLe}%
+            </div>
             <div style={{ fontSize: 12 }}>Tỷ lệ</div>
           </div>
         </div>
@@ -176,39 +223,69 @@ export default function DiemDanhStats() {
         {/* DÒNG QUORUM */}
         <div style={{ marginTop: 12, textAlign: "center" }}>
           {hasQuorum ? (
-            <div style={{ display: "inline-block", padding: "8px 12px", borderRadius: 8, backgroundColor: "#e6f7ee", color: "#1b7a3a", fontWeight: 700 }} aria-live="polite">
-              ĐẠI HỘI ĐỦ ĐIỀU KIỆN TIẾN HÀNH — ({coMat} / {TOTAL_DELEGATES} ≥ {requiredCount})
+            <div
+              style={{
+                display: "inline-block",
+                padding: "8px 12px",
+                borderRadius: 8,
+                backgroundColor: "#e6f7ee",
+                color: "#1b7a3a",
+                fontWeight: 700,
+              }}
+              aria-live="polite"
+            >
+              ĐẠI HỘI ĐỦ ĐIỀU KIỆN TIẾN HÀNH — ({coMat} / {TOTAL_DELEGATES} ≥{" "}
+              {requiredCount})
             </div>
           ) : (
-            <div style={{ display: "inline-block", padding: "8px 12px", borderRadius: 8, backgroundColor: "#fdecea", color: "#b02a2a", fontWeight: 700 }} aria-live="polite">
-              ĐẠI HỘI KHÔNG ĐỦ ĐIỀU KIỆN TIẾN HÀNH <br/>Cần ít nhất {requiredCount} đại biểu ({QUORUM_PERCENT}%)
+            <div
+              style={{
+                display: "inline-block",
+                padding: "8px 12px",
+                borderRadius: 8,
+                backgroundColor: "#fdecea",
+                color: "#b02a2a",
+                fontWeight: 700,
+              }}
+              aria-live="polite"
+            >
+              ĐẠI HỘI KHÔNG ĐỦ ĐIỀU KIỆN TIẾN HÀNH <br/>Cần ít nhất {requiredCount} đại biểu
+              ({QUORUM_PERCENT}%)
             </div>
           )}
         </div>
 
         {/* Doughnut */}
-        <div style={{ marginTop: 14, maxWidth: 300, marginLeft: "auto", marginRight: "auto" }}>
+        <div
+          style={{
+            marginTop: 14,
+            maxWidth: 300,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
           <Doughnut data={data} />
         </div>
 
         {/* Nút */}
-        <div style={{ marginTop: 14, display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <Link href="/diemdanh/nhap" className="btn" style={{ flex: 1, textAlign: "center", justifyContent: "center", background: "rgb(28, 85, 159)" }}>
+        <div
+          style={{
+            marginTop: 14,
+            display: "flex",
+            gap: 8,
+            flexWrap: "wrap",
+          }}
+        >
+          <Link href="/diemdanh/nhap" className="btn" style={{ flex: 1,textAlign: "center", justifyContent: "center", background: "rgb(28, 85, 159)" }}>
             Điểm danh
           </Link>
-          <Link href="/" className="btn" style={{ flex: 1, textAlign: "center", justifyContent: "center", background: "rgb(28, 85, 159)" }}>
+          <Link
+            href="/"
+            className="btn"
+            style={{ flex: 1,textAlign: "center", justifyContent: "center", background: "rgb(28, 85, 159)" }}
+          >
             Trang chủ
           </Link>
-        </div>
-
-        {/* Link ẩn điểm danh toàn bộ */}
-        <div style={{ marginTop: 12, textAlign: "center" }}>
-          <button
-            onClick={handleDiemDanhToanBo}
-            style={{ fontSize: 12, color: "#fff", backgroundColor: "#b02a2a", padding: "4px 8px", borderRadius: 4, cursor: "pointer" }}
-          >
-            Điểm danh toàn bộ (ẩn)
-          </button>
         </div>
       </div>
     </div>
