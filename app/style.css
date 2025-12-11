@@ -21,23 +21,21 @@
 
 /* Thanh menu ngang */
 .top-menu {
-  /* BỎ height cố định */
   height: auto;
   min-height: 35px;
-
   padding: 4px 6px;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;   /* CHO XUỐNG DÒNG */
+  flex-wrap: wrap;   /* xuống dòng */
   align-items: center;
   gap: 6px;
   background-color: #0650b7;
 
-  /* BỎ đi, nếu không dòng 2 sẽ bị che */
+  /* bỏ cuộn ngang để không che nút */
   /* overflow-x: auto; */
 }
 
-/* Nút menu */
+/* Nút menu – KHÔNG VIỀN */
 .top-menu-btn {
   color: white;
   text-decoration: none;
@@ -45,17 +43,25 @@
   font-size: 0.9rem;
   padding: 6px 10px;
 
-  /* Quan trọng: cho nút co giãn đều trên mobile */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  background: rgba(255,255,255,0.05);
+
+  /* Bỏ hết viền & nền */
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* Hover */
+/* Hover vàng */
 .top-menu-btn:hover {
   color: #ffea00;
+}
+
+/* Gạch phân cách – MÀU TRẮNG */
+.separator {
+  color: #ffffff !important;
+  margin: 0 4px;
 }
 
 
