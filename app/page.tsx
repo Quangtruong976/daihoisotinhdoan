@@ -11,6 +11,8 @@ export default function TrangChu() {
     { label: "Văn kiện Đại hội", route: "/vankien" },
     { label: "Sơ đồ chổ ngồi", route: "/sodo" },
     { label: "Điểm danh", route: "/diemdanh" },
+     { label: "Diễn đàn thảo luận", route: "/diendanthaoluan" },
+       { label: "Góp ý Văn Kiện", route: "/gopyvankien" },
     { label: "Thông tin đại biểu", route: "/thongtindaibieu" },
    
   ];*/
