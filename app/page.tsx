@@ -27,16 +27,16 @@ export default function TrangChu() {
     <p><strong>⏰ Thời gian:</strong> Ngày 19, 20/12/2025</p>
 
     <p><strong>📍 Địa điểm:</strong> Nhà Văn hóa Lao động tỉnh Lâm Đồng</p>
-    <p className="daihHoi-address">
+    <p className="daihHoi-address" style={{ fontStyle: "italic" }}>
       (Số 01 Trần Quốc Toản, phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng)
     </p>
 
-    <div className="daihHoi-section-title">Khẩu hiệu hành động</div>
+    <div className="daihHoi-section-title" style={{ color: "rgb(203, 9, 15)" }}>Khẩu hiệu hành động</div>
     <div className="daihHoi-slogan">
       TIÊN PHONG – ĐOÀN KẾT – BẢN LĨNH – ĐỘT PHÁ – PHÁT TRIỂN
     </div>
 
-    <div className="daihHoi-section-title">Chủ đề Đại hội</div>
+    <div className="daihHoi-section-title" style={{ color: "rgb(203, 9, 15)" }}>Chủ đề Đại hội</div>
     <div className="daihHoi-theme">
       Tự hào, vững tin theo Đảng, tuổi trẻ Lâm Đồng xây hoài bão lớn,  
       chung sức, đồng lòng, tiên phong tham gia xây dựng quê hương  
