@@ -2,37 +2,40 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const { hoTen, donVi } = body;
-
-    if (!hoTen || !donVi) {
-      return NextResponse.json({ ok: false, message: "Thiếu dữ liệu" });
-    }
-
-    // KEY lưu danh sách điểm danh
-    const KEY = "diemdanh:list";
-
-    // Lưu data vào Redis (dạng List)
-    await redis.rpush(KEY, JSON.stringify({ hoTen, donVi, time: Date.now() }));
-
-    return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("Lỗi điểm danh:", err);
-    return NextResponse.json({ ok: false, message: "Lỗi server" });
-  }
-}
+const KEY = "diemdanh_list";
 
 export async function GET() {
-  try {
-    const KEY = "diemdanh:list";
+  const list = await redis.get(KEY);
+  return NextResponse.json({ diemDanhList: list || [] });
+}
 
-    const list = await redis.lrange(KEY, 0, -1);
-    const parsed = list.map((item) => JSON.parse(item));
+export async function POST(req: Request) {
+  const body = await req.json();
+  const { hoTen, donVi, ngay, phien } = body;
 
-    return NextResponse.json({ ok: true, data: parsed });
-  } catch {
-    return NextResponse.json({ ok: false, data: [] });
+  if (!hoTen || !donVi || !ngay || !phien) {
+    return NextResponse.json({ error: "Thiếu dữ liệu" }, { status: 400 });
   }
+
+  const current = ((await redis.get(KEY)) as any[]) || [];
+
+  const exists = current.some(
+    (d) =>
+      d.hoTen.toLowerCase() === hoTen.toLowerCase() &&
+      d.phien === phien
+  );
+
+  if (exists) {
+    return NextResponse.json(
+      { error: "Đã điểm danh phiên này" },
+      { status: 400 }
+    );
+  }
+
+  const newItem = { hoTen, donVi, ngay, phien };
+  const newList = [...current, newItem];
+
+  await redis.set(KEY, newList);
+
+  return NextResponse.json({ diemDanhList: newList });
 }
