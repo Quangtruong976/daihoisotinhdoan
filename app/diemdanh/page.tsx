@@ -14,12 +14,12 @@ const DATE_OPTIONS = [
     label: "19/12/2025",
     phien: "Phiên thứ 1",
     open: new Date("2025-12-07T08:00:00"),
-    close: new Date("2025-12-19T11:00:00"),
+    close: new Date("2025-12-11T11:00:00"),
   },
   {
     label: "20/12/2025",
     phien: "Phiên trọng thể",
-    open: new Date("2025-12-20T06:00:00"),
+    open: new Date("2025-12-21T06:00:00"),
     close: new Date("2025-12-20T23:59:00"),
   },
 ];
