@@ -66,39 +66,53 @@
 
 
 /* Khối nút chữ nhật */
+/* Khối nút chữ nhật – tự co giãn theo màn hình */
 .button-grid {
   display: grid;
-  grid-template-columns: repeat(4, 170px);
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 15px;
-  padding: 40px 0;
-  justify-content: center;
+  padding: 20px 10px;
 }
 
+/* Nút đẹp hơn */
 .btn-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   color: white;
-  padding: 18px 10px;
-  border-radius: 10px;
-  border: 1px solid #d5d7d7;
-  font-weight: bold;
-  font-size: 0.9rem;
+  padding: 14px 10px;
+  border-radius: 14px;
   text-decoration: none;
-  min-height: 100px;
-  width: 100%;
-  transition: all 0.2s;
+
+  min-height: 110px;
+/* Bỏ viền cứng – thay bằng bóng mềm */
+border: none;
+box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+
+transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+font-weight: bold;
+font-size: 0.92rem;
 }
+
+/* Hiệu ứng nhấn */
+.btn-card:active {
+transform: scale(0.96);
+box-shadow: 0 2px 6px rgba(0,0,0,0.16);
+}
+
 
 .btn-card:hover {
   filter: brightness(1.2);
   transform: translateY(-3px);
 }
 
+/* Icon to và đẹp */
 .btn-icon {
-  font-size: 1.5rem;
-  margin-bottom: 6px;
+  font-size: 2rem;
+  margin-bottom: 8px;
 }
 
 .footer {

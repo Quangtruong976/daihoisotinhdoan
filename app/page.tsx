@@ -39,8 +39,7 @@ export default function TrangChu() {
     <div className="daihHoi-section-title" style={{ color: "rgb(251, 249, 249)" }}>📘Chủ đề Đại hội</div>
     <div className="daihHoi-theme">
       Tự hào, vững tin theo Đảng, tuổi trẻ Lâm Đồng xây hoài bão lớn,  
-      chung sức, đồng lòng, tiên phong tham gia xây dựng quê hương  
-      phát triển nhanh, bền vững, trở thành cực tăng trưởng năng động trong kỷ nguyên vươn mình của dân tộc.
+      chung sức, đồng lòng, tiên phong xây dựng quê hương phát triển nhanh, bền vững, trở thành cực tăng trưởng năng động trong kỷ nguyên vươn mình của dân tộc.
 
     </div>
   </div>
