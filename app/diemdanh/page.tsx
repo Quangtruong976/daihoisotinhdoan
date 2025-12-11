@@ -19,7 +19,7 @@ const DATE_OPTIONS = [
   {
     label: "20/12/2025",
     phien: "Phiên trọng thể",
-    open: new Date("2025-12-21T06:00:00"),
+    open: new Date("2025-12-11T06:00:00"),
     close: new Date("2025-12-20T23:59:00"),
   },
 ];
