@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Đại hội Đoàn TNCS Hồ Chí Minh tỉnh Lâm Đồng",
   description: "Ứng dụng Đại hội Đoàn",
+  icons: {
+    icon: "/favicon.ico",   // hoặc favicon.png
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
