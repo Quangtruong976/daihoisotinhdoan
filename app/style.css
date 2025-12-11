@@ -662,3 +662,11 @@ input, select {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+/*.........*/
+export const metadata = {
+  title: "Đại hội Đoàn TNCS Hồ Chí Minh tỉnh Lâm Đồng",
+  description: "Ứng dụng Đại hội Đoàn",
+  icons: {
+    icon: "/favicon.ico",   // hoặc .png
+  },
+};
