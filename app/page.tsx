@@ -24,23 +24,24 @@ export default function TrangChu() {
   <div className="daihHoi-title">🌟 THÔNG TIN ĐẠI HỘI 🌟</div>
 
   <div className="daihHoi-content">
-    <p><strong>⏰ Thời gian:</strong> Ngày 19, 20/12/2025</p>
+    <p><strong>⏰ Thời gian:</strong> Ngày 19,20/12/2025</p>
 
     <p><strong>📍 Địa điểm:</strong> Nhà Văn hóa Lao động tỉnh Lâm Đồng</p>
     <p className="daihHoi-address" style={{ fontStyle: "italic" }}>
       (Số 01 Trần Quốc Toản, phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng)
     </p>
 
-    <div className="daihHoi-section-title" style={{ color: "rgb(203, 9, 15)" }}>Khẩu hiệu hành động</div>
+    <div className="daihHoi-section-title" style={{ color: "rgb(247, 247, 243)" }}>🌟Khẩu hiệu hành động</div>
     <div className="daihHoi-slogan">
-      TIÊN PHONG – ĐOÀN KẾT – BẢN LĨNH – ĐỘT PHÁ – PHÁT TRIỂN
+      TIÊN PHONG – ĐOÀN KẾT – BẢN LĨNH – <br/>ĐỘT PHÁ – PHÁT TRIỂN
     </div>
 
-    <div className="daihHoi-section-title" style={{ color: "rgb(203, 9, 15)" }}>Chủ đề Đại hội</div>
+    <div className="daihHoi-section-title" style={{ color: "rgb(251, 249, 249)" }}>📘Chủ đề Đại hội</div>
     <div className="daihHoi-theme">
       Tự hào, vững tin theo Đảng, tuổi trẻ Lâm Đồng xây hoài bão lớn,  
       chung sức, đồng lòng, tiên phong tham gia xây dựng quê hương  
-      phát triển nhanh, bền vững trong kỷ nguyên mới
+      phát triển nhanh, bền vững, trở thành cực tăng trưởng năng động trong kỷ nguyên vươn mình của dân tộc.
+
     </div>
   </div>
 </div>
