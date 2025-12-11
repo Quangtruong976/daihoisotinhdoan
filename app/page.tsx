@@ -20,25 +20,30 @@ export default function TrangChu() {
     <div className="main-container">
 
       {/* 🔵 THÔNG TIN ĐẠI HỘI */}
-      <div className="daihHoi-info">
-        <p>⏰ <strong>Thời gian:</strong> Ngày 19, 20/12/2025</p>
-        <p>📍 <strong>Địa điểm:</strong> Nhà Văn hóa Lao động tỉnh Lâm Đồng</p>
-        <p style={{ marginTop: "-5px" }}>
-          (Số 01 Trần Quốc Toản, phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng)
-        </p>
+      <div className="daihHoi-box">
+  <div className="daihHoi-title">🌟 THÔNG TIN ĐẠI HỘI 🌟</div>
 
-        <p className="info-title">Khẩu hiệu hành động</p>
-        <p className="info-highlight">
-          TIÊN PHONG – ĐOÀN KẾT – BẢN LĨNH – ĐỘT PHÁ – PHÁT TRIỂN
-        </p>
+  <div className="daihHoi-content">
+    <p><strong>⏰ Thời gian:</strong> Ngày 19, 20/12/2025</p>
 
-        <p className="info-title">Chủ đề Đại hội</p>
-        <p className="info-highlight">
-          Tự hào, vững tin theo Đảng, tuổi trẻ Lâm Đồng xây hoài bão lớn,
-          chung sức, đồng lòng, tiên phong tham gia xây dựng quê hương
-          phát triển nhanh, bền vững trong kỷ nguyên mới
-        </p>
-      </div>
+    <p><strong>📍 Địa điểm:</strong> Nhà Văn hóa Lao động tỉnh Lâm Đồng</p>
+    <p className="daihHoi-address">
+      (Số 01 Trần Quốc Toản, phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng)
+    </p>
+
+    <div className="daihHoi-section-title">Khẩu hiệu hành động</div>
+    <div className="daihHoi-slogan">
+      TIÊN PHONG – ĐOÀN KẾT – BẢN LĨNH – ĐỘT PHÁ – PHÁT TRIỂN
+    </div>
+
+    <div className="daihHoi-section-title">Chủ đề Đại hội</div>
+    <div className="daihHoi-theme">
+      Tự hào, vững tin theo Đảng, tuổi trẻ Lâm Đồng xây hoài bão lớn,  
+      chung sức, đồng lòng, tiên phong tham gia xây dựng quê hương  
+      phát triển nhanh, bền vững trong kỷ nguyên mới
+    </div>
+  </div>
+</div>
 
       {/* Khối nút chữ nhật dưới */}
       <div className="button-grid">
