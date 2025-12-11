@@ -4,15 +4,6 @@ import { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import Link from "next/link";
-async function xacNhanDiemDanh(hoTen: string, donVi: string, ngay: string, phien: string) {
-  const res = await fetch("/api/diemdanh", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ hoTen, donVi, ngay, phien }),
-  });
-
-  return await res.json();
-}
 
 
 ChartJS.register(ArcElement, Tooltip, Legend);
