@@ -13,14 +13,15 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "Đại hội Đoàn TNCS Hồ Chí Minh tỉnh Lâm Đồng",
-  description: "Ứng dụng Đại hội Đoàn",
+export const metadata = {
+  title: "Đại hội Đoàn",
   icons: {
-    icon: "/favicon.ico",   // hoặc favicon.png
+    icon: "/favicon.ico",
+    apple: "/icon-192.png"
   },
+  manifest: "/manifest.json",
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
