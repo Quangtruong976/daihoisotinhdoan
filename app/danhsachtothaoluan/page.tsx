@@ -18,7 +18,7 @@ export default function DanhSachToThaoLuan() {
           fontWeight: 700,
           color: "rgb(4, 16, 104)",
           marginBottom: 25,
-          fontSize: 26,
+          fontSize: 22,
         }}
       >
         Diễn đàn “Tuổi trẻ Lâm Đồng tiên phong trong kỷ nguyên mới”
@@ -43,9 +43,9 @@ export default function DanhSachToThaoLuan() {
   <div
     style={{
       fontStyle: "italic",
-      textAlign: "justify",
+      textAlign: "center",
       lineHeight: "1.45",
-      fontSize: 12, // ← size nhỏ hơn ở đây
+      fontSize: 13, // ← size nhỏ hơn ở đây
     }}
   >
     “Tăng cường giáo dục, bồi dưỡng lý tưởng – khơi dậy khát vọng cống hiến, lẽ sống thanh niên”.
@@ -65,9 +65,9 @@ export default function DanhSachToThaoLuan() {
   <div
     style={{
       fontStyle: "italic",
-      textAlign: "justify",
+      textAlign: "center",
       lineHeight: "1.45",
-      fontSize: 12, // ← size nhỏ hơn ở đây
+      fontSize: 13, // ← size nhỏ hơn ở đây
     }}
   >
     “Tuổi trẻ Lâm Đồng tiên phong, sáng tạo, xung kích, tình nguyện xây dựng quê hương Lâm Đồng giàu đẹp, văn minh”.
@@ -88,9 +88,9 @@ export default function DanhSachToThaoLuan() {
   <div
     style={{
       fontStyle: "italic",
-      textAlign: "justify",
+      textAlign: "center",
       lineHeight: "1.45",
-      fontSize: 12, // ← size nhỏ hơn ở đây
+      fontSize: 13, // ← size nhỏ hơn ở đây
     }}
   >
     “Phát huy vai trò tiên phong của tuổi trẻ tham gia xây dựng Đoàn, Đoàn tham gia xây dựng Đảng và chính quyền trong sạch, vững mạnh”.
@@ -104,7 +104,7 @@ export default function DanhSachToThaoLuan() {
         <h3 style={titleStyle}>II. Tham luận tại Đại hội</h3>
 
         <Link href="/thamluan" style={buttonStyle}>
-          Xem danh sách tham luận
+          Các bài viết báo cáo tham luận
         </Link>
       </div>
     </div>

@@ -10,7 +10,7 @@ export default function TrangChu() {
     { label: "Văn kiện Đại hội", icon: <FaClipboard color="rgb(245, 183, 49)"/>, color: "rgb(9, 182, 52)", route: "/vankien" },
     { label: "Sơ đồ chổ ngồi", icon: <FaMap color="rgb(216, 242, 111)"/>, color: "rgb(19, 166, 229)", route: "/sodo" },
     { label: "Điểm danh", icon: <FaCheck color=" #ff3399"/>, color: "rgb(145, 26, 188)", route: "/diemdanh" },
-    { label: "Diễn đàn thảo luận", icon: <FaComments color="rgb(242, 234, 9)"/>, color: "rgb(239, 55, 79)", route: "/dien" },
+    { label: "Danh sách Tổ thảo luận", icon: <FaComments color="rgb(242, 234, 9)"/>, color: "rgb(239, 55, 79)", route: "/danhsachtothaoluan" },
     { label: "Tham luận", icon: <FaFileAlt color="rgb(243, 245, 246)"/>, color: "rgb(249, 131, 21)", route: "/thamluan" },
     { label: "Góp ý văn kiện", icon: <FaRegLightbulb color="#ff33ff"/>, color: "rgb(15, 87, 243)", route: "/gopy" },
     { label: "Thông tin đại biểu", icon: <FaClipboard color=" #00ffcc"/>, color: "rgb(8, 175, 105)", route: "/vankien2" },
