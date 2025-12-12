@@ -59,7 +59,7 @@ Họ tên: ${formData.name}
       if (result.success) {
         setStatus({
           success: true,
-          message: "Gửi góp ý thành công. Cám ơn bạn đã quan tâm góp ý.",
+          message: "Cám ơn bạn đã gửi góp ý.",
         });
 
         setFormData({ category: "", name: "", unit: "", content: "" });
@@ -156,11 +156,11 @@ Họ tên: ${formData.name}
         <button
           type="submit"
           style={{
-            width: "100%",
+            width: "20%",
             padding: "12px 0",
             fontWeight: "bold",
             fontSize: 16,
-            backgroundColor: "#0650b7",
+            backgroundColor: " #0650b7",
             color: "white",
             border: "none",
             borderRadius: 8,
@@ -197,7 +197,7 @@ Họ tên: ${formData.name}
         boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
         textAlign: "center",
         position: "relative",
-        borderTop: `6px solid ${status.success ? "green" : "red"}`,
+        borderTop: `6px solid ${status.success ? " #0650b7" : " #0650b7}`,
         fontSize: 17,
         lineHeight: "24px",
       }}
@@ -227,7 +227,7 @@ Họ tên: ${formData.name}
         style={{
           marginTop: 20,
           padding: "10px 20px",
-          backgroundColor: "#0650b7",
+          backgroundColor: " #0650b7",
           color: "white",
           border: "none",
           borderRadius: 6,
