@@ -18,25 +18,30 @@ export default function GopYVanKien() {
     "Góp ý chương trình hành động thực hiện nghị quyết ĐH",
   ];
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Gửi Web3Forms
-  const handleSubmit = async (e: React.FormEvent) => {
+  // -------------------------
+  // GỬI WEB3FORMS
+  // -------------------------
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setStatus(null);
 
     const form = new FormData();
     form.append("access_key", "5f72bc68-0240-4a4e-aeba-2d27fb81a831");
+    form.append("from_name", formData.name);
+    form.append("email", "no-reply@yourdomain.com"); 
     form.append("subject", `[Góp ý Văn kiện] ${formData.category}`);
-    form.append("name", formData.name);
-    form.append("unit", formData.unit);
     form.append(
       "message",
-      `--- THÔNG TIN GÓP Ý ---\n• Họ tên: ${formData.name}\n• Đơn vị: ${formData.unit}\n• Nội dung: ${formData.category}\n\n${formData.content}`
+      `--- Thông tin góp ý ---
+Loại góp ý: ${formData.category}
+Nội dung: ${formData.content}
+
+Họ tên: ${formData.name}
+Đơn vị: ${formData.unit}`
     );
 
     try {
@@ -48,15 +53,12 @@ export default function GopYVanKien() {
       const result = await res.json();
 
       if (result.success) {
-        setStatus({
-          success: true,
-          message: "Gửi góp ý thành công. Cám ơn bạn đã quan tâm góp ý!",
-        });
+        setStatus({ success: true, message: "Cám ơn bạn đã gửi góp ý." });
         setFormData({ category: "", name: "", unit: "", content: "" });
       } else {
         setStatus({ success: false, message: "Gửi thất bại. Vui lòng thử lại." });
       }
-    } catch {
+    } catch (err) {
       setStatus({ success: false, message: "Lỗi mạng. Vui lòng thử lại." });
     }
   };
@@ -66,61 +68,57 @@ export default function GopYVanKien() {
       style={{
         maxWidth: 600,
         margin: "30px auto",
-        padding: "20px",
+        padding: "0 15px",
         fontFamily: "Times New Roman, serif",
       }}
     >
       <h2
         style={{
           textAlign: "center",
-          fontSize: 22,
-          marginBottom: 25,
           fontWeight: "bold",
+          marginBottom: 25,
           color: "#0650b7",
-          lineHeight: "30px",
+          fontSize: 22,
         }}
       >
-        MỜI BẠN THAM GIA GÓP Ý  
-        <br />
-        VÀO CÁC DỰ THẢO VĂN KIỆN ĐẠI HỘI
+        Mời bạn tham gia đóng góp ý kiến vào các nội dung dự thảo văn kiện
       </h2>
 
       <form
         onSubmit={handleSubmit}
         style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 15,
+          background: "white",
+          padding: 20,
+          borderRadius: 12,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
         }}
       >
-        {/* Loại góp ý */}
-        <div>
-          <label style={{ fontWeight: "bold", marginBottom: 6, display: "block" }}>
-            Nội dung góp ý:
-          </label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-            style={{
-              width: "100%",
-              padding: 12,
-              fontSize: 16,
-              borderRadius: 8,
-              border: "1px solid #ccc",
-            }}
-          >
-            <option value="">-- Chọn nội dung --</option>
-            {categories.map((c, i) => (
-              <option key={i} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </div>
+        <label style={{ fontWeight: "bold", marginBottom: 5, display: "block" }}>
+          Chọn nội dung góp ý:
+        </label>
 
-        {/* Họ tên */}
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+          style={{
+            width: "100%",
+            padding: 12,
+            marginBottom: 15,
+            fontSize: 15,
+            borderRadius: 8,
+            border: "1px solid #ccc",
+          }}
+        >
+          <option value="">-- Chọn --</option>
+          {categories.map((c, idx) => (
+            <option key={idx} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+
         <input
           type="text"
           name="name"
@@ -129,14 +127,15 @@ export default function GopYVanKien() {
           onChange={handleChange}
           required
           style={{
+            width: "100%",
             padding: 12,
-            fontSize: 16,
+            marginBottom: 15,
             borderRadius: 8,
             border: "1px solid #ccc",
+            fontSize: 15,
           }}
         />
 
-        {/* Đơn vị */}
         <input
           type="text"
           name="unit"
@@ -145,45 +144,47 @@ export default function GopYVanKien() {
           onChange={handleChange}
           required
           style={{
+            width: "100%",
             padding: 12,
-            fontSize: 16,
+            marginBottom: 15,
             borderRadius: 8,
             border: "1px solid #ccc",
+            fontSize: 15,
           }}
         />
 
-        {/* Nội dung góp ý */}
         <textarea
           name="content"
-          placeholder="Nhập nội dung góp ý..."
-          rows={6}
+          placeholder="Nhập nội dung góp ý"
           value={formData.content}
           onChange={handleChange}
           required
+          rows={6}
           style={{
+            width: "100%",
             padding: 12,
-            fontSize: 16,
+            marginBottom: 20,
             borderRadius: 8,
             border: "1px solid #ccc",
+            fontSize: 15,
             resize: "vertical",
           }}
         />
 
-        {/* Nút gửi chính giữa */}
-        <div style={{ textAlign: "center", marginTop: 10 }}>
+        {/* NÚT GỬI CANH GIỮA */}
+        <div style={{ textAlign: "center" }}>
           <button
             type="submit"
             style={{
-              padding: "12px 30px",
-              fontSize: 17,
-              fontWeight: "bold",
-              background: "#0650b7",
-              color: "white",
-              borderRadius: 8,
-              border: "none",
-              cursor: "pointer",
               width: "60%",
-              maxWidth: 250,
+              padding: "12px 0",
+              backgroundColor: "#0650b7",
+              fontWeight: "bold",
+              fontSize: 16,
+              color: "white",
+              border: "none",
+              borderRadius: 10,
+              cursor: "pointer",
             }}
           >
             Gửi góp ý
@@ -191,16 +192,13 @@ export default function GopYVanKien() {
         </div>
       </form>
 
-      {/* POPUP THÔNG BÁO */}
+      {/* THÔNG BÁO POPUP */}
       {status && (
         <div
           style={{
             position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0,0,0,0.4)",
+            inset: 0,
+            backgroundColor: "rgba(0,0,0,0.45)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -212,22 +210,21 @@ export default function GopYVanKien() {
               background: "white",
               padding: "25px 30px",
               borderRadius: 12,
-              width: "90%",
               maxWidth: 380,
-              boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+              width: "90%",
+              boxShadow: "0 4px 14px rgba(0,0,0,0.25)",
               textAlign: "center",
-              borderTop: `6px solid ${status.success ? "green" : "red"}`,
               position: "relative",
+              borderTop: `6px solid ${status.success ? "green" : "red"}`,
             }}
           >
             <button
               onClick={() => setStatus(null)}
               style={{
                 position: "absolute",
-                top: 8,
-                right: 12,
-                fontSize: 22,
-                fontWeight: "bold",
+                top: 6,
+                right: 10,
+                fontSize: 24,
                 background: "transparent",
                 border: "none",
                 cursor: "pointer",
@@ -238,11 +235,10 @@ export default function GopYVanKien() {
 
             <p
               style={{
-                fontSize: 17,
                 fontWeight: "bold",
                 color: status.success ? "green" : "red",
-                marginBottom: 20,
-                lineHeight: "24px",
+                fontSize: 17,
+                marginTop: 10,
               }}
             >
               {status.message}
@@ -251,13 +247,13 @@ export default function GopYVanKien() {
             <button
               onClick={() => setStatus(null)}
               style={{
-                padding: "10px 24px",
+                marginTop: 18,
+                padding: "10px 20px",
                 backgroundColor: "#0650b7",
                 color: "white",
                 border: "none",
-                borderRadius: 8,
+                borderRadius: 6,
                 cursor: "pointer",
-                fontSize: 16,
                 fontWeight: "bold",
               }}
             >
