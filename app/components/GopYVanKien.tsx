@@ -87,7 +87,7 @@ Họ tên: ${formData.name}
       <form
         onSubmit={handleSubmit}
         style={{
-          background: "rgba(0,0,0,0.03)",
+          background: "rgba(244, 246, 247, 0.03)",
           padding: 20,
           borderRadius: 10,
           border: "1px solid #ddd",
