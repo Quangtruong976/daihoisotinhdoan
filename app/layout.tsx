@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Đại hội Đoàn TNCS Hồ Chí Minh tỉnh Lâm Đồng lần thứ I",
   icons: {
-    icon: "/icon-192.png",
+    icon: "/favicon.ico?v=2",
     apple: "/icon-192.png"
   },
   manifest: "/manifest.json",

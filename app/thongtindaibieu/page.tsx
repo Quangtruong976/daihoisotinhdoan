@@ -6,20 +6,20 @@ export default function ThongTinDaiBieu() {
     {
       icon: <FaClock className="text-blue-600 text-4xl" />,
       title: "Thời gian tổ chức Đại hội",
-      content: "Phiên 1: Từ 15h00p - 17h30p,/n Phiên 2: Từ 8h00p - 11h20p ",
+      content: "Phiên 1: Từ 15h00p - 17h30p,\n Phiên 2: Từ 8h00p - 11h20p ",
     
     },
     {
       icon: <FaGavel className="text-red-600 text-4xl" />,
       title: "Nội quy, Quy chế Đại hội",
       content:
-        "Đại biểu thực hiện nghiêm túc giờ giấc, trang phục, vị trí ngồi; /n tuân thủ hướng dẫn của Ban Tổ chức.",
+        "Đại biểu thực hiện nghiêm túc giờ giấc, trang phục, vị trí ngồi; \n tuân thủ hướng dẫn của Ban Tổ chức.",
     },
     {
       icon: <FaTshirt className="text-green-600 text-4xl" />,
       title: "Trang phục tại Đại hội",
       content:
-        "Phiên thứ 1: Áo thanh niên Việt Nam – quần sẫm màu. /n Ngày làm việc còn lại: Trang phục theo hướng dẫn.",
+        "Phiên thứ 1: Áo thanh niên Việt Nam – quần sẫm màu. \n Ngày làm việc còn lại: Trang phục theo hướng dẫn.",
     },
     {
       icon: <FaHotel className="text-purple-600 text-4xl" />,
