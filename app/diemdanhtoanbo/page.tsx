@@ -19,7 +19,11 @@ export default function DiemDanhToanBoPage() {
     try {
       const res = await fetch("/api/diemdanh/all?key=SECRET123", { method: "POST" });
       const data = await res.json();
-      setMessage(data.message || "Đã điểm danh toàn bộ!");
+      if (res.ok) {
+        setMessage(data.message || "Đã điểm danh toàn bộ!");
+      } else {
+        setMessage(data.message || "Không thể điểm danh toàn bộ!");
+      }
     } catch (err) {
       console.error(err);
       setMessage("Lỗi mạng, không thể điểm danh.");
@@ -29,8 +33,8 @@ export default function DiemDanhToanBoPage() {
   };
 
   const handleBack = () => {
-    // Khi quay về, reload lại trang thống kê để cập nhật
-    router.push("/diemdanh");
+    // Quay về trang thống kê và refresh dữ liệu
+    router.push("/diemdanh"); // nếu muốn refresh ngay, có thể dùng router.refresh() nếu App Router
   };
 
   return (
