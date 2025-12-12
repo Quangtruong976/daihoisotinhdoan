@@ -16,27 +16,27 @@ export default function DanhSachToThaoLuan() {
         style={{
           textAlign: "center",
           fontWeight: 700,
-          color: "#004aad",
+          color: "rgb(4, 16, 104)",
           marginBottom: 25,
           fontSize: 26,
         }}
       >
-        Danh sách Tổ Thảo Luận – Đại hội
+        Diễn đàn “Tuổi trẻ Lâm Đồng tiên phong trong kỷ nguyên mới”
       </h2>
 
       {/* KHUNG TO THAO LUAN */}
       <div style={boxStyle}>
-        <h3 style={titleStyle}>I. Danh sách các tổ thảo luận</h3>
+        <h3 style={titleStyle}>I. Danh sách các diễn đàn</h3>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <a href="LINK_TO1" target="_blank" style={buttonStyle}>
-            Tổ thảo luận số 1
+            Diễn đàn thảo luận số 1: “Tăng cường giáo dục, bồi dưỡng lý tưởng – khơi dậy khát vọng cống hiến, lẽ sống thanh niên”.
           </a>
           <a href="LINK_TO2" target="_blank" style={buttonStyle}>
-            Tổ thảo luận số 2
+            Diễn đàn thảo luận số 2: “Tuổi trẻ Lâm Đồng tiên phong, sáng tạo, xung kích, tình nguyện xây dựng quê hương Lâm Đồng giàu đẹp, văn minh”.
           </a>
           <a href="LINK_TO3" target="_blank" style={buttonStyle}>
-            Tổ thảo luận số 3
+            Diễn đàn thảo luận số 3: “Phát huy vai trò tiên phong của tuổi trẻ tham gia xây dựng Đoàn, Đoàn tham gia xây dựng Đảng và chính quyền trong sạch, vững mạnh”.
           </a>
         </div>
       </div>
