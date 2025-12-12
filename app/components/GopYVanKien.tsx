@@ -6,10 +6,10 @@ export default function GopYVanKien() {
     category: "",
     name: "",
     unit: "",
-    email: "",
     content: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+
+  const [status, setStatus] = useState<{ success: boolean; message: string } | null>(null);
 
   const categories = [
     "Góp ý báo cáo chính trị",
@@ -24,33 +24,51 @@ export default function GopYVanKien() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // ---------------------------------
+  // GỬI THẲNG QUA WEB3FORMS
+  // ---------------------------------
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus(null);
 
     const form = new FormData();
-    form.append("access_key", "YOUR_ACCESS_KEY_HERE"); // <-- THAY KEY
-    form.append("category", formData.category);
-    form.append("name", formData.name);
-    form.append("unit", formData.unit);
-    form.append("email", formData.email);
-    form.append("content", formData.content);
+    form.append("access_key", "5f72bc68-0240-4a4e-aeba-2d27fb81a831");
 
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: form,
-    });
+    // THÊM CÁC FIELD BẮT BUỘC CHO WEB3FORMS
+    form.append("from_name", formData.name);
+    form.append("email", "no-reply@yourdomain.com"); // KHÔNG CÓ EMAIL THẬT → BẮT BUỘC PHẢI CÓ
+    
+    form.append("subject", `[Góp ý Văn kiện] ${formData.category}`);
+    form.append("message",
+      `--- Thông tin góp ý ---
+Loại góp ý: ${formData.category}
+Nội dung: ${formData.content}
 
-    if (res.ok) {
-      setSubmitted(true);
-      setFormData({
-        category: "",
-        name: "",
-        unit: "",
-        email: "",
-        content: "",
+Họ tên: ${formData.name}
+Đơn vị: ${formData.unit}`
+    );
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: form,
       });
-    } else {
-      alert("Gửi góp ý thất bại, hãy thử lại.");
+
+      const result = await res.json();
+
+      if (result.success) {
+        setStatus({
+          success: true,
+          message: "Gửi góp ý thành công. Cám ơn bạn đã quan tâm góp ý.",
+        });
+
+        setFormData({ category: "", name: "", unit: "", content: "" });
+      } else {
+        setStatus({ success: false, message: "Gửi thất bại. Vui lòng thử lại." });
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus({ success: false, message: "Lỗi mạng. Vui lòng thử lại." });
     }
   };
 
@@ -60,150 +78,128 @@ export default function GopYVanKien() {
         Mời bạn tham gia đóng góp ý kiến vào các nội dung dự thảo văn kiện
       </h2>
 
-      {!submitted ? (
-        <form onSubmit={handleSubmit}>
-          {/* Chọn nội dung góp ý */}
-          <label style={{ fontWeight: "bold" }}>Chọn nội dung góp ý:</label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-            style={{
-              width: "100%",
-              padding: 10,
-              marginBottom: 15,
-              fontSize: 16,
-              borderRadius: 6,
-              border: "1px solid #ccc",
-            }}
-          >
-            <option value="">-- Chọn --</option>
-            {categories.map((c, idx) => (
-              <option key={idx} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-
-          {/* Họ và tên */}
-          <input
-            type="text"
-            name="name"
-            placeholder="Họ và tên"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            style={{
-              width: "100%",
-              padding: 10,
-              marginBottom: 15,
-              fontSize: 16,
-              borderRadius: 6,
-              border: "1px solid #ccc",
-            }}
-          />
-
-          {/* Đơn vị */}
-          <input
-            type="text"
-            name="unit"
-            placeholder="Đơn vị"
-            value={formData.unit}
-            onChange={handleChange}
-            required
-            style={{
-              width: "100%",
-              padding: 10,
-              marginBottom: 15,
-              fontSize: 16,
-              borderRadius: 6,
-              border: "1px solid #ccc",
-            }}
-          />
-
-          {/* Email - KHÔNG BẮT BUỘC */}
-          <input
-            type="email"
-            name="email"
-            placeholder="Email (không bắt buộc)"
-            value={formData.email}
-            onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: 10,
-              marginBottom: 15,
-              fontSize: 16,
-              borderRadius: 6,
-              border: "1px solid #ccc",
-            }}
-          />
-
-          {/* Nội dung góp ý */}
-          <textarea
-            name="content"
-            placeholder="Nhập nội dung góp ý"
-            value={formData.content}
-            onChange={handleChange}
-            required
-            rows={6}
-            style={{
-              width: "100%",
-              padding: 10,
-              marginBottom: 20,
-              fontSize: 16,
-              borderRadius: 6,
-              border: "1px solid #ccc",
-              resize: "vertical",
-            }}
-          />
-
-          {/* Nút gửi */}
-          <button
-            type="submit"
-            style={{
-              width: "100%",
-              padding: "12px 0",
-              fontWeight: "bold",
-              fontSize: 16,
-              backgroundColor: "#0650b7",
-              color: "white",
-              border: "none",
-              borderRadius: 8,
-              cursor: "pointer",
-            }}
-          >
-            Gửi góp ý
-          </button>
-        </form>
-      ) : (
-        <div
+      <form onSubmit={handleSubmit}>
+        
+        <label style={{ fontWeight: "bold" }}>Chọn nội dung góp ý:</label>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
           style={{
-            textAlign: "center",
-            color: "green",
-            fontWeight: "bold",
-            fontSize: 18,
-            padding: 20,
-            border: "1px solid #cfcfcf",
-            borderRadius: 10,
-            background: "#f6fff6",
+            width: "100%",
+            padding: 10,
+            marginBottom: 15,
+            fontSize: 16,
+            borderRadius: 6,
+            border: "1px solid #ccc",
           }}
         >
-          <p>Gửi góp ý thành công!</p>
+          <option value="">-- Chọn --</option>
+          {categories.map((c, idx) => (
+            <option key={idx} value={c}>{c}</option>
+          ))}
+        </select>
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Họ và tên"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          style={{
+            width: "100%",
+            padding: 10,
+            marginBottom: 15,
+            fontSize: 16,
+            borderRadius: 6,
+            border: "1px solid #ccc",
+          }}
+        />
+
+        <input
+          type="text"
+          name="unit"
+          placeholder="Đơn vị"
+          value={formData.unit}
+          onChange={handleChange}
+          required
+          style={{
+            width: "100%",
+            padding: 10,
+            marginBottom: 15,
+            fontSize: 16,
+            borderRadius: 6,
+            border: "1px solid #ccc",
+          }}
+        />
+
+        <textarea
+          name="content"
+          placeholder="Nhập nội dung góp ý"
+          value={formData.content}
+          onChange={handleChange}
+          required
+          rows={6}
+          style={{
+            width: "100%",
+            padding: 10,
+            marginBottom: 20,
+            fontSize: 16,
+            borderRadius: 6,
+            border: "1px solid #ccc",
+            resize: "vertical",
+          }}
+        />
+
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            padding: "12px 0",
+            fontWeight: "bold",
+            fontSize: 16,
+            backgroundColor: "#0650b7",
+            color: "white",
+            border: "none",
+            borderRadius: 8,
+            cursor: "pointer",
+          }}
+        >
+          Gửi góp ý
+        </button>
+      </form>
+
+      {/* THÔNG BÁO CÓ NÚT TẮT */}
+      {status && (
+        <div
+          style={{
+            marginTop: 20,
+            padding: "12px 16px",
+            borderRadius: 6,
+            backgroundColor: status.success ? "#d4f7d4" : "#ffd4d4",
+            color: status.success ? "#0a7a0a" : "#b30000",
+            fontWeight: "bold",
+            position: "relative",
+            textAlign: "center",
+          }}
+        >
+          {status.message}
           <button
-            onClick={() => setSubmitted(false)}
+            onClick={() => setStatus(null)}
             style={{
-              marginTop: 15,
-              padding: "10px 20px",
-              background: "#0650b7",
-              color: "white",
+              position: "absolute",
+              top: 6,
+              right: 8,
               border: "none",
-              borderRadius: 6,
+              background: "transparent",
               cursor: "pointer",
+              fontSize: 18,
               fontWeight: "bold",
             }}
           >
-            Đóng
+            ×
           </button>
         </div>
       )}
