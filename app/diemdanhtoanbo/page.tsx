@@ -1,37 +1,42 @@
 "use client";
 
-export default function DiemDanhToanBo() {
-  const handleDiemDanhAll = async () => {
-    if (!confirm("Xác nhận điểm danh toàn bộ đại biểu?")) return;
+import { useEffect, useState } from "react";
 
-    try {
-      const res = await fetch("/api/diemdanh/all", {
-        method: "POST",
-      });
-      const data = await res.json();
-      alert(data.message);
-    } catch {
-      alert("Lỗi mạng");
-    }
-  };
+export default function DiemDanhToanBoPage() {
+  const [message, setMessage] = useState<string>("Đang điểm danh...");
+
+  useEffect(() => {
+    const diemDanhToanBo = async () => {
+      try {
+        const res = await fetch("/api/diemdanh/all?key=SECRET123", {
+          method: "POST",
+        });
+        const data = await res.json();
+        setMessage(data.message || "Đã điểm danh toàn bộ!");
+      } catch (err) {
+        console.error(err);
+        setMessage("Lỗi mạng, không thể điểm danh.");
+      }
+    };
+
+    diemDanhToanBo();
+  }, []);
 
   return (
-    <div style={{ padding: 40 }}>
-      <h1>Điểm danh kỹ thuật (ẩn)</h1>
-      <p>Chỉ dùng trong trường hợp đặc biệt, khi hệ thống treo hoặc không đại biểu nào điểm danh.</p>
-      <button
-        onClick={handleDiemDanhAll}
-        style={{
-          padding: "12px 20px",
-          backgroundColor: "red",
-          color: "white",
-          borderRadius: 8,
-          fontSize: 18,
-          cursor: "pointer",
-        }}
-      >
-        Điểm danh toàn bộ
-      </button>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundColor: "#fff",
+        color: "#000",
+        fontSize: 16,
+        textAlign: "center",
+        padding: 12,
+      }}
+    >
+      {message}
     </div>
   );
 }
