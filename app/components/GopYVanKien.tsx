@@ -24,9 +24,7 @@ export default function GopYVanKien() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // ---------------------------------
-  // GỬI THẲNG QUA WEB3FORMS
-  // ---------------------------------
+  // GỬI QUA WEB3FORMS — GIỮ NGUYÊN CHỨC NĂNG
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus(null);
@@ -34,12 +32,12 @@ export default function GopYVanKien() {
     const form = new FormData();
     form.append("access_key", "5f72bc68-0240-4a4e-aeba-2d27fb81a831");
 
-    // THÊM CÁC FIELD BẮT BUỘC CHO WEB3FORMS
     form.append("from_name", formData.name);
-    form.append("email", "no-reply@yourdomain.com"); // KHÔNG CÓ EMAIL THẬT → BẮT BUỘC PHẢI CÓ
-    
+    form.append("email", "no-reply@yourdomain.com");
+
     form.append("subject", `[Góp ý Văn kiện] ${formData.category}`);
-    form.append("message",
+    form.append(
+      "message",
       `--- Thông tin góp ý ---
 Loại góp ý: ${formData.category}
 Nội dung: ${formData.content}
@@ -74,12 +72,29 @@ Họ tên: ${formData.name}
 
   return (
     <div style={{ maxWidth: 700, margin: "40px auto", fontFamily: "Times New Roman, serif" }}>
-      <h2 style={{ textAlign: "center", fontWeight: "bold", marginBottom: 30, color: "#0650b7" }}>
+      <h2
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
+          marginBottom: 30,
+          color: "#0650b7",
+        }}
+      >
         Mời bạn tham gia đóng góp ý kiến vào các nội dung dự thảo văn kiện
       </h2>
 
-      <form onSubmit={handleSubmit}>
-        
+      {/* FORM ĐÃ THÊM KHUNG VIỀN MỜ + TỰ CĂN ĐIỆN THOẠI */}
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          background: "rgba(0,0,0,0.03)",
+          padding: 20,
+          borderRadius: 10,
+          border: "1px solid #ddd",
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
         <label style={{ fontWeight: "bold" }}>Chọn nội dung góp ý:</label>
         <select
           name="category"
@@ -88,7 +103,7 @@ Họ tên: ${formData.name}
           required
           style={{
             width: "100%",
-            padding: 10,
+            padding: 12,
             marginBottom: 15,
             fontSize: 16,
             borderRadius: 6,
@@ -97,7 +112,9 @@ Họ tên: ${formData.name}
         >
           <option value="">-- Chọn --</option>
           {categories.map((c, idx) => (
-            <option key={idx} value={c}>{c}</option>
+            <option key={idx} value={c}>
+              {c}
+            </option>
           ))}
         </select>
 
@@ -110,7 +127,7 @@ Họ tên: ${formData.name}
           required
           style={{
             width: "100%",
-            padding: 10,
+            padding: 12,
             marginBottom: 15,
             fontSize: 16,
             borderRadius: 6,
@@ -127,7 +144,7 @@ Họ tên: ${formData.name}
           required
           style={{
             width: "100%",
-            padding: 10,
+            padding: 12,
             marginBottom: 15,
             fontSize: 16,
             borderRadius: 6,
@@ -144,7 +161,7 @@ Họ tên: ${formData.name}
           rows={6}
           style={{
             width: "100%",
-            padding: 10,
+            padding: 12,
             marginBottom: 20,
             fontSize: 16,
             borderRadius: 6,
@@ -153,94 +170,96 @@ Họ tên: ${formData.name}
           }}
         />
 
-        <button
-          type="submit"
-          style={{
-            width: "20%",
-            padding: "12px 0",
-            fontWeight: "bold",
-            fontSize: 16,
-            backgroundColor: " #0650b7",
-            color: "white",
-            border: "none",
-            borderRadius: 8,
-            cursor: "pointer",
-          }}
-        >
-          Gửi góp ý
-        </button>
+        {/* NÚT GỬI NẰM GIỮA */}
+        <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <button
+            type="submit"
+            style={{
+              width: "60%",
+              padding: "12px 0",
+              fontWeight: "bold",
+              fontSize: 16,
+              backgroundColor: "#0650b7",
+              color: "white",
+              border: "none",
+              borderRadius: 8,
+              cursor: "pointer",
+            }}
+          >
+            Gửi góp ý
+          </button>
+        </div>
       </form>
 
       {/* THÔNG BÁO CÓ NÚT TẮT */}
       {status && (
-  <div
-    style={{
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100vw",
-      height: "100vh",
-      backgroundColor: "rgba(0,0,0,0.4)",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      zIndex: 9999,
-    }}
-  >
-    <div
-      style={{
-        background: "white",
-        padding: "25px 30px",
-        borderRadius: 10,
-        maxWidth: 400,
-        width: "90%",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-        textAlign: "center",
-        position: "relative",
-        borderTop: `6px solid ${status.success ? "blue" : "red"}`,
-        fontSize: 17,
-        lineHeight: "24px",
-      }}
-    >
-      <button
-        onClick={() => setStatus(null)}
-        style={{
-          position: "absolute",
-          top: 8,
-          right: 12,
-          border: "none",
-          background: "transparent",
-          cursor: "pointer",
-          fontSize: 22,
-          fontWeight: "bold",
-        }}
-      >
-        ×
-      </button>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0,0,0,0.4)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+          }}
+        >
+          <div
+            style={{
+              background: "white",
+              padding: "25px 30px",
+              borderRadius: 10,
+              maxWidth: 400,
+              width: "90%",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+              textAlign: "center",
+              position: "relative",
+              borderTop: `6px solid ${status.success ? "blue" : "red"}`,
+              fontSize: 17,
+              lineHeight: "24px",
+            }}
+          >
+            <button
+              onClick={() => setStatus(null)}
+              style={{
+                position: "absolute",
+                top: 8,
+                right: 12,
+                border: "none",
+                background: "transparent",
+                cursor: "pointer",
+                fontSize: 22,
+                fontWeight: "bold",
+              }}
+            >
+              ×
+            </button>
 
-      <p style={{ margin: 0, fontWeight: "bold", color: status.success ? "green" : "red" }}>
-        {status.message}
-      </p>
+            <p style={{ margin: 0, fontWeight: "bold", color: status.success ? "green" : "red" }}>
+              {status.message}
+            </p>
 
-      <button
-        onClick={() => setStatus(null)}
-        style={{
-          marginTop: 20,
-          padding: "10px 20px",
-          backgroundColor: " #0650b7",
-          color: "white",
-          border: "none",
-          borderRadius: 6,
-          cursor: "pointer",
-          fontWeight: "bold",
-        }}
-      >
-        Đóng
-      </button>
-    </div>
-  </div>
-)}
-
+            <button
+              onClick={() => setStatus(null)}
+              style={{
+                marginTop: 20,
+                padding: "10px 20px",
+                backgroundColor: "#0650b7",
+                color: "white",
+                border: "none",
+                borderRadius: 6,
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}
+            >
+              Đóng
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
