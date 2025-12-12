@@ -25,10 +25,10 @@ export default function Header() {
         <span className="separator">I</span>
         <Link href="/gopy" className="top-menu-btn">Góp ý Văn kiện</Link>
         <span className="separator">I</span>
-        <Link href="/danhsachtothaoluan" className="top-menu-btn">Danh sách chia tổ thảo luận</Link>
+        <Link href="/danhsachtothaoluan" className="top-menu-btn">Diễn đàn thảo luận</Link>
         <span className="separator">I</span>
 
-        <Link href="/thongtindaibieu" className="top-menu-btn">Thông tin đại biểu</Link>
+        <Link href="/thongtindaibieu" className="top-menu-btn"> Sổ tay Thông tin</Link>
       </nav>
     </>
   );
