@@ -173,36 +173,74 @@ Họ tên: ${formData.name}
 
       {/* THÔNG BÁO CÓ NÚT TẮT */}
       {status && (
-        <div
-          style={{
-            marginTop: 20,
-            padding: "12px 16px",
-            borderRadius: 6,
-            backgroundColor: status.success ? "#d4f7d4" : "#ffd4d4",
-            color: status.success ? "#0a7a0a" : "#b30000",
-            fontWeight: "bold",
-            position: "relative",
-            textAlign: "center",
-          }}
-        >
-          {status.message}
-          <button
-            onClick={() => setStatus(null)}
-            style={{
-              position: "absolute",
-              top: 6,
-              right: 8,
-              border: "none",
-              background: "transparent",
-              cursor: "pointer",
-              fontSize: 18,
-              fontWeight: "bold",
-            }}
-          >
-            ×
-          </button>
-        </div>
-      )}
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      backgroundColor: "rgba(0,0,0,0.4)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 9999,
+    }}
+  >
+    <div
+      style={{
+        background: "white",
+        padding: "25px 30px",
+        borderRadius: 10,
+        maxWidth: 400,
+        width: "90%",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+        textAlign: "center",
+        position: "relative",
+        borderTop: `6px solid ${status.success ? "green" : "red"}`,
+        fontSize: 17,
+        lineHeight: "24px",
+      }}
+    >
+      <button
+        onClick={() => setStatus(null)}
+        style={{
+          position: "absolute",
+          top: 8,
+          right: 12,
+          border: "none",
+          background: "transparent",
+          cursor: "pointer",
+          fontSize: 22,
+          fontWeight: "bold",
+        }}
+      >
+        ×
+      </button>
+
+      <p style={{ margin: 0, fontWeight: "bold", color: status.success ? "green" : "red" }}>
+        {status.message}
+      </p>
+
+      <button
+        onClick={() => setStatus(null)}
+        style={{
+          marginTop: 20,
+          padding: "10px 20px",
+          backgroundColor: "#0650b7",
+          color: "white",
+          border: "none",
+          borderRadius: 6,
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        Đóng
+      </button>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
