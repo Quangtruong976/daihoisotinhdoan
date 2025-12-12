@@ -3,39 +3,22 @@
 import { useEffect, useState } from "react";
 
 export default function DiemDanhToanBoPage() {
-  const [message, setMessage] = useState<string>("Đang điểm danh...");
+  const [message, setMessage] = useState("Đang điểm danh...");
 
   useEffect(() => {
-    const diemDanhToanBo = async () => {
+    (async () => {
       try {
-        const res = await fetch("/api/diemdanh/all?key=SECRET123", {
-          method: "POST",
-        });
+        const res = await fetch("/api/diemdanh/all?key=SECRET123", { method: "POST" });
         const data = await res.json();
         setMessage(data.message || "Đã điểm danh toàn bộ!");
-      } catch (err) {
-        console.error(err);
+      } catch {
         setMessage("Lỗi mạng, không thể điểm danh.");
       }
-    };
-
-    diemDanhToanBo();
+    })();
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#fff",
-        color: "#000",
-        fontSize: 16,
-        textAlign: "center",
-        padding: 12,
-      }}
-    >
+    <div style={{ textAlign: "center", marginTop: "40vh", fontSize: 18 }}>
       {message}
     </div>
   );
