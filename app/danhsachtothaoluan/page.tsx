@@ -20,7 +20,7 @@ export default function DanhSachToThaoLuan() {
           marginBottom: 30,
         }}
       >
-        Danh sách tổ thảo luận
+        DANH SÁCH CÁC TỔ THẢO LUẬN TẠI ĐẠI HỘI
       </h2>
 
       {/* --- KHUNG DANH SÁCH --- */}
@@ -29,7 +29,7 @@ export default function DanhSachToThaoLuan() {
           border: "1px solid #ccc",
           padding: "20px",
           borderRadius: 10,
-          background: "#f9f9f9",
+          background: " #f9f9f9",
           marginBottom: 30,
         }}
       >
@@ -43,7 +43,9 @@ export default function DanhSachToThaoLuan() {
             target="_blank"
             style={buttonStyle}
           >
-            Tổ thảo luận số 1
+           Tổ thảo luận số 1<br/>
+            * Chủ trì: Đồng chí.....<br/>
+            * Thư ký: Đồng chí......
           </a>
 
           <a
@@ -51,7 +53,9 @@ export default function DanhSachToThaoLuan() {
             target="_blank"
             style={buttonStyle}
           >
-            Tổ thảo luận số 2
+            Tổ thảo luận số 2<br/>
+            * Chủ trì: Đồng chí.....<br/>
+            * Thư ký: Đồng chí......
           </a>
 
           <a
@@ -59,7 +63,9 @@ export default function DanhSachToThaoLuan() {
             target="_blank"
             style={buttonStyle}
           >
-            Tổ thảo luận số 3
+             Tổ thảo luận số 3<br/>
+            * Chủ trì: Đồng chí.....<br/>
+            * Thư ký: Đồng chí......
           </a>
         </div>
       </div>
@@ -90,7 +96,7 @@ const buttonStyle: React.CSSProperties = {
   width: "100%",
   padding: "12px",
   textAlign: "center",
-  backgroundColor: "#0650b7",
+  backgroundColor: "rgb(136, 178, 236)",
   color: "white",
   borderRadius: 8,
   fontWeight: "bold",
