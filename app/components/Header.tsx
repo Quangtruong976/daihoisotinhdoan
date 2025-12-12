@@ -23,7 +23,7 @@ export default function Header() {
 
         <Link href="/diemdanh" className="top-menu-btn">Điểm danh</Link>
         <span className="separator">I</span>
-        <Link href="/GopYVanKien" className="top-menu-btn">Góp ý Văn kiện</Link>
+        <Link href="/gopy" className="top-menu-btn">Góp ý Văn kiện</Link>
         <span className="separator">I</span>
         <Link href="/danhsachtothaoluan" className="top-menu-btn">Danh sách chia tổ thảo luận</Link>
         <span className="separator">I</span>
