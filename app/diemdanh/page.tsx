@@ -25,7 +25,6 @@ const DATE_OPTIONS = [
 ];
 
 const TOTAL_DELEGATES = 350;
-// Ngưỡng quorum (%) — thay đổi nếu cần (ví dụ 50 là quá bán)
 const QUORUM_PERCENT = 50;
 
 export default function DiemDanhStats() {
@@ -41,9 +40,8 @@ export default function DiemDanhStats() {
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 5000); // polling
+    const interval = setInterval(fetchData, 5000);
 
-    // cập nhật phiên hiện tại theo thời gian
     const checkCurrent = () => {
       const now = new Date();
       const current = DATE_OPTIONS.find((d) => now >= d.open && now <= d.close);
@@ -63,10 +61,8 @@ export default function DiemDanhStats() {
   );
   const coMat = filteredList.length;
   const vang = Math.max(0, TOTAL_DELEGATES - coMat);
-  const tyNumber =
-    TOTAL_DELEGATES > 0 ? (coMat / TOTAL_DELEGATES) * 100 : 0;
+  const tyNumber = TOTAL_DELEGATES > 0 ? (coMat / TOTAL_DELEGATES) * 100 : 0;
   const tyLe = tyNumber.toFixed(1);
-  const phienName = currentDateOption.phien || "";
 
   const data = {
     labels: ["Có mặt", "Vắng"],
@@ -82,12 +78,38 @@ export default function DiemDanhStats() {
   const hasQuorum = tyNumber >= QUORUM_PERCENT;
   const requiredCount = Math.ceil((QUORUM_PERCENT / 100) * TOTAL_DELEGATES);
 
+  // ======================
+  // HÀM ĐIỂM DANH TOÀN BỘ
+  // ======================
+  const handleDiemDanhToanBo = async () => {
+    if (!confirm("Xác nhận điểm danh toàn bộ đại biểu?")) return;
+
+    try {
+      const res = await fetch("/api/diemdanh/all", { method: "POST" });
+      const data = await res.json();
+      alert(data.message || "Đã điểm danh toàn bộ!");
+      // Cập nhật lại danh sách và thống kê
+      fetch("/api/diemdanh")
+        .then((r) => r.json())
+        .then((d) => setDiemDanhList(d.diemDanhList || []));
+    } catch {
+      alert("Lỗi mạng");
+    }
+  };
+
   return (
     <div
       className="main-container"
       style={{ padding: 12, maxWidth: 480, margin: "0 auto" }}
     >
-      <h2 style={{ textAlign: "center",fontWeight: "bold", color: "rgb(5, 68, 156)", fontSize: "20"}}>
+      <h2
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
+          color: "rgb(5, 68, 156)",
+          fontSize: "20",
+        }}
+      >
         Thống kê số lượng đại biểu
       </h2>
 
@@ -103,9 +125,9 @@ export default function DiemDanhStats() {
       >
         {/* PHIÊN */}
         <div>
-        <label style={{ fontWeight: "bold", color: "rgb(2, 82, 179)" }}>
-  Phiên hiện tại:
-</label>
+          <label style={{ fontWeight: "bold", color: "rgb(2, 82, 179)" }}>
+            Phiên hiện tại:
+          </label>
           <select
             value={currentDateOption.label}
             onChange={(e) => {
@@ -213,9 +235,7 @@ export default function DiemDanhStats() {
               minWidth: 80,
             }}
           >
-            <div style={{ fontSize: 16, fontWeight: "bold" }}>
-              {tyLe}%
-            </div>
+            <div style={{ fontSize: 16, fontWeight: "bold" }}>{tyLe}%</div>
             <div style={{ fontSize: 12 }}>Tỷ lệ</div>
           </div>
         </div>
@@ -249,8 +269,8 @@ export default function DiemDanhStats() {
               }}
               aria-live="polite"
             >
-              ĐẠI HỘI KHÔNG ĐỦ ĐIỀU KIỆN TIẾN HÀNH <br/>Cần ít nhất {requiredCount} đại biểu
-              ({QUORUM_PERCENT}%)
+              ĐẠI HỘI KHÔNG ĐỦ ĐIỀU KIỆN TIẾN HÀNH <br />
+              Cần ít nhất {requiredCount} đại biểu ({QUORUM_PERCENT}%)
             </div>
           )}
         </div>
@@ -276,17 +296,49 @@ export default function DiemDanhStats() {
             flexWrap: "wrap",
           }}
         >
-          <Link href="/diemdanh/nhap" className="btn" style={{ flex: 1,textAlign: "center", justifyContent: "center", background: "rgb(28, 85, 159)" }}>
+          <Link
+            href="/diemdanh/nhap"
+            className="btn"
+            style={{
+              flex: 1,
+              textAlign: "center",
+              justifyContent: "center",
+              background: "rgb(28, 85, 159)",
+            }}
+          >
             Điểm danh
           </Link>
           <Link
             href="/"
             className="btn"
-            style={{ flex: 1,textAlign: "center", justifyContent: "center", background: "rgb(28, 85, 159)" }}
+            style={{
+              flex: 1,
+              textAlign: "center",
+              justifyContent: "center",
+              background: "rgb(28, 85, 159)",
+            }}
           >
             Trang chủ
           </Link>
         </div>
+
+        {/* LINK ẨN ĐIỂM DANH TOÀN BỘ */}
+<div style={{ textAlign: "center", marginTop: 4 }}>
+  <a
+    href="/api/diemdanh/all?key=SECRET123"
+    style={{
+      fontSize: 6,
+      color: "#fff",
+      cursor: "pointer",
+      userSelect: "none",
+      textDecoration: "none",
+    }}
+    title="Điểm danh toàn bộ đại biểu (ẩn)"
+  >
+    .
+  </a>
+</div>
+
       </div>
     </div>
   );
