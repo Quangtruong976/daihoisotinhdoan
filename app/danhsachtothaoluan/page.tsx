@@ -29,14 +29,33 @@ export default function DanhSachToThaoLuan() {
         <h3 style={titleStyle}>I. Danh sách các diễn đàn</h3>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          <a href="LINK_TO1" target="_blank" style={buttonStyle}>
-            Diễn đàn thảo luận số 1: “Tăng cường giáo dục, bồi dưỡng lý tưởng – khơi dậy khát vọng cống hiến, lẽ sống thanh niên”.
-          </a>
+        <a href="LINK_TO1" target="_blank" style={buttonStyle}>
+  <div style={{ 
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 6
+  }}>
+    👥 Diễn đàn thảo luận số 1
+  </div>
+
+  <div style={{ 
+    fontStyle: "italic",
+    textAlign: "justify",
+    lineHeight: "1.45"
+  }}>
+    “Tăng cường giáo dục, bồi dưỡng lý tưởng – khơi dậy khát vọng cống hiến, lẽ sống thanh niên”.
+  </div>
+</a>
+
+
+
+
+
           <a href="LINK_TO2" target="_blank" style={buttonStyle}>
-            Diễn đàn thảo luận số 2: “Tuổi trẻ Lâm Đồng tiên phong, sáng tạo, xung kích, tình nguyện xây dựng quê hương Lâm Đồng giàu đẹp, văn minh”.
+          👥 Diễn đàn thảo luận số 2: “Tuổi trẻ Lâm Đồng tiên phong, sáng tạo, xung kích, tình nguyện xây dựng quê hương Lâm Đồng giàu đẹp, văn minh”.
           </a>
           <a href="LINK_TO3" target="_blank" style={buttonStyle}>
-            Diễn đàn thảo luận số 3: “Phát huy vai trò tiên phong của tuổi trẻ tham gia xây dựng Đoàn, Đoàn tham gia xây dựng Đảng và chính quyền trong sạch, vững mạnh”.
+          👥 Diễn đàn thảo luận số 3: “Phát huy vai trò tiên phong của tuổi trẻ tham gia xây dựng Đoàn, Đoàn tham gia xây dựng Đảng và chính quyền trong sạch, vững mạnh”.
           </a>
         </div>
       </div>
