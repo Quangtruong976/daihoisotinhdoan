@@ -197,7 +197,7 @@ Họ tên: ${formData.name}
         boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
         textAlign: "center",
         position: "relative",
-        borderTop: `6px solid ${status.success ? " #0650b7" : " #0650b7}`,
+        borderTop: `6px solid ${status.success ? "blue" : "red"}`,
         fontSize: 17,
         lineHeight: "24px",
       }}
