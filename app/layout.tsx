@@ -15,9 +15,7 @@ const geistMono = Geist_Mono({
 });
 export const metadata = {
   title: "Đại hội Đoàn TNCS Hồ Chí Minh tỉnh Lâm Đồng",
-  icons: {
-    icon: "/icon-v2.png",
-  },
+  
 };
 
 
@@ -26,6 +24,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi">
+        <head>
+        {/* ÉP favicon – ƯU TIÊN TUYỆT ĐỐI */}
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         
         {/* Header dùng chung cho mọi trang */}
