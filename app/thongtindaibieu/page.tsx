@@ -20,7 +20,7 @@ export default function ThongTinDaiBieu() {
           <p>(Đại biểu vui lòng có mặt trước 30 phút để ổn định tổ chức và vị trí chỗ ngồi)</p>
           <p><strong>2. Địa điểm:</strong> tại Hội trường Nhà Văn hóa Lao động tỉnh Lâm Đồng</p>
           <p><em>(Số 01 Trần Quốc Toản, phường Xuân Hương - Đà Lạt, tỉnh Lâm Đồng).</em></p>
-          <p>👤 Ban Tổ chức sẽ đón tiếp đại biểu Đoàn các xã, phường, đặc khu, Đoàn trực thuộc về dự Đại hội từ 8 giờ 00’ đến 11 giờ 00’ ngày 19/12/2025 tại: <br> - Đoàn An Điều dưỡng 198 - số 2B Lữ Gia, phường Lâm Viên Đà Lạt. </br> <br>- Nhà khách Tổng Liên đoàn - Số 01 Yersin, phường Xuân Hương Đà Lạt, tỉnh Lâm Đồng.</br></p>
+          <p>👤 Ban Tổ chức sẽ đón tiếp đại biểu Đoàn các xã, phường, đặc khu, Đoàn trực thuộc về dự Đại hội từ 8 giờ 00’ đến 11 giờ 00’ ngày 19/12/2025 tại: Đoàn An Điều dưỡng 198 - số 2B Lữ Gia, phường Lâm Viên Đà Lạt và Nhà khách Tổng Liên đoàn - Số 01 Yersin, phường Xuân Hương Đà Lạt, tỉnh Lâm Đồng.</p>
         </div>
       ),
     },
