@@ -74,11 +74,12 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
       ref={containerRef}
       className="p-4 sm:p-6 max-w-3xl mx-auto bg-gray-50 min-h-screen"
     >
-      <h1 className="text-2xl sm:text-3xl font-extrabold text-center mb-8 text-sky-400">
+      {/* Chữ Sổ tay nhỏ hơn */}
+      <h1 className="text-base sm:text-lg font-semibold text-center mb-6 text-sky-400">
         SỔ TAY THÔNG TIN ĐẠI BIỂU
       </h1>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {items.map((item, index) => {
           const isOpen = openIndex === index;
           return (
@@ -92,13 +93,15 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
                   e.stopPropagation(); // tránh trigger click ngoài
                   setOpenIndex(isOpen ? null : index);
                 }}
-                className="w-full flex items-center justify-between p-4 sm:p-5 text-left group bg-sky-400 hover:bg-sky-500 rounded-t-2xl"
+                className="w-full flex items-center justify-between p-3 text-left group bg-sky-400 hover:bg-sky-500 rounded-t-2xl"
               >
-                <div className="flex items-center gap-4 sm:gap-5">
-                  <div className="p-3 rounded-lg bg-sky-100 text-white flex items-center justify-center group-hover:bg-sky-200">
+                <div className="flex items-center gap-3">
+                  {/* Icon màu vàng */}
+                  <div className="p-2 rounded-lg bg-yellow-100 text-yellow-400 flex items-center justify-center group-hover:bg-yellow-200">
                     {item.icon}
                   </div>
-                  <h2 className="text-lg sm:text-xl font-semibold text-white">
+                  {/* Tiêu đề nhỏ hơn */}
+                  <h2 className="text-sm sm:text-base font-medium text-white">
                     {item.title}
                   </h2>
                 </div>
@@ -111,7 +114,7 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
 
               {/* Nội dung chỉ hiển thị khi nhấn */}
               {isOpen && (
-                <div className="px-4 sm:px-6 pb-4 sm:pb-6 text-gray-700 whitespace-pre-line leading-relaxed bg-white">
+                <div className="px-4 sm:px-6 pb-3 sm:pb-4 text-gray-700 whitespace-pre-line leading-relaxed bg-white">
                   {item.content}
                 </div>
               )}
