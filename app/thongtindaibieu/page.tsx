@@ -30,13 +30,13 @@ export default function ThongTinDaiBieu() {
       title: "Nội quy, Quy chế Đại hội",
       content: (
         <div className="whitespace-pre-line text-sm">
-  <p><strong>1. Nội quy:</strong> Đại biểu thực hiện nghiêm túc:</p>
+  <p><strong>* Nội quy:</strong> Đại biểu thực hiện nghiêm túc:</p>
   <p>- Giờ giấc làm việc của Đại hội</p>
-  <p>- Trang phục</p>
+  <p>- Trang phục tại các Phiên của Đại hội</p>
   <p>- Vị trí ngồi theo sơ đồ do Ban Tổ chức đã sắp xếp;</p>
   <p>Tuân thủ tuyệt đối hướng dẫn của Ban Tổ chức.</p>
   <p>
-  <strong>Xem Nội dng Quy chế đầy đủ </strong><a 
+  <strong>* Xem chi tiết </strong><a 
       href="https://drive.google.com/file/d/19dCLfzBiEKgcOkkwqkGQhzd7_hB8BzON/view?usp=sharing" 
       target="_blank" 
       rel="noopener noreferrer" 
@@ -46,17 +46,21 @@ export default function ThongTinDaiBieu() {
     </a>.
   </p>
 </div>
-
       ),
     },
     {
       icon: <FaTshirt />,
       title: "Trang phục tại Đại hội",
       content: (
-        <div className="whitespace-pre-line">
-          <p><strong>Phiên 1:</strong> Áo Thanh niên Việt Nam – quần sẫm màu</p>
-          <p><strong>Các phiên còn lại:</strong> Thực hiện theo hướng dẫn của Ban Tổ chức.</p>
-        </div>
+        <div className="whitespace-pre-line text-sm">
+  <p>* Đại biểu phải đảm bảo Trang phục đúng quy định tại các Phiên làm việc của Đại hội, cụ thể như sau:</p>
+  <p>- Đối với đại biểu là Nam: Mặc áo Thanh niên Việt Nam, thắt cà vạt màu đỏ có huy hiệu Đoàn, quần tây sẫm màu, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội. (Lưu ý mặc Áo khoác Thanh niên Việt Nam tại phiên thứ nhất Đại hội).</p>
+  <p>- Đối với đại biểu là Nữ: Mặc áo Thanh niên Việt Nam, thắt cà vạt màu đỏ có huy hiệu Đoàn, quần tây hoặc váy sẫm màu, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội.</p>
+  <p>- Đại biểu lực lượng vũ trang: mặc trang phục của ngành theo quy định.</p>
+  <p>- Đại biểu là người dân tộc thiểu số: mặc trang phục truyền thống của dân tộc, đi giày hoặc dép có quai hậu.</p>
+  <p>* Các đại biểu đeo huy hiệu Đại hội và các Huy chương, Kỷ niệm chương của Đoàn, ngành (nếu có).</p>
+  <p><strong>Lưu ý:</strong> Đại biểu không mặc quần hoặc váy Jean, kaki.</p>
+</div>
       ),
     },
     {
@@ -64,9 +68,10 @@ export default function ThongTinDaiBieu() {
       title: "Thông tin ăn – nghỉ",
       content: (
         <div className="whitespace-pre-line">
-          <p><strong>Nghỉ:</strong> Khách sạn …</p>
-          <p><strong>Ăn:</strong> Nhà ăn …</p>
-          <p><strong>Giờ ăn:</strong> Theo lịch thống nhất của Ban Tổ chức.</p>
+          <p> Ban Tổ chức bố trí ăn nghỉ cho đại biểu tại Khách sạn nơi nghỉ của đại biểu trong thời gian diễn ra Đại hội, cụ thể:</p>
+          <p> - Đoàn An Điều dưỡng 198 - số 2B Lữ Gia, phường Lâm Viên Đà Lạt</p>
+          <p> - Nhà khách Tổng Liên đoàn - Số 01 Yersin, phường Xuân Hương Đà Lạt</p>
+          <p> * Buổi cơm thân chào mừng thành công Đại hội: tại Nhà hàng Nhà khách Tổng Liên đoàn - Số 01 Yersin, phường Xuân Hương Đà Lạt</p>
         </div>
       ),
     },
@@ -75,7 +80,7 @@ export default function ThongTinDaiBieu() {
       title: "Số điện thoại liên hệ",
       content: (
         <div className="whitespace-pre-line">
-          <p><strong>Hậu cần:</strong> 09xx.xxx.xxx – Cán bộ A</p>
+          <p><strong>Hậu cần:</strong> 09xx.xxx.xxx – Đồng chí Phan Xuân Tấn</p>
           <p><strong>Y tế:</strong> 09xx.xxx.xxx – Cán bộ B</p>
           <p><strong>Trực nơi nghỉ:</strong> 09xx.xxx.xxx</p>
         </div>
