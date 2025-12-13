@@ -1,37 +1,53 @@
 "use client";
-import { FaClock, FaGavel, FaTshirt, FaHotel, FaPhoneAlt } from "react-icons/fa";
+
+import { useState } from "react";
+import {
+  FaClock,
+  FaGavel,
+  FaTshirt,
+  FaHotel,
+  FaPhoneAlt,
+  FaChevronDown,
+} from "react-icons/fa";
 
 export default function ThongTinDaiBieu() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   const items = [
     {
-      icon: <FaClock className="text-blue-600 text-4xl" />,
+      icon: <FaClock className="text-blue-600 text-3xl" />,
       title: "Thời gian tổ chức Đại hội",
-      content: "Phiên 1: Từ 15h00p - 17h30p,\n Phiên 2: Từ 8h00p - 11h20p ",
-    
+      content: `Phiên 1: 15h00 – 17h30
+Phiên 2: 08h00 – 11h20`,
     },
     {
-      icon: <FaGavel className="text-red-600 text-4xl" />,
+      icon: <FaGavel className="text-red-600 text-3xl" />,
       title: "Nội quy, Quy chế Đại hội",
-      content:
-        "Đại biểu thực hiện nghiêm túc giờ giấc, trang phục, vị trí ngồi; \n tuân thủ hướng dẫn của Ban Tổ chức.",
+      content: `Đại biểu thực hiện nghiêm túc:
+- Giờ giấc
+- Trang phục
+- Vị trí ngồi
+Tuân thủ tuyệt đối hướng dẫn của Ban Tổ chức.`,
     },
     {
-      icon: <FaTshirt className="text-green-600 text-4xl" />,
+      icon: <FaTshirt className="text-green-600 text-3xl" />,
       title: "Trang phục tại Đại hội",
-      content:
-        "Phiên thứ 1: Áo thanh niên Việt Nam – quần sẫm màu. \n Ngày làm việc còn lại: Trang phục theo hướng dẫn.",
+      content: `Phiên 1: Áo Thanh niên Việt Nam – quần sẫm màu
+Các phiên còn lại: Thực hiện theo hướng dẫn của Ban Tổ chức.`,
     },
     {
-      icon: <FaHotel className="text-purple-600 text-4xl" />,
-      title: "Thông tin địa điểm ăn – nghỉ",
-      content:
-        "Đại biểu nghỉ tại khách sạn …; Ăn tại Nhà ăn …; Giờ ăn theo lịch của Ban Tổ chức.",
+      icon: <FaHotel className="text-purple-600 text-3xl" />,
+      title: "Thông tin ăn – nghỉ",
+      content: `Nghỉ: Khách sạn …
+Ăn: Nhà ăn …
+Giờ ăn: Theo lịch thống nhất của Ban Tổ chức.`,
     },
     {
-      icon: <FaPhoneAlt className="text-orange-600 text-4xl" />,
+      icon: <FaPhoneAlt className="text-orange-600 text-3xl" />,
       title: "Số điện thoại liên hệ",
-      content:
-        "Hậu cần: 09xx.xxx.xxx – Cán bộ A\nY tế: 09xx.xxx.xxx – Cán bộ B\nTrực các điểm nghỉ: 09xx.xxx.xxx",
+      content: `Hậu cần: 09xx.xxx.xxx – Cán bộ A
+Y tế: 09xx.xxx.xxx – Cán bộ B
+Trực nơi nghỉ: 09xx.xxx.xxx`,
     },
   ];
 
@@ -41,23 +57,42 @@ export default function ThongTinDaiBieu() {
         SỔ TAY THÔNG TIN ĐẠI BIỂU
       </h1>
 
-      <div className="grid gap-4">
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className="p-4 border rounded-xl bg-white shadow hover:shadow-lg transition-all"
-          >
-            <div className="flex items-start gap-4">
-              {item.icon}
-              <div>
-                <h2 className="text-xl font-semibold mb-1">{item.title}</h2>
-                <p className="text-gray-700 whitespace-pre-line leading-relaxed">
+      <div className="space-y-4">
+        {items.map((item, index) => {
+          const isOpen = openIndex === index;
+
+          return (
+            <div
+              key={index}
+              className="border rounded-xl bg-white shadow"
+            >
+              <button
+                onClick={() =>
+                  setOpenIndex(isOpen ? null : index)
+                }
+                className="w-full flex items-center justify-between p-4 text-left"
+              >
+                <div className="flex items-center gap-4">
+                  {item.icon}
+                  <h2 className="text-lg font-semibold">
+                    {item.title}
+                  </h2>
+                </div>
+                <FaChevronDown
+                  className={`transition-transform ${
+                    isOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {isOpen && (
+                <div className="px-4 pb-4 text-gray-700 whitespace-pre-line leading-relaxed">
                   {item.content}
-                </p>
-              </div>
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="h-10"></div>
