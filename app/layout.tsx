@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 export const metadata = {
-  title: "Đại hội Đoàn TNCS Hồ Chí Minh",
+  title: "Đại hội Đoàn TNCS Hồ Chí Minh tỉnh Lâm Đồng",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon-v2.png",
   },
 };
 
