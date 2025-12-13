@@ -72,7 +72,8 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
   return (
     <div
       ref={containerRef}
-      className="p-4 sm:p-6 max-w-3xl mx-auto bg-gray-50 min-h-screen"
+      className="p-4 sm:p-6 max-w-3xl mx-auto min-h-screen"
+      style={{ backgroundColor: " #F9FAFB" }} // bg-gray-50 hiển thị thực tế
     >
       <h1 className="text-2xl sm:text-3xl font-extrabold text-center mb-8 text-sky-400">
         SỔ TAY THÔNG TIN ĐẠI BIỂU
@@ -84,7 +85,8 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
           return (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200"
+              className="rounded-2xl shadow hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200"
+              style={{ backgroundColor: " #FFFFFF" }} // bg-white hiển thị thực tế
             >
               <button
                 onClick={(e) => {
@@ -94,7 +96,10 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
                 className="w-full flex items-center justify-between p-4 sm:p-5 text-left group"
               >
                 <div className="flex items-center gap-4 sm:gap-5">
-                  <div className="p-3 rounded-lg bg-sky-50 group-hover:bg-sky-100 text-sky-400 flex items-center justify-center">
+                  <div
+                    className="p-3 rounded-lg text-sky-400 flex items-center justify-center"
+                    style={{ backgroundColor: " #E0F2FE" }} // bg-sky-50
+                  >
                     {item.icon}
                   </div>
                   <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
@@ -109,7 +114,10 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
               </button>
 
               {isOpen && (
-                <div className="px-4 sm:px-6 pb-4 sm:pb-6 text-gray-700 whitespace-pre-line leading-relaxed bg-white/80 backdrop-blur-sm transition-all duration-300">
+                <div
+                  className="px-4 sm:px-6 pb-4 sm:pb-6 text-gray-700 whitespace-pre-line leading-relaxed backdrop-blur-sm transition-all duration-300"
+                  style={{ backgroundColor: "rgba(255,255,255,0.8)" }} // bg-white/80 hiển thị thực tế
+                >
                   {item.content}
                 </div>
               )}
