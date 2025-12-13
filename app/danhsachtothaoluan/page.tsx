@@ -29,7 +29,7 @@ export default function DanhSachToThaoLuan() {
         <h3 style={titleStyle}>I. Danh sách các diễn đàn</h3>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-        <a href="LINK_TO1" target="_blank" style={buttonStyle}>
+        <a href="https://drive.google.com/file/d/16-XyefUVRobiOSbR9oGlMmC6AFGwQ-UA/view?usp=sharing" target="_blank" style={buttonStyle}>
   <div
     style={{
       fontWeight: "bold",
@@ -51,7 +51,7 @@ export default function DanhSachToThaoLuan() {
     “Tăng cường giáo dục, bồi dưỡng lý tưởng – khơi dậy khát vọng cống hiến, lẽ sống thanh niên”.
   </div>
 </a>
-<a href="LINK_TO2" target="_blank" style={buttonStyle}>
+<a href="https://drive.google.com/file/d/1mxoL8JWb78wQeILkAes9hHJmun8OJbr7/view?usp=sharing" target="_blank" style={buttonStyle}>
   <div
     style={{
       fontWeight: "bold",
@@ -74,7 +74,7 @@ export default function DanhSachToThaoLuan() {
   </div>
 </a>
 
-<a href="LINK_TO3" target="_blank" style={buttonStyle}>
+<a href="https://drive.google.com/file/d/1ZcheHY1acLRntJCg5fe8wItMpCYlEiMK/view?usp=sharing" target="_blank" style={buttonStyle}>
   <div
     style={{
       fontWeight: "bold",

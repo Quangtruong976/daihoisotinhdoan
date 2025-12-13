@@ -18,7 +18,7 @@ export default function PageVanKien() {
     },
     {
       title: "4. Chương trình hành động thực hiện nghị quyết Đại hội",
-      link: "https://drive.google.com/file/d/16nBUORoOk_-12qky7bX8DSrA_KjIg_77/view?usp=sharing",
+      link: "https://drive.google.com/file/d/1lPd2DJN1UVYNZk4x1vUDbEz9DGffxSdN/view?usp=sharing",
     },
   ];
 
