@@ -18,19 +18,15 @@ export default function ThongTinDaiBieu() {
     {
       icon: <FaClock />,
       title: "Thời gian tổ chức Đại hội",
-      content: 
-`
- 1. Thời gian: Đại hội diễn ra từ ngày 19/12/2025 đến ngày 20/12/2025 
+      content: `
+ <strong>1. Thời gian:</strong> Đại hội diễn ra từ ngày 19/12/2025 đến ngày 20/12/2025 
  - Phiên 1: bắt đầu lúc 15h00 – 17h30
  - Phiên 2: bắt đầu lúc 08h00 – 11h20
  (Đại biểu Vui lòng có mặt trước 30 phút để ổn định tổ chức và vị trí chổ ngồi)
-2. Địa điểm: tại Hội trường Nhà Văn hóa Lao động tỉnh Lâm Đồng 
+ <strong>2. Địa điểm: </strong> tại Hội trường Nhà Văn hóa Lao động tỉnh Lâm Đồng 
 (Số 01 Trần Quốc Toản, phường Xuân Hương - Đà Lạt, tỉnh Lâm Đồng).
 Ban Tổ chức sẽ đón tiếp đại biểu Đoàn các xã, phường, đặc khu, Đoàn trực thuộc về dự Đại hội từ 8 giờ 00’ đến 11 giờ 00’ ngày 19/12/2025 tại Đoàn An Điều dưỡng 198 - số 2B Lữ Gia, phường Lâm Viên Đà lạt và Nhà khách Tổng Liên đoàn - Số 01 Yersin, phường Xuân Hương Đà Lạt, tỉnh Lâm Đồng.
-
- `
- 
- ,
+ `,
     },
     {
       icon: <FaGavel />,
