@@ -75,8 +75,8 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
       className="p-4 sm:p-6 max-w-3xl mx-auto bg-gray-50 min-h-screen"
     >
       {/* Chữ Sổ tay nhỏ hơn */}
-      <h1 className="text-base sm:text-lg font-semibold text-center mb-6 text-sky-400">
-        SỔ TAY THÔNG TIN ĐẠI BIỂU
+      <h1 className="text-base sm:text-lg font-semibold text-center mb-6 text-sky-500">
+        SỔ TAY THÔNG TIN ĐẠI HỘI
       </h1>
 
       <div className="space-y-3">
