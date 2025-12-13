@@ -17,10 +17,11 @@ export default function ThongTinDaiBieu() {
           <p><strong>1. Thời gian:</strong> Đại hội diễn ra từ ngày 19/12/2025 đến ngày 20/12/2025</p>
           <p>- Phiên 1: bắt đầu lúc 15h00 – 17h30</p>
           <p>- Phiên 2: bắt đầu lúc 08h00 – 11h20</p>
-          <p>(Đại biểu vui lòng có mặt trước 30 phút để ổn định tổ chức và vị trí chỗ ngồi)</p>
+          <p><em>(Đại biểu vui lòng có mặt trước 30 phút để ổn định tổ chức và vị trí chỗ ngồi)</em></p>
           <p><strong>2. Địa điểm:</strong> tại Hội trường Nhà Văn hóa Lao động tỉnh Lâm Đồng</p>
           <p><em>(Số 01 Trần Quốc Toản, phường Xuân Hương - Đà Lạt, tỉnh Lâm Đồng).</em></p>
-          <p>👤 Ban Tổ chức sẽ đón tiếp đại biểu Đoàn các xã, phường, đặc khu, Đoàn trực thuộc về dự Đại hội từ 8 giờ 00’ đến 11 giờ 00’ ngày 19/12/2025 tại: Đoàn An Điều dưỡng 198 - số 2B Lữ Gia, phường Lâm Viên Đà Lạt và Nhà khách Tổng Liên đoàn - Số 01 Yersin, phường Xuân Hương Đà Lạt, tỉnh Lâm Đồng.</p>
+          <p> * Ban Tổ chức sẽ đón tiếp đại biểu Đoàn các xã, phường, đặc khu, Đoàn trực thuộc về dự Đại hội từ 8 giờ 00’ đến 11 giờ 00’ ngày 19/12/2025 tại: 
+            Đoàn An Điều dưỡng 198 - số 2B Lữ Gia, phường Lâm Viên Đà Lạt và Nhà khách Tổng Liên đoàn - Số 01 Yersin, phường Xuân Hương Đà Lạt, tỉnh Lâm Đồng.</p>
         </div>
       ),
     },
@@ -28,13 +29,24 @@ export default function ThongTinDaiBieu() {
       icon: <FaGavel />,
       title: "Nội quy, Quy chế Đại hội",
       content: (
-        <div className="whitespace-pre-line">
-          <p><strong>1. Nội quy:</strong> Đại biểu thực hiện nghiêm túc:</p>
-          <p>- Giờ giấc làm việc của Đại hội</p>
-          <p>- Trang phục</p>
-          <p>- Vị trí ngồi theo sơ đồ do Ban Tổ chức đã sắp xếp;</p>
-          <p>Tuân thủ tuyệt đối hướng dẫn của Ban Tổ chức.</p>
-        </div>
+        <div className="whitespace-pre-line text-sm">
+  <p><strong>1. Nội quy:</strong> Đại biểu thực hiện nghiêm túc:</p>
+  <p>- Giờ giấc làm việc của Đại hội</p>
+  <p>- Trang phục</p>
+  <p>- Vị trí ngồi theo sơ đồ do Ban Tổ chức đã sắp xếp;</p>
+  <p>Tuân thủ tuyệt đối hướng dẫn của Ban Tổ chức.</p>
+  <p>
+  <strong>Xem Nội dng Quy chế đầy đủ </strong><a 
+      href="https://drive.google.com/file/d/19dCLfzBiEKgcOkkwqkGQhzd7_hB8BzON/view?usp=sharing" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="text-blue-600 underline hover:text-blue-800"
+    >
+      Nội quy, Quy chế Đại hội
+    </a>.
+  </p>
+</div>
+
       ),
     },
     {
