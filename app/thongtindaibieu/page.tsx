@@ -71,7 +71,7 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
                 className="w-full flex items-center justify-between p-4 sm:p-5 text-left group"
               >
                 <div className="flex items-center gap-4 sm:gap-5">
-                  <div className="p-3 rounded-lg bg-sky-100 group-hover:bg-sky-200 text-sky-400 flex items-center justify-center">
+                  <div className="p-3 rounded-lg bg-sky-50 group-hover:bg-sky-100 text-sky-400 flex items-center justify-center">
                     {item.icon}
                   </div>
                   <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
@@ -85,13 +85,12 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
                 />
               </button>
 
-              <div
-                className={`px-4 sm:px-6 pb-4 sm:pb-6 text-gray-700 whitespace-pre-line leading-relaxed transition-max-height duration-500 ease-in-out ${
-                  isOpen ? "max-h-96" : "max-h-0 overflow-hidden"
-                }`}
-              >
-                {item.content}
-              </div>
+              {/* Nội dung chỉ hiển thị khi nhấn */}
+              {isOpen && (
+                <div className="px-4 sm:px-6 pb-4 sm:pb-6 text-gray-700 whitespace-pre-line leading-relaxed bg-white/80 backdrop-blur-sm transition-all duration-300">
+                  {item.content}
+                </div>
+              )}
             </div>
           );
         })}
