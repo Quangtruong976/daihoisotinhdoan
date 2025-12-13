@@ -30,7 +30,7 @@ export default function ThongTinDaiBieu() {
       icon: <FaGavel />,
       title: "Nội quy, Quy chế Đại hội",
       content: (
-        <div className="whitespace-pre-line text-sm">
+        <div className="whitespace-pre-line">
   <p><strong>* Nội quy:</strong> Đại biểu thực hiện nghiêm túc:</p>
   <p>- Giờ giấc làm việc của Đại hội</p>
   <p>- Trang phục tại các Phiên của Đại hội</p>
@@ -53,7 +53,7 @@ export default function ThongTinDaiBieu() {
       icon: <FaTshirt />,
       title: "Trang phục tại Đại hội",
       content: (
-        <div className="whitespace-pre-line text-sm">
+        <div className="whitespace-pre-line">
   <p>* Đại biểu phải đảm bảo Trang phục đúng quy định tại các Phiên làm việc của Đại hội, cụ thể như sau:</p>
   <p><strong>- Đối với đại biểu là Nam:</strong> Mặc áo Thanh niên Việt Nam, thắt cà vạt màu đỏ có huy hiệu Đoàn, quần tây sẫm màu, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội. (Lưu ý mặc Áo khoác Thanh niên Việt Nam tại phiên thứ nhất Đại hội).</p>
   <p><strong>- Đối với đại biểu là Nữ:</strong> Mặc áo Thanh niên Việt Nam, thắt cà vạt màu đỏ có huy hiệu Đoàn, quần tây hoặc váy sẫm màu, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội.</p>
@@ -102,7 +102,7 @@ export default function ThongTinDaiBieu() {
 
   return (
     <div ref={containerRef} className="p-4 sm:p-6 max-w-3xl mx-auto bg-gray-50 min-h-screen">
-      <h1 className="text-base sm:text-lg font-semibold text-center mb-6 text-sky-500">
+      <h1 className="text-base sm:text-lg font-semibold text-center mb-6 text-sky-700">
         SỔ TAY THÔNG TIN ĐẠI HỘI
       </h1>
 
