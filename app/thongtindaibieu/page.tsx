@@ -19,7 +19,8 @@ export default function ThongTinDaiBieu() {
       icon: <FaClock />,
       title: "Thời gian tổ chức Đại hội",
       content: `
- <strong>1. Thời gian:</strong> Đại hội diễn ra từ ngày 19/12/2025 đến ngày 20/12/2025 
+1. Thời gian: 
+ <p style={{ fontWeight: 'bold' }}>1. Thời gian:</p> Đại hội diễn ra từ ngày 19/12/2025 đến ngày 20/12/2025 
  - Phiên 1: bắt đầu lúc 15h00 – 17h30
  - Phiên 2: bắt đầu lúc 08h00 – 11h20
  (Đại biểu Vui lòng có mặt trước 30 phút để ổn định tổ chức và vị trí chổ ngồi)
