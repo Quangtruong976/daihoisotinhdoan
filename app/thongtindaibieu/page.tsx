@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   FaClock,
   FaGavel,
@@ -12,6 +12,7 @@ import {
 
 export default function ThongTinDaiBieu() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const items = [
     {
@@ -52,8 +53,27 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
     },
   ];
 
+  // Đóng card khi click ngoài container
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setOpenIndex(null);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="p-4 sm:p-6 max-w-3xl mx-auto bg-gray-50 min-h-screen">
+    <div
+      ref={containerRef}
+      className="p-4 sm:p-6 max-w-3xl mx-auto bg-gray-50 min-h-screen"
+    >
       <h1 className="text-2xl sm:text-3xl font-extrabold text-center mb-8 text-sky-400">
         SỔ TAY THÔNG TIN ĐẠI BIỂU
       </h1>
@@ -67,7 +87,10 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
               className="bg-white rounded-2xl shadow hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200"
             >
               <button
-                onClick={() => setOpenIndex(isOpen ? null : index)}
+                onClick={(e) => {
+                  e.stopPropagation(); // tránh trigger click ngoài
+                  setOpenIndex(isOpen ? null : index);
+                }}
                 className="w-full flex items-center justify-between p-4 sm:p-5 text-left group"
               >
                 <div className="flex items-center gap-4 sm:gap-5">
@@ -85,7 +108,6 @@ Trực nơi nghỉ: 09xx.xxx.xxx`,
                 />
               </button>
 
-              {/* Nội dung chỉ hiển thị khi nhấn */}
               {isOpen && (
                 <div className="px-4 sm:px-6 pb-4 sm:pb-6 text-gray-700 whitespace-pre-line leading-relaxed bg-white/80 backdrop-blur-sm transition-all duration-300">
                   {item.content}
