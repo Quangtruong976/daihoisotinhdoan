@@ -81,7 +81,7 @@ export default function ThongTinDaiBieu() {
           <p> * Ban Tổ chức bố trí ăn nghỉ cho đại biểu tại Khách sạn nơi nghỉ của đại biểu trong thời gian diễn ra Đại hội, cụ thể:</p>
           <p> - Đoàn An Điều dưỡng 198 - số 2B Lữ Gia, phường Lâm Viên Đà Lạt</p>
           <p> - Nhà khách Tổng Liên đoàn - Số 01 Yersin, phường Xuân Hương Đà Lạt</p>
-          <p> * Buổi cơm thân chào mừng thành công Đại hội: tại Nhà hàng Nhà khách Tổng Liên đoàn - Số 01 Yersin, phường Xuân Hương Đà Lạt</p>
+          <p> * Buổi cơm thân chào mừng thành công Đại hội: tại Nhà hàng Nhà khách Tổng Liên đoàn - Số 01 Yersin, phường Xuân Hương Đà Lạt (sau khi Đại hội kết thúc)</p>
         </div>
       ),
     },
