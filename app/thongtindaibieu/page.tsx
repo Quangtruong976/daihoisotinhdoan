@@ -55,14 +55,7 @@ export default function ThongTinDaiBieu() {
       content: (
         <div className="whitespace-pre-line">
   <p>* Đại biểu phải đảm bảo Trang phục đúng quy định tại các Phiên làm việc của Đại hội, cụ thể như sau:</p>
-  <p><strong>- Đối với đại biểu là Nam:</strong> Mặc áo Thanh niên Việt Nam, thắt cà vạt màu đỏ có huy hiệu Đoàn, quần tây sẫm màu, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội. (Lưu ý mặc Áo khoác Thanh niên Việt Nam tại phiên thứ nhất Đại hội).</p>
-  <p><strong>- Đối với đại biểu là Nữ:</strong> Mặc áo Thanh niên Việt Nam, thắt cà vạt màu đỏ có huy hiệu Đoàn, quần tây hoặc váy sẫm màu, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội.</p>
-  <p><strong>- Đại biểu lực lượng vũ trang:</strong> mặc trang phục của ngành theo quy định.</p>
-  <p><strong>- Đại biểu là người dân tộc thiểu số:</strong> mặc trang phục truyền thống của dân tộc, đi giày hoặc dép có quai hậu.</p>
-  <p>* Các đại biểu đeo huy hiệu Đại hội và các Huy chương, Kỷ niệm chương của Đoàn, ngành (nếu có).</p>
-  <p><strong>Lưu ý:</strong> Đại biểu không mặc quần hoặc váy Jean, kaki.</p>
-
-  <p><strong>1. Phiên thứ nhất:</strong>
+  <p><strong>1. Phiên thứ nhất:</strong></p>
 <p>- Thời gian: Chiều ngày 19/12/2025.</p>
 <p>- Trang phục:</p>
 <p>+ Đại biểu Nam: Mặc áo Thanh niên Việt Nam, thắt cà vạt màu đỏ có huy hiệu Đoàn, Áo khoác Đại hội, quần tây sẫm màu, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội.  </p>
@@ -74,11 +67,10 @@ export default function ThongTinDaiBieu() {
 <p>+ Đại biểu Nữ: Mặc áo dài Thanh niên Việt Nam, đeo huy hiệu Đại hội, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội.  </p>
 <p>+ Đại biểu lực lượng vũ trang: Mặc trang phục của ngành theo quy định. </p>
 <p>+ Đại biểu là người dân tộc thiểu số: Mặc trang phục truyền thống của dân tộc, đi giày hoặc dép có quai hậu. </p>
-<p>Lưu ý: Cà vạt, huy điệu Đại hội, Áo khoác đồng phục sẽ được Ban tổ chức gửi trong phần quà tặng của Đại biểu. Đại biểu không mặc quần hoặc váy Jean, kaki.
-</p>
-
+<p>Lưu ý: Cà vạt, huy điệu Đại hội, Áo khoác đồng phục sẽ được Ban tổ chức gửi trong phần quà tặng của Đại biểu. Đại biểu không mặc quần hoặc váy Jean, kaki.</p>
 
 </div>
+
       ),
     },
     {
