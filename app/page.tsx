@@ -13,7 +13,7 @@ export default function TrangChu() {
     { label: "Danh sách Tổ thảo luận", icon: <FaComments color="rgb(242, 234, 9)"/>, color: "rgb(239, 55, 79)", route: "/danhsachtothaoluan" },
     { label: "Tham luận", icon: <FaFileAlt color="rgb(243, 245, 246)"/>, color: "rgb(249, 131, 21)", route: "/thamluan" },
     { label: "Góp ý văn kiện", icon: <FaRegLightbulb color="#ff33ff"/>, color: "rgb(15, 87, 243)", route: "/gopy" },
-    { label: "Sổ tay thông tin đại biểu", icon: <FaClipboard color=" #00ffcc"/>, color: "rgb(8, 175, 105)", route: "/thongtindaibieu" },
+    { label: "Sổ tay thông tin đại Đại hội", icon: <FaClipboard color=" #00ffcc"/>, color: "rgb(8, 175, 105)", route: "/thongtindaibieu" },
   ];
 
   return (

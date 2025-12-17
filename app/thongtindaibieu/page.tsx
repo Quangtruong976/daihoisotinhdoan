@@ -61,6 +61,23 @@ export default function ThongTinDaiBieu() {
   <p><strong>- Đại biểu là người dân tộc thiểu số:</strong> mặc trang phục truyền thống của dân tộc, đi giày hoặc dép có quai hậu.</p>
   <p>* Các đại biểu đeo huy hiệu Đại hội và các Huy chương, Kỷ niệm chương của Đoàn, ngành (nếu có).</p>
   <p><strong>Lưu ý:</strong> Đại biểu không mặc quần hoặc váy Jean, kaki.</p>
+
+  <p><strong>1. Phiên thứ nhất:</strong>
+<p>- Thời gian: Chiều ngày 19/12/2025.</p>
+<p>- Trang phục:</p>
+<p>+ Đại biểu Nam: Mặc áo Thanh niên Việt Nam, thắt cà vạt màu đỏ có huy hiệu Đoàn, Áo khoác Đại hội, quần tây sẫm màu, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội.  </p>
+<p>+ Đại biểu Nữ: Mặc áo Thanh niên Việt Nam, thắt cà vạt màu đỏ có huy hiệu Đoàn, Áo khoác Đại hội, quần tây hoặc váy sẫm màu (váy dài qua đầu gối), đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội.  </p>
+<p><strong>2. Phiên trọng thể:</strong></p>
+<p>- Thời gian: Sáng ngày 20/12/2025.</p>
+<p>- Trang phục:</p>
+<p>+ Đại biểu Nam: Mặc áo Thanh niên Việt Nam, thắt cà vạt màu đỏ có huy hiệu Đoàn, Áo Vest, đeo huy hiệu Đại hội, quần tây sẫm màu, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội.  </p>
+<p>+ Đại biểu Nữ: Mặc áo dài Thanh niên Việt Nam, đeo huy hiệu Đại hội, đi giày hoặc dép có quai hậu; đeo thẻ đại biểu trong suốt thời gian Đại hội.  </p>
+<p>+ Đại biểu lực lượng vũ trang: Mặc trang phục của ngành theo quy định. </p>
+<p>+ Đại biểu là người dân tộc thiểu số: Mặc trang phục truyền thống của dân tộc, đi giày hoặc dép có quai hậu. </p>
+<p>Lưu ý: Cà vạt, huy điệu Đại hội, Áo khoác đồng phục sẽ được Ban tổ chức gửi trong phần quà tặng của Đại biểu. Đại biểu không mặc quần hoặc váy Jean, kaki.
+</p>
+
+
 </div>
       ),
     },
