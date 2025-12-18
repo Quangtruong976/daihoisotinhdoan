@@ -54,7 +54,7 @@ export default function ThongTinDaiBieu() {
       title: "Trang phục tại Đại hội",
       content: (
         <div className="whitespace-pre-line">
-  <p>* Đại biểu phải đảm bảo Trang phục đúng quy định tại các Phiên làm việc của Đại hội, cụ thể như sau:</p>
+  <p>* Đại biểu chính thức của Đại hội phải đảm bảo Trang phục đúng quy định tại các Phiên làm việc của Đại hội, cụ thể như sau:</p>
   <p><strong>1. Phiên thứ nhất:</strong></p>
 <p>- Thời gian: Chiều ngày 19/12/2025.</p>
 <p>- Trang phục:</p>
@@ -90,9 +90,27 @@ export default function ThongTinDaiBieu() {
       title: "Số điện thoại liên hệ",
       content: (
         <div className="whitespace-pre-line">
-          <p><strong>Hậu cần:</strong> 09xx.xxx.xxx – Đồng chí Phan Xuân Tấn</p>
-          <p><strong>Y tế:</strong> 09xx.xxx.xxx – Cán bộ B</p>
-          <p><strong>Trực nơi nghỉ:</strong> 09xx.xxx.xxx</p>
+          <p><strong>* Hậu cần:</strong> </p>
+          <p><strong> - Thường trực phụ trách:</strong> Đ/c H'Hồng - SĐT: 0395058888 </p>
+          <p><strong> - Cán bộ tham mưu:</strong> Đ/c Phan Xuân Tấn- SĐT: 0342850136 </p>
+          <p><strong>* Y tế:</strong> </p>
+          <p><strong> - Tại Nhà khách Công đoàn: </strong></p>
+          <p>+ Đ/c Nguyễn Thị Quỳnh - SĐT: 0986.425.662</p>
+          <p>+ Đ/c Quách Trường Giang - SĐT: 0906.646.248</p>
+          <p><strong> - Tại Đoàn An Điều dưỡng 198: </strong></p>
+          <p>+ Nguyễn Văn Tuấn - SĐT: 0946.113.139</p>
+          <p>+ Vũ Đại Duong - 0943.762.275</p>
+          <p><strong>* Trực nơi nghỉ:</strong></p>
+          <p><strong>- Tại Đoàn An Điều dưỡng 198:</strong></p>
+          <p><strong> + Thường trực phụ trách:</strong> Đ/c Đoàn Minh Tâm - SĐT: 0918326750 </p>
+          <p><strong> + Cán bộ tham mưu:</strong> </p>
+          <p> Đ/c Nguyễn Hà - SĐT 0935924558 </p>
+          <p> Đ/c Hồ Như Toán - SĐT: 0982914212 </p>
+          <p><strong>- Tại Nhà khách Công Đoàn:</strong></p>
+          <p><strong> + Thường trực phụ trách:</strong> Đ/c H'Hồng - SĐT: 0395058888 </p>
+          <p><strong> + Cán bộ tham mưu:</strong> </p>
+          <p> Đ/c Đinh Thị Trúc - SĐT: 0782795661 </p>
+          <p> Đ/c Nguyễn Thanh Tín - SĐT: 0848095551 </p>
         </div>
       ),
     },
