@@ -90,27 +90,29 @@ export default function ThongTinDaiBieu() {
       title: "Số điện thoại liên hệ",
       content: (
         <div className="whitespace-pre-line">
-          <p><strong>* Hậu cần:</strong> </p>
+          <p><strong>1. Hậu cần:</strong> </p>
           <p><strong> - Thường trực phụ trách:</strong> Đ/c H'Hồng - SĐT: 0395058888 </p>
           <p><strong> - Cán bộ tham mưu:</strong> Đ/c Phan Xuân Tấn- SĐT: 0342850136 </p>
-          <p><strong>* Y tế:</strong> </p>
+
+          <p><strong>2. Y tế:</strong> </p>
           <p><strong> - Tại Nhà khách Công đoàn: </strong></p>
           <p>+ Đ/c Nguyễn Thị Quỳnh - SĐT: 0986.425.662</p>
           <p>+ Đ/c Quách Trường Giang - SĐT: 0906.646.248</p>
           <p><strong> - Tại Đoàn An Điều dưỡng 198: </strong></p>
           <p>+ Nguyễn Văn Tuấn - SĐT: 0946.113.139</p>
           <p>+ Vũ Đại Duong - 0943.762.275</p>
-          <p><strong>* Trực nơi nghỉ:</strong></p>
-          <p><strong>- Tại Đoàn An Điều dưỡng 198:</strong></p>
-          <p><strong> + Thường trực phụ trách:</strong> Đ/c Đoàn Minh Tâm - SĐT: 0918326750 </p>
-          <p><strong> + Cán bộ tham mưu:</strong> </p>
-          <p> Đ/c Nguyễn Hà - SĐT 0935924558 </p>
-          <p> Đ/c Hồ Như Toán - SĐT: 0982914212 </p>
-          <p><strong>- Tại Nhà khách Công Đoàn:</strong></p>
-          <p><strong> + Thường trực phụ trách:</strong> Đ/c H'Hồng - SĐT: 0395058888 </p>
-          <p><strong> + Cán bộ tham mưu:</strong> </p>
-          <p> Đ/c Đinh Thị Trúc - SĐT: 0782795661 </p>
-          <p> Đ/c Nguyễn Thanh Tín - SĐT: 0848095551 </p>
+
+          <p><strong>3. Trực nơi nghỉ:</strong></p>
+          <p><strong>* Tại Đoàn An Điều dưỡng 198:</strong></p>
+          <p><strong> - Thường trực phụ trách:</strong> Đ/c Đoàn Minh Tâm - SĐT: 0918326750 </p>
+          <p><strong> - Cán bộ tham mưu:</strong> </p>
+          <p>+ Đ/c Nguyễn Hà - SĐT 0935924558 </p>
+          <p> + Đ/c Hồ Như Toán - SĐT: 0982914212 </p>
+          <p><strong>* Tại Nhà khách Công Đoàn:</strong></p>
+          <p><strong> - Thường trực phụ trách:</strong> Đ/c H'Hồng - SĐT: 0395058888 </p>
+          <p><strong> - Cán bộ tham mưu:</strong> </p>
+          <p> + Đ/c Đinh Thị Trúc - SĐT: 0782795661 </p>
+          <p> + Đ/c Nguyễn Thanh Tín - SĐT: 0848095551 </p>
         </div>
       ),
     },
