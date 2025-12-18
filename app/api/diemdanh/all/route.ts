@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       {
         label: "19/12/2025",
         phien: "Phiên thứ 1",
-        open: new Date("2025-12-18T23:07:00"),
+        open: new Date("2025-12-17T23:07:00"),
         close: new Date("2025-12-19T18:00:00"),
       },
       {
