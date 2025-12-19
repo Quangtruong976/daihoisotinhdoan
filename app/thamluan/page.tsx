@@ -19,40 +19,31 @@ export default function PageThamLuan() {
   ];
 
   return (
-    <div className="thamluan-wrapper">
-      <h2 className="thamluan-title">
+    <div className="page-center">
+      <h2 className="section-title">
         I. Định hướng nhiệm vụ, giải pháp của các sở, ban, ngành
       </h2>
 
-      <div className="table-container">
-        <table className="thamluan-table">
-          <thead>
-            <tr>
-              <th className="col-stt">TT</th>
-              <th className="col-donvi">Sở/ngành</th>
-              <th className="col-tieude">Tên bài tham luận</th>
+      <table className="thamluan-table">
+        <thead>
+          <tr>
+            <th>TT</th>
+            <th>Sở/ngành</th>
+            <th>Bài tham luận</th>
+          </tr>
+        </thead>
+        <tbody>
+          {phanI.map((item) => (
+            <tr key={item.stt}>
+              <td className="col-tt">{item.stt}</td>
+              <td className="col-donvi">{item.donvi}</td>
+              <td className="col-tieude">
+                <a href={item.link} target="_blank">{item.tieude}</a>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {phanI.map((item) => (
-              <tr key={item.stt}>
-                <td className="center">{item.stt}</td>
-                <td>{item.donvi}</td>
-                <td>
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="file-link"
-                  >
-                    {item.tieude}
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
