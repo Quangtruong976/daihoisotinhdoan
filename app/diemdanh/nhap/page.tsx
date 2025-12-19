@@ -21,7 +21,7 @@ export default function DiemDanhNhap() {
     {
       label: "19/12/2025",
       phien: "Phiên thứ 1",
-      open: new Date("2025-12-10T23:07:00"),
+      open: new Date("2025-12-19T14:00:00"),
       close: new Date("2025-12-19T18:00:00"),
     },
     {
