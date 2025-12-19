@@ -3,8 +3,7 @@ import ThamLuanTable from "../components/ThamLuanTable";
 import "../style.css";
 
 export default function PageThamLuan() {
-
-  const thamluanSoNganh = [
+  const phanI = [
     {
       stt: 1,
       donvi: "Ban Tổ chức Tỉnh uỷ",
@@ -21,29 +20,48 @@ export default function PageThamLuan() {
     },
   ];
 
-  const thamluanCoSo = [
+  const phanII = [
     {
       stt: 1,
-      donvi: "Đoàn Thanh niên Đảng uỷ các cơ quan Đảng tỉnh",
+      donvi: "Đoàn TNCS Hồ Chí Minh xã Bắc Ruộng",
       tieude:
-        "Vai trò của đoàn viên thanh niên trong tham gia bảo vệ nền tảng tư tưởng của Đảng trên không gian mạng",
+        "Công tác tuyên truyền, giáo dục pháp luật, đạo đức, lối sống cho thanh niên",
       link: "https://drive.google.com/file/d/FILE_ID_3/view",
+    },
+    {
+      stt: 2,
+      donvi: "Đoàn Thanh niên Bộ CHQS tỉnh",
+      tieude:
+        "Vai trò của đoàn viên thanh niên trong bảo vệ nền tảng tư tưởng của Đảng trên không gian mạng",
+      link: "https://drive.google.com/file/d/FILE_ID_4/view",
     },
   ];
 
   return (
     <div className="main-container">
+      {/* PHẦN I */}
+      <div className="phan-block">
+        <div className="phan-label">
+          I. Góp ý, định hướng nhiệm vụ, giải pháp công tác Đoàn của các sở, ban, ngành
+        </div>
+        <ThamLuanTable
+          thamluans={phanI}
+          tenDonVi="Sở, ban, ngành"
+          tenNoiDung="Bài viết"
+        />
+      </div>
 
-      <h3 className="phan-title">
-        I. Định hướng nhiệm vụ, giải pháp của các sở, ban, ngành
-      </h3>
-      <ThamLuanTable thamluans={thamluanSoNganh} />
-
-      <h3 className="phan-title">
-        II. Tham luận của các cơ sở Đoàn trực thuộc Tỉnh đoàn
-      </h3>
-      <ThamLuanTable thamluans={thamluanCoSo} />
-
+      {/* PHẦN II */}
+      <div className="phan-block">
+        <div className="phan-label">
+          II. Tham luận của các cơ sở Đoàn trực thuộc Tỉnh đoàn
+        </div>
+        <ThamLuanTable
+          thamluans={phanII}
+          tenDonVi="Tên đơn vị"
+          tenNoiDung="Nội dung tham luận"
+        />
+      </div>
     </div>
   );
 }
