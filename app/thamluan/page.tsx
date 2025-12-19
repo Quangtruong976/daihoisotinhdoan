@@ -1,5 +1,4 @@
 // app/thamluan/page.tsx
-import Header from "../components/Header";
 import ThamLuanTable from "../components/ThamLuanTable";
 import "../style.css";
 
@@ -36,14 +35,14 @@ export default function PageThamLuan() {
       stt: 1,
       donvi: "Đoàn Thanh niên Đảng uỷ các cơ quan Đảng tỉnh",
       tieude:
-        "Vai trò của đoàn viên thanh niên trong bảo vệ nền tảng tư tưởng của Đảng trên không gian mạng",
+        "Vai trò của đoàn viên thanh niên trong tham gia bảo vệ nền tảng tư tưởng của Đảng trên không gian mạng",
       link: "https://drive.google.com/file/d/FILE_ID_4/view",
     },
     {
       stt: 2,
       donvi: "Đoàn Thanh niên Bộ CHQS tỉnh",
       tieude:
-        "Vai trò của đoàn viên thanh niên trong bảo vệ nền tảng tư tưởng của Đảng, phản bác quan điểm sai trái",
+        "Vai trò của đoàn viên thanh niên trong bảo vệ nền tảng tư tưởng của Đảng, phản bác các quan điểm sai trái",
       link: "https://drive.google.com/file/d/FILE_ID_5/view",
     },
     {
@@ -57,7 +56,6 @@ export default function PageThamLuan() {
 
   return (
     <div className="main-container">
-      <Header />
 
       <h2 className="section-title">
         I. Định hướng nhiệm vụ, giải pháp của các sở, ban, ngành
@@ -68,6 +66,7 @@ export default function PageThamLuan() {
         II. Tham luận của các cơ sở Đoàn trực thuộc Tỉnh đoàn
       </h2>
       <ThamLuanTable thamluans={thamluanCoSo} />
+
     </div>
   );
 }
