@@ -42,7 +42,7 @@ export default function PageThamLuan() {
       tieude: "Giáo dục pháp luật, đạo đức, lối sống cho thanh niên",
       link: "https://drive.google.com/file/d/FILE_ID_6/view",
     },
-    // … tiếp đến 20 tham luận cũng KHÔNG dài trang
+    // thêm đến 20 tham luận cũng KHÔNG bị tràn
   ];
 
   return (
@@ -52,70 +52,74 @@ export default function PageThamLuan() {
         I. Định hướng nhiệm vụ, giải pháp của các sở, ban, ngành
       </h2>
 
-      <table className="thamluan-table">
-        <thead>
-          <tr>
-            <th>TT</th>
-            <th>Sở/ngành</th>
-            <th>Tên bài</th>
-            <th>File</th>
-          </tr>
-        </thead>
-        <tbody>
-          {phanI.map((item) => (
-            <tr key={item.stt}>
-              <td className="col-stt">{item.stt}</td>
-              <td>{item.donvi}</td>
-              <td>{item.tieude}</td>
-              <td>
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="file-link"
-                >
-                  Xem
-                </a>
-              </td>
+      <div className="table-wrapper">
+        <table className="thamluan-table">
+          <thead>
+            <tr>
+              <th>TT</th>
+              <th>Sở/ngành</th>
+              <th>Tên bài</th>
+              <th>File</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {phanI.map((item) => (
+              <tr key={item.stt}>
+                <td className="col-stt">{item.stt}</td>
+                <td>{item.donvi}</td>
+                <td>{item.tieude}</td>
+                <td className="col-file">
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="file-link"
+                  >
+                    Xem
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {/* PHẦN II */}
       <h2 className="thamluan-title">
         II. Tham luận của các cơ sở Đoàn trực thuộc Tỉnh đoàn
       </h2>
 
-      <table className="thamluan-table">
-        <thead>
-          <tr>
-            <th>STT</th>
-            <th>Tên đơn vị</th>
-            <th>Tên bài tham luận</th>
-            <th>File</th>
-          </tr>
-        </thead>
-        <tbody>
-          {phanII.map((item) => (
-            <tr key={item.stt}>
-              <td className="col-stt">{item.stt}</td>
-              <td>{item.donvi}</td>
-              <td>{item.tieude}</td>
-              <td>
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="file-link"
-                >
-                  Xem
-                </a>
-              </td>
+      <div className="table-wrapper">
+        <table className="thamluan-table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Tên đơn vị</th>
+              <th>Tên bài tham luận</th>
+              <th>File</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {phanII.map((item) => (
+              <tr key={item.stt}>
+                <td className="col-stt">{item.stt}</td>
+                <td>{item.donvi}</td>
+                <td>{item.tieude}</td>
+                <td className="col-file">
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="file-link"
+                  >
+                    Xem
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

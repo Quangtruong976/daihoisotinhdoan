@@ -664,3 +664,81 @@ input, select {
 }
 /*.........*/
 
+/* Khung tổng – canh giữa */
+.main-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+/* Tiêu đề phần */
+.thamluan-title {
+  margin: 28px 0 12px;
+  padding-left: 10px;
+  border-left: 4px solid #1e3a8a;
+  font-size: 17px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Bọc bảng để mobile kéo ngang */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Bảng */
+.thamluan-table {
+  width: 100%;
+  min-width: 720px; /* tránh vỡ cột */
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.thamluan-table th,
+.thamluan-table td {
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  vertical-align: top;
+}
+
+.thamluan-table thead {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+/* Cột */
+.col-stt {
+  width: 60px;
+  text-align: center;
+}
+
+.col-file {
+  width: 80px;
+  text-align: center;
+}
+
+/* Link file */
+.file-link {
+  color: #1e40af;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* Mobile tối ưu */
+@media (max-width: 768px) {
+  .thamluan-title {
+    font-size: 15px;
+  }
+
+  .thamluan-table {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 576px) {
+  .col-stt {
+    display: none;
+  }
+}
