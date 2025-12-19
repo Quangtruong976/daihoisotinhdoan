@@ -6,18 +6,18 @@ export default function PageThamLuan() {
       stt: 1,
       donvi: "Ban Tổ chức Tỉnh uỷ",
       title: "Nâng cao chất lượng công tác bồi dưỡng, phát triển Đảng viên từ tổ chức Đoàn",
-      link: "https://drive.google.com/file/d/FILE_ID_1/view",
+      link: "https://docs.google.com/document/d/1odxYt9dwxakMFAC62GMYzzpbJZ5u7WKd/edit?usp=share_link&ouid=105710743425623209897&rtpof=true&sd=true",
     },
     {
       stt: 2,
       donvi: "Sở Nội vụ",
       title: "Phối hợp trong triển khai thực hiện quản lý Nhà nước về thanh niên trên địa bàn tỉnh Lâm Đồng",
-      link: "https://drive.google.com/file/d/FILE_ID_1/view",
+      link: "https://docs.google.com/document/d/1QhNTBQZudTaEzuqDdinu3Se8X8uK6t1Z/edit?usp=share_link&ouid=105710743425623209897&rtpof=true&sd=true",
     }, {
       stt: 2,
       donvi: "Sở Khoa học và Công nghệ",
       title: "Tăng cường hỗ trợ và thúc đẩy phong trào khởi nghiệp đổi mới sáng tạo trong thanh niên tỉnh Lâm Đồng",
-      link: "https://drive.google.com/file/d/FILE_ID_1/view",
+      link: "https://docs.google.com/document/d/1_eYUprn8z9GmlokkafxRrmlJxH9GETJf/edit?usp=share_link&ouid=105710743425623209897&rtpof=true&sd=true",
     },
   ];
 
@@ -26,13 +26,13 @@ export default function PageThamLuan() {
       stt: 1,
       donvi: "Đoàn TN các cơ quan Đảng tỉnh",
       title: "Vai trò của Đoàn viên thanh niên trong tham gia bảo vệ nền tảng tư tưởng của Đảng, phản bác các quan điểm sai trái, thù địch trên không gian mạng trong thời kỳ mới",
-      link: "https://drive.google.com/file/d/FILE_ID_2/view",
+      link: "https://docs.google.com/document/d/1_1Y3z3LiNc7-aVZGz-X_OZVauirQh6rL/edit?usp=share_link&ouid=105710743425623209897&rtpof=true&sd=true",
     },
     {
       stt: 2,
       donvi: "Xã Đoàn Bắc Ruộng",
       title: "Công tác tuyên truyền, giáo dục pháp luật, đạo đức, lối sống cho thanh niên: Các mô hình hiệu quả trong việc giáo dục thanh niên  sống đẹp, sống có ích, tuân thủ pháp luật, phòng chống tệ nạn xã hội",
-      link: "https://drive.google.com/file/d/FILE_ID_2/view",
+      link: "https://docs.google.com/document/d/1DciUhRj_FfSWP135cKkeTfTFx8r4DLGd/edit?usp=share_link&ouid=105710743425623209897&rtpof=true&sd=true",
     }, {
       stt: 3,
       donvi: "Xã Đoàn Tuy Phong",
@@ -42,27 +42,27 @@ export default function PageThamLuan() {
       stt: 4,
       donvi: "xã Đoàn Quảng Trực",
       title: "Ý thức, trách nhiệm của đoàn viên, thanh niên trong tổ chức các hoạt động bảo tồn, phát huy bản sắc văn hóa truyền thống của các dân tộc thiểu số khu vực miền núi, biên giới tỉnh Lâm Đồng",
-      link: "https://drive.google.com/file/d/FILE_ID_2/view",
+      link: "https://docs.google.com/document/d/16g50TS_Hy-RXrAD_Zc-i8wXLubmCM732/edit?usp=share_link&ouid=105710743425623209897&rtpof=true&sd=true",
     }, {
       stt: 5,
       donvi: "xã Đoàn Hòa Ninh",
       title: "Phát huy vai trò xung kích của thanh niên trong tham gia chuyển đổi số",
-      link: "https://drive.google.com/file/d/FILE_ID_2/view",
+      link: "https://docs.google.com/document/d/1k8w-jUvbt4ttqe-HhvkkPGs_R2m1CFjS/edit?usp=share_link&ouid=105710743425623209897&rtpof=true&sd=true",
     }, {
       stt: 6,
       donvi: "xã Đoàn Đạ Huoai 2",
       title: "Xây dựng tổ chức Đoàn vững mạnh: Bàn về các giải pháp nâng cao chất lượng tổ chức cơ sở Đoàn, phát triển đoàn viên, bồi dưỡng đội ngũ cán bộ Đoàn nòng cốt có năng lực và phẩm chất.",
-      link: "https://drive.google.com/file/d/FILE_ID_2/view",
+      link: "https://docs.google.com/document/d/1bKaYItzYPnTgBkKEBC140IqL9-FraGoP/edit?usp=share_link&ouid=105710743425623209897&rtpof=true&sd=true",
     }, {
       stt: 7,
       donvi: "Đoàn Trường ĐH Phan Thiết",
       title: "Nâng cao năng lực hội nhập quốc tế cho đoàn viên, thanh niên tại trường Đại học Phan Thiết trong kỷ nguyên vươn mình của dân tộc",
-      link: "https://drive.google.com/file/d/FILE_ID_2/view",
+      link: "https://docs.google.com/document/d/1piKRs1wZg9hKBf4-N75TOsAvMSfmfEns/edit?usp=share_link&ouid=105710743425623209897&rtpof=true&sd=true",
     }, {
       stt: 8,
       donvi: "Đoàn phường 2 Bảo Lộc",
       title: "Vai trò của đoàn viên, thanh niên trong công tác hỗ trợ chính chính quyền địa phương 2 cấp giải quyết thủ tục hành chính công cho người dân. Vai trò của đoàn viên, thanh niên trong việc ứng dụng công nghệ số, đổi mới sáng tạo, chuyển đổi số",
-      link: "https://drive.google.com/file/d/FILE_ID_2/view",
+      link: "https://docs.google.com/document/d/1PZSrcyH50SEY9RI-cbI5cYYCoyXgCnDe/edit?usp=share_link&ouid=105710743425623209897&rtpof=true&sd=true",
     }, {
       stt: 9,
       donvi: "xã Đoàn Quảng Hòa",
